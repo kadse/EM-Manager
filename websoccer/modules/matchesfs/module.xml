@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE module SYSTEM "../module.dtd">
+<module version="1.0.0">
+
+    <dependencies>
+        <dependency module="office" version="1.0.0" />
+    </dependencies>
+    
+    <pages>
+        <page
+            id="matchesfs"
+            template="matchesfs"
+            navitem="true"
+            navweight="0"
+            role="user"
+            parentItem="office">
+
+                <script file="jquery-ui-1.10.2.custom.min.js" debugonly="true"/>
+                <script file="formationws4.js" debugonly="true"/>
+                <script file="formation.min.js" productiononly="true"/>
+                
+                <script file="bootstrap-slider.js" />
+                <script file="bootstrap-switch.js" />
+                <script file="bootstrap-datepicker.js" />
+                <script file="bootstrap-timepicker.min.js" />
+                
+                <css file="slider.css"/>
+                <css file="formation.css"/>
+                <css file="bootstrap-switch.css"/>       
+                <css file="bootstrap-datepicker.css"/>       
+                <css file="bootstrap-timepicker.css"/>       
+        </page>
+    </pages> 
+    
+  <actions>
+	<action id="add-fs-match" controller="AddMatchFSController" role="user">
+        <param id="datum" type="timestamp" required="true"  />
+        <param id="spieltyp" type="select" selection="Freundschaft" required="true"  />                  
+        <param id="elfmeter" type="boolean" />
+        
+        <param id="home_verein" type="foreign_key" entity="club" jointable="verein" cascade="delete" labelcolumns="name"  required="true" />
+        <param id="gast_verein" type="foreign_key" entity="club" jointable="verein" cascade="delete" labelcolumns="name"  required="true" />
+        <param id="stadion_id" type="foreign_key" entity="stadium" jointable="stadion" labelcolumns="id,name" />    
+	</action>
+  </actions>
+    
+</module>

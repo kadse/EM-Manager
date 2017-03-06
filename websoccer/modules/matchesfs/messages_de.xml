@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE messages SYSTEM "../messages.dtd">
+<messages>
+    <message id="matchesfs_navlabel">FS Spiele</message>
+
+    <message id="datum_label">Datum</message>
+    <message id="spieltyp_label">Spieltyp</message>
+    <message id="elfmeter_label">Elfmeterschießen bei Unentschieden?</message>
+
+    <message id="home_verein_label">Heimmannschaft</message>
+    <message id="gast_verein_label">Gastmannschaft</message>
+    <message id="stadion_label">Stadion</message>
+
+    <message id="button_save">Spiel ansetzen</message>
+</messages>

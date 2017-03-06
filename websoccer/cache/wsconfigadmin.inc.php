@@ -1,0 +1,43 @@
+<?php
+// !!!!! GENERATED FILE! DO NOT EDIT !!!!!
+$adminpage['club'] = '{"id":"club","entity":"club","navcategory":"league","permissionrole":"r_daten","module":"clubs"}';
+$adminpage['all_settings'] = '{"id":"all_settings","permissionrole":"r_admin","navcategory":"settings","filename":"all_settings","module":"core"}';
+$adminpage['all_logging'] = '{"id":"all_logging","permissionrole":"r_admin","navcategory":"settings","filename":"all_logging","module":"core"}';
+$adminpage['entitylogging'] = '{"id":"entitylogging","permissionrole":"r_admin","navcategory":"settings","filename":"entitylogging","module":"core"}';
+$adminpage['jobs'] = '{"id":"jobs","permissionrole":"r_admin","navcategory":"settings","filename":"jobs","module":"core"}';
+$adminpage['admin'] = '{"id":"admin","permissionrole":"r_adminuser","navcategory":"website","entity":"admin","module":"core"}';
+$adminpage['cup'] = '{"id":"cup","entity":"cup","navcategory":"season","permissionrole":"r_spiele","module":"cups"}';
+$adminpage['firemanagers'] = '{"id":"firemanagers","permissionrole":"r_user","navcategory":"league","filename":"firemanagers","module":"firemanagers"}';
+$adminpage['imprint'] = '{"id":"imprint","permissionrole":"r_admin","navcategory":"settings","filename":"imprint","module":"frontend"}';
+$adminpage['teamsgenerator'] = '{"id":"teamsgenerator","permissionrole":"r_daten","navcategory":"league","filename":"teamsgenerator","module":"generator"}';
+$adminpage['playersgenerator'] = '{"id":"playersgenerator","permissionrole":"r_daten","navcategory":"league","filename":"playersgenerator","module":"generator"}';
+$adminpage['league'] = '{"id":"league","entity":"league","navcategory":"league","permissionrole":"r_daten","module":"leagues"}';
+$adminpage['match'] = '{"id":"match","entity":"match","navcategory":"season","permissionrole":"r_spiele","module":"matches"}';
+$adminpage['matchtext'] = '{"id":"matchtext","entity":"matchtext","navcategory":"season","permissionrole":"r_daten","module":"matches"}';
+$adminpage['transaction'] = '{"id":"transaction","entity":"transaction","navcategory":"league","permissionrole":"r_daten","module":"moneytransactions"}';
+$adminpage['news'] = '{"id":"news","permissionrole":"r_news","navcategory":"website","entity":"news","module":"news"}';
+$adminpage['player'] = '{"id":"player","entity":"player","navcategory":"league","permissionrole":"r_daten","module":"players"}';
+$adminpage['premiumstatement'] = '{"id":"premiumstatement","entity":"premiumstatement","navcategory":"website","permissionrole":"r_user","module":"premium"}';
+$adminpage['premiumpayment'] = '{"id":"premiumpayment","entity":"premiumpayment","navcategory":"website","permissionrole":"r_user","module":"premium"}';
+$adminpage['randomevent'] = '{"id":"randomevent","entity":"randomevent","navcategory":"league","permissionrole":"r_daten","module":"randomevents"}';
+$adminpage['schedulegenerator'] = '{"id":"schedulegenerator","permissionrole":"r_spiele","navcategory":"season","filename":"schedulegenerator","module":"season"}';
+$adminpage['season'] = '{"id":"season","entity":"season","navcategory":"season","permissionrole":"r_spiele","module":"season"}';
+$adminpage['complete-season'] = '{"id":"complete-season","filename":"season-complete","navcategory":"season","permissionrole":"r_spiele","module":"season"}';
+$adminpage['sponsor'] = '{"id":"sponsor","entity":"sponsor","navcategory":"league","permissionrole":"r_daten","module":"sponsor"}';
+$adminpage['stadium'] = '{"id":"stadium","entity":"stadium","navcategory":"league","permissionrole":"r_daten","module":"stadium"}';
+$adminpage['stadiumbuilder'] = '{"id":"stadiumbuilder","entity":"stadiumbuilder","navcategory":"league","permissionrole":"r_daten","module":"stadium"}';
+$adminpage['stadiumconstruction'] = '{"id":"stadiumconstruction","entity":"stadiumconstruction","navcategory":"league","permissionrole":"r_daten","module":"stadium"}';
+$adminpage['stadiumbuilding'] = '{"id":"stadiumbuilding","entity":"stadiumbuilding","navcategory":"league","permissionrole":"r_daten","module":"stadiumenvironment"}';
+$adminpage['tablemarker'] = '{"id":"tablemarker","entity":"tablemarker","navcategory":"league","permissionrole":"r_daten","module":"tables"}';
+$adminpage['termsandconditions'] = '{"id":"termsandconditions","permissionrole":"r_admin","navcategory":"settings","filename":"termsandconditions","module":"termsandconditions"}';
+$adminpage['trainer'] = '{"id":"trainer","entity":"trainer","navcategory":"league","permissionrole":"r_daten","module":"training"}';
+$adminpage['trainingcamp'] = '{"id":"trainingcamp","entity":"trainingcamp","navcategory":"league","permissionrole":"r_daten","module":"trainingcamp"}';
+$adminpage['transfer_offer'] = '{"id":"transfer_offer","entity":"transfer_offer","navcategory":"league","permissionrole":"r_daten","module":"transferoffers"}';
+$adminpage['transfers'] = '{"id":"transfers","entity":"transfers","navcategory":"league","permissionrole":"r_daten","module":"transfers"}';
+$adminpage['userabsence'] = '{"id":"userabsence","permissionrole":"r_user","navcategory":"website","entity":"userabsence","module":"userabsence"}';
+$adminpage['badge'] = '{"id":"badge","entity":"badge","navcategory":"website","permissionrole":"r_user","module":"userbadges"}';
+$adminpage['users'] = '{"id":"users","permissionrole":"r_user","navcategory":"website","entity":"users","module":"users"}';
+$adminpage['youthplayer'] = '{"id":"youthplayer","entity":"youthplayer","navcategory":"league","permissionrole":"r_daten","module":"youth"}';
+$adminpage['youthscout'] = '{"id":"youthscout","entity":"youthscout","navcategory":"league","permissionrole":"r_daten","module":"youth"}';
+$adminpage['youthmatch'] = '{"id":"youthmatch","entity":"youthmatch","navcategory":"league","permissionrole":"r_daten","module":"youth"}';
+?>
