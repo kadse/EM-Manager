@@ -175,6 +175,7 @@
 	<message id="settings_saved_note_restartjobs_details">Änderungen, die Jobs betreffen, werden erst nach deren Neustart wirksam.</message>
 	
 	<message id="manage_add">Neuen Eintrag erstellen</message>
+	<message id="manage_add_players">Mehrere neue Einträge erstellen</message>
 	<message id="manage_edit">Bearbeiten</message>
 	<message id="manage_delete">Löschen</message>
 	<message id="manage_no_records_found">Es wurden keine Datensätze gefunden.</message>

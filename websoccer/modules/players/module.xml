@@ -100,9 +100,9 @@
 					
 					<field id="w_staerke" type="percent" required="true" roles="r_staerken" />
 					<field id="w_technik" type="percent" required="true" roles="r_staerken" />
-					<field id="w_kondition" type="percent" required="true" roles="r_staerken" />
-					<field id="w_frische" type="percent" required="true" roles="r_staerken" />
-					<field id="w_zufriedenheit" type="percent" required="true" roles="r_staerken" />
+					<field id="w_kondition" type="percent" required="true" roles="r_staerken" default="80" />
+					<field id="w_frische" type="percent" required="true" roles="r_staerken" default="85" />
+					<field id="w_zufriedenheit" type="percent" required="true" roles="r_staerken" default="80" />
 					
 					<field id="transfermarkt" type="boolean" />
 					<field id="transfer_start" type="timestamp" />
@@ -110,7 +110,7 @@
 					<field id="transfer_mindestgebot" type="number" />
 					
 					<field id="vertrag_gehalt" type="number" />
-					<field id="vertrag_spiele" type="number" />
+					<field id="vertrag_spiele" type="number" default="1000" />
 					<field id="vertrag_torpraemie" type="number" />
 					
 					<field id="lending_owner_id" type="foreign_key" entity="club" jointable="verein" labelcolumns="name" />
@@ -138,6 +138,36 @@
 					<field id="unsellable" type="boolean" />
 					<field id="status" type="boolean" default="1" />
                 </editform>
+
+                <editform_players>
+                    <field id="verein_id" type="foreign_key" entity="club" jointable="verein" cascade="delete" labelcolumns="name" />
+
+                    <field id="vorname" type="text" />
+                    <field id="nachname" type="text" />
+                    <field id="kunstname" type="text" />
+                    <field id="geburtstag" type="date" required="true" />
+                    <field id="position" type="select" selection="Torwart,Abwehr,Mittelfeld,Sturm" required="true"  />
+                    <field id="position_main" type="select" selection="T,LV,IV,RV,LM,ZM,DM,OM,RM,LS,MS,RS" required="false"  />
+                    <field id="position_second" type="select" selection="T,LV,IV,RV,LM,ZM,DM,OM,RM,LS,MS,RS" required="false"  />
+                    <field id="nation" type="text" required="true"  />
+                    
+                    <field id="tm" type="url"  />
+                    <field id="picture" type="file"  />
+                    
+                    <field id="w_staerke" type="percent" required="true" roles="r_staerken" />
+                    <field id="w_technik" type="percent" required="true" roles="r_staerken" />
+                    <field id="w_kondition" type="percent" required="true" roles="r_staerken" default="80" />
+                    <field id="w_frische" type="percent" required="true" roles="r_staerken" default="85" />
+                    <field id="w_zufriedenheit" type="percent" required="true" roles="r_staerken" default="80" />
+                                       
+                    <field id="vertrag_gehalt" type="number" />
+                    <field id="vertrag_spiele" type="number" default="1000" />
+                    <field id="vertrag_torpraemie" type="number" />
+                    
+                    <field id="marktwert" type="number" />
+                    
+                    <field id="status" type="boolean" default="1" />
+                </editform_players>                
             </entity>
         </adminpage>
     </admin>

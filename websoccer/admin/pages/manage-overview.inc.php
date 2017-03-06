@@ -63,6 +63,9 @@ $editEnabled = ($overviewConfig[0]->attributes()->edit == "true") ? TRUE : FALSE
 // add button
 if ($addEnabled) {
 	echo "<p><a class=\"btn btn-small\" href=\"?site=". $site ."&entity=". $entity . "&show=add\"><i class=\"icon-file\"></i> ". $i18n->getMessage("manage_add") . "</a></p>";
+	if ($entity == "player") {
+	echo "<p><a class=\"btn btn-small\" href=\"?site=". $site ."&entity=". $entity . "&show=add_players\"><i class=\"icon-file\"></i> ". $i18n->getMessage("manage_add_players") . "</a></p>";
+	}
 }
 
 // build meta data

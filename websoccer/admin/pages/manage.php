@@ -72,17 +72,22 @@ $dbTable = $tablePrefix . $dbTableWithoutPrefix;
 $showOverview = TRUE;
 
 // process add/edit form action
-if ($show == "add" || $show == "edit") {
+if ($show == "add" || $show == "edit" || $show == "add_players") {
 	$showOverview = FALSE;
 	$enableFileUpload = FALSE;
 	
 	// field config
-	$fields = $entityConfig[0]->xpath("editform/field");
+	if ($show == "add_players") {
+		$fields = $entityConfig[0]->xpath("editform_players/field");
+	}
+	else {
+		$fields = $entityConfig[0]->xpath("editform/field");
+	}
 	$formFields = array();
 	foreach($fields as $field) {
 		$attrs = $field->attributes();
 		
-		if ($show == "add" && (boolean) $attrs["editonly"]) {
+		if (($show == "add" || $show == "add_players") && (boolean) $attrs["editonly"]) {
 			continue;
 		}
 		
@@ -133,55 +138,110 @@ if ($show == "add" || $show == "edit") {
 	
 			// validate
 			$dbcolumns = array();
-			foreach ($formFields as $fieldId => $fieldInfo) {
-				
-				if ($fieldInfo["readonly"]) {
-					continue;
+			if ($show == "add_players") {
+				for ($i = 1; $i <= 2; $i++) {
+					foreach ($formFields as $fieldId => $fieldInfo) {					
+
+						if ($fieldId != "verein_id") $formFieldId = $fieldId."_".$i;
+						else $formFieldId = $fieldId;
+
+						if ($fieldInfo["readonly"]) {
+							continue;
+						}
+						
+						if ($fieldInfo["type"] == "timestamp") {
+							$dateObj = DateTime::createFromFormat($website->getConfig("date_format") .", H:i", 
+									$_POST[$formFieldId ."_date"] .", ". $_POST[$formFieldId ."_time"]);
+							$fieldValue = ($dateObj) ? $dateObj->getTimestamp() : 0;
+						} elseif ($fieldInfo["type"] == "boolean") {
+							$fieldValue = (isset($_POST[$formFieldId])) ? "1" : "0";
+						} else {
+							$fieldValue = (isset($_POST[$formFieldId])) ? $_POST[$formFieldId] : "";
+						}
+						
+						FormBuilderPlayers::validateField($i18n, $i, $formFieldId, $fieldInfo, $fieldValue, $labelPrefix);	
+							
+						// apply converter
+						if (strlen($fieldInfo["converter"])) {
+							$converter = new $fieldInfo["converter"]($i18n, $website);
+							$fieldValue = $converter->toDbValue($fieldValue);
+						}
+						
+						// convert date
+						if (strlen($fieldValue) && $fieldInfo["type"] == "date") {
+							$dateObj = DateTime::createFromFormat($website->getConfig("date_format"), $fieldValue);
+							$fieldValue = $dateObj->format("Y-m-d");
+						} else if ($fieldInfo["type"] == "timestamp" && $fieldInfo["readonly"] && $show == "add") {
+							$fieldValue = $website->getNowAsTimestamp();
+						} else if ($fieldInfo["type"] == "file") {
+							if (isset($_FILES[$formFieldId]) && isset($_FILES[$formFieldId]["tmp_name"]) && strlen($_FILES[$formFieldId]["tmp_name"])) {
+								$fieldValue = md5($entity . "-". $website->getNowAsTimestamp());
+								$fieldValue .= "." . FileUploadHelper::uploadImageFile($i18n, $formFieldId, $fieldValue, $entity);
+							} else {
+								continue;
+							}
+
+						}
+						
+						// do not store read-only, except generated timestamp on adding
+						if (!$fieldInfo["readonly"] or $fieldInfo["readonly"] && $fieldInfo["type"] == "timestamp" && $show == "add_players") {
+							$dbcolumns[$fieldId] = $fieldValue;			
+						}				
+					}
+				$db->queryInsert($dbcolumns, $dbTable);
 				}
-				
-				if ($fieldInfo["type"] == "timestamp") {
-					$dateObj = DateTime::createFromFormat($website->getConfig("date_format") .", H:i", 
-							$_POST[$fieldId ."_date"] .", ". $_POST[$fieldId ."_time"]);
-					$fieldValue = ($dateObj) ? $dateObj->getTimestamp() : 0;
-				} elseif ($fieldInfo["type"] == "boolean") {
-					$fieldValue = (isset($_POST[$fieldId])) ? "1" : "0";
-				} else {
-					$fieldValue = (isset($_POST[$fieldId])) ? $_POST[$fieldId] : "";
-				}
-				
-				FormBuilder::validateField($i18n, $fieldId, $fieldInfo, $fieldValue, $labelPrefix);
-					
-				// apply converter
-				if (strlen($fieldInfo["converter"])) {
-					$converter = new $fieldInfo["converter"]($i18n, $website);
-					$fieldValue = $converter->toDbValue($fieldValue);
-				}
-				
-				// convert date
-				if (strlen($fieldValue) && $fieldInfo["type"] == "date") {
-					$dateObj = DateTime::createFromFormat($website->getConfig("date_format"), $fieldValue);
-					$fieldValue = $dateObj->format("Y-m-d");
-				} else if ($fieldInfo["type"] == "timestamp" && $fieldInfo["readonly"] && $show == "add") {
-					$fieldValue = $website->getNowAsTimestamp();
-				} else if ($fieldInfo["type"] == "file") {
-					if (isset($_FILES[$fieldId]) && isset($_FILES[$fieldId]["tmp_name"]) && strlen($_FILES[$fieldId]["tmp_name"])) {
-						$fieldValue = md5($entity . "-". $website->getNowAsTimestamp());
-						$fieldValue .= "." . FileUploadHelper::uploadImageFile($i18n, $fieldId, $fieldValue, $entity);
-					} else {
+			}
+			else {
+				foreach ($formFields as $fieldId => $fieldInfo) {					
+					if ($fieldInfo["readonly"]) {
 						continue;
 					}
+					
+					if ($fieldInfo["type"] == "timestamp") {
+						$dateObj = DateTime::createFromFormat($website->getConfig("date_format") .", H:i", 
+								$_POST[$fieldId ."_date"] .", ". $_POST[$fieldId ."_time"]);
+						$fieldValue = ($dateObj) ? $dateObj->getTimestamp() : 0;
+					} elseif ($fieldInfo["type"] == "boolean") {
+						$fieldValue = (isset($_POST[$fieldId])) ? "1" : "0";
+					} else {
+						$fieldValue = (isset($_POST[$fieldId])) ? $_POST[$fieldId] : "";
+					}
+					
+					FormBuilder::validateField($i18n, $fieldId, $fieldInfo, $fieldValue, $labelPrefix);	
+						
+					// apply converter
+					if (strlen($fieldInfo["converter"])) {
+						$converter = new $fieldInfo["converter"]($i18n, $website);
+						$fieldValue = $converter->toDbValue($fieldValue);
+					}
+					
+					// convert date
+					if (strlen($fieldValue) && $fieldInfo["type"] == "date") {
+						$dateObj = DateTime::createFromFormat($website->getConfig("date_format"), $fieldValue);
+						$fieldValue = $dateObj->format("Y-m-d");
+					} else if ($fieldInfo["type"] == "timestamp" && $fieldInfo["readonly"] && $show == "add") {
+						$fieldValue = $website->getNowAsTimestamp();
+					} else if ($fieldInfo["type"] == "file") {
+						if (isset($_FILES[$fieldId]) && isset($_FILES[$fieldId]["tmp_name"]) && strlen($_FILES[$fieldId]["tmp_name"])) {
+							$fieldValue = md5($entity . "-". $website->getNowAsTimestamp());
+							$fieldValue .= "." . FileUploadHelper::uploadImageFile($i18n, $fieldId, $fieldValue, $entity);
+						} else {
+							continue;
+						}
 
+					}
+					
+					// do not store read-only, except generated timestamp on adding
+					if (!$fieldInfo["readonly"] or $fieldInfo["readonly"] && $fieldInfo["type"] == "timestamp" && $show == "add") {
+						$dbcolumns[$fieldId] = $fieldValue;	
+					}				
 				}
-				
-				// do not store read-only, except generated timestamp on adding
-				if (!$fieldInfo["readonly"] or $fieldInfo["readonly"] && $fieldInfo["type"] == "timestamp"  && $show == "add") {
-					$dbcolumns[$fieldId] = $fieldValue;
-				}
-				
 			}
 	
-			if ($show == "add") {
-				$db->queryInsert($dbcolumns, $dbTable);
+			if ($show == "add" || $show == "add_players") {
+				if ($show == "add") {
+					$db->queryInsert($dbcolumns, $dbTable);	
+				}
 			} else {
 				$whereCondition = "id = %d";
 				$parameter = $id;
@@ -208,7 +268,9 @@ if ($show == "add" || $show == "edit") {
 
 if ($show == "add") {
 	include(__DIR__ . "/manage-add.inc.php");
-} else if($show == "edit") {
+} elseif ($show == "add_players") {
+	include(__DIR__ . "/manage-add_players.inc.php");
+} elseif($show == "edit") {
 	include(__DIR__ . "/manage-edit.inc.php");
 } 
 
