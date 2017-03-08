@@ -23,8 +23,6 @@
 				</td>
 				
 				{% if env.getConfig("hide_strength_attributes") != "1" %}
-				<td {{ playerlists.strengthClass(player.strength) }} title="{{ i18n.getMessage("playertable_head_strength") }}"><strong>{{ player.strength }}</strong></td>
-				<td {{ playerlists.strengthClass(player.strength_technic) }} title="{{ i18n.getMessage("playertable_head_strength_technic") }}">{{ player.strength_technic }}</td>
 				<td {{ playerlists.strengthClass(player.strength_freshness) }} title="{{ i18n.getMessage("playertable_head_strength_freshness") }}">{{ player.strength_freshness }}</td>
 				<td {{ playerlists.strengthClass(player.strength_stamina) }} title="{{ i18n.getMessage("playertable_head_strength_stamina") }}">{{ player.strength_stamina }}</td>
 				<td {{ playerlists.strengthClass(player.strength_satisfaction) }} title="{{ i18n.getMessage("playertable_head_strength_satisfaction") }}">{{ player.strength_satisfaction }}</td>

@@ -383,15 +383,7 @@
 									</small>
 									
 									{% if env.getConfig("hide_strength_attributes") != "1" or youthFormation is defined and youthFormation %}
-										<div class="playerinfoStrengthRow">
-											<div class="playerinfoStrengthLabelFull">{{ i18n.getMessage("entity_player_w_staerke") }}</div>
-											{{ statisticelements.progressbar(player.strength, "playerinfoStrength") }}
-										</div>
 										{% if player.strength_technique is defined %}
-										<div class="playerinfoStrengthRow">
-											<div class="playerinfoStrengthLabelFull">{{ i18n.getMessage("entity_player_w_technik") }}</div>
-											{{ statisticelements.progressbar(player.strength_technique, "playerinfoStrength") }}
-										</div>
 										<div class="playerinfoStrengthRow">
 											<div class="playerinfoStrengthLabelFull">{{ i18n.getMessage("entity_player_w_kondition") }}</div>
 											{{ statisticelements.progressbar(player.strength_stamina, "playerinfoStrength") }}

@@ -11,8 +11,6 @@
 
 {{ profile.infofield(i18n.getMessage("entity_trainingcamp_name"), camp.name) }}
 {{ profile.infofield(i18n.getMessage("entity_trainingcamp_preis_spieler_tag"), camp.costs|number_format(0, ',', ' ') ~ " " ~ env.getConfig("game_currency")) }}
-{{ profile.infofield(i18n.getMessage("entity_trainingcamp_p_staerke"), camp.effect_strength) }}
-{{ profile.infofield(i18n.getMessage("entity_trainingcamp_p_technik"), camp.effect_strength_technique) }}
 {{ profile.infofield(i18n.getMessage("entity_trainingcamp_p_kondition"), camp.effect_strength_stamina) }}
 {{ profile.infofield(i18n.getMessage("entity_trainingcamp_p_frische"), camp.effect_strength_freshness) }}
 {{ profile.infofield(i18n.getMessage("entity_trainingcamp_p_zufriedenheit"), camp.effect_strength_satisfaction) }}

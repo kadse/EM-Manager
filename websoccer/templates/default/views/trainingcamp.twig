@@ -17,8 +17,6 @@
 	{{ profile.infofield(i18n.getMessage("entity_trainingcamp_name"), bookedCamp.name) }}
 	{{ profile.infofield(i18n.getMessage("trainingcamp_startdate"), env.getFormattedDate(bookedCamp.date_start)) }}
 	{{ profile.infofield(i18n.getMessage("trainingcamp_enddate"), env.getFormattedDate(bookedCamp.date_end)) }}
-	{{ profile.infofield(i18n.getMessage("entity_trainingcamp_p_staerke"), bookedCamp.effect_strength) }}
-	{{ profile.infofield(i18n.getMessage("entity_trainingcamp_p_technik"), bookedCamp.effect_strength_technique) }}
 	{{ profile.infofield(i18n.getMessage("entity_trainingcamp_p_kondition"), bookedCamp.effect_strength_stamina) }}
 	{{ profile.infofield(i18n.getMessage("entity_trainingcamp_p_frische"), bookedCamp.effect_strength_freshness) }}
 	{{ profile.infofield(i18n.getMessage("entity_trainingcamp_p_zufriedenheit"), bookedCamp.effect_strength_satisfaction) }}
@@ -57,8 +55,6 @@
 					<td><p>{{ camp.name }} ({{ camp.country }})</p>
 					<p><a href="{{ env.getInternalUrl("camp-details", "id=" ~ camp.id) }}" class="btn"><i class="icon-hand-right"></i> {{ i18n.getMessage("button_choose") }}</a></p></td>
 					<td>{{ camp.costs|number_format(0, ',', ' ') }} {{ env.getConfig("game_currency") }}</td>
-					<td>{{ camp.effect_strength }}</td>
-					<td>{{ camp.effect_strength_technique }}</td>
 					<td>{{ camp.effect_strength_stamina }}</td>
 					<td>{{ camp.effect_strength_freshness }}</td>
 					<td>{{ camp.effect_strength_satisfaction }}</td>
