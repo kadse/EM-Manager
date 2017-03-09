@@ -2,11 +2,14 @@
 include ("config/config.inc.php");
 
 $liga_id = mysqli_real_escape_string($dbconn, $_POST['liga']);
+$liga_id = intval($liga_id);
 
-$query = "SELECT name,id FROM ws__verein WHERE liga_id = '".$liga_id."' ORDER BY name ASC";
-$result = mysqli_query($dbconn, $query);
-$verein = mysqli_fetch_all($result);
-mysqli_free_result($result);
+if (is_numeric($liga_id)) {
+    $query = "SELECT name,id FROM ws__verein WHERE liga_id = '".$liga_id."' ORDER BY name ASC";
+    $result = mysqli_query($dbconn, $query);
+    $verein = mysqli_fetch_all($result);
+    mysqli_free_result($result);
+}
 mysqli_close($dbconn);
 ?>
 

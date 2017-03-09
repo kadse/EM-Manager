@@ -7,8 +7,48 @@
 </style>
 
 <?php
-
 include ("config/config.inc.php");
+
+$spalten = 5;
+
+$zusatzArray = array();
+$zusatz = '';
+
+if ($_POST['sa_spiele'] == 1) {
+    $zusatz .= '<th>Spiele (Saison)</th>';
+    array_push($zusatzArray, "sa_spiele");
+    $spalten++;
+}
+if ($_POST['st_spiele'] == 1) {
+    $zusatz .= '<th>Spiele (Gesamt)</th>';
+    array_push($zusatzArray, "st_spiele");
+    $spalten++;
+}
+if ($_POST['sa_tore'] == 1) {
+    $zusatz .= '<th>Tore (Saison)</th>';
+    array_push($zusatzArray, "sa_tore");
+    $spalten++;
+}
+if ($_POST['st_tore'] == 1) {
+    $zusatz .= '<th>Tore (Gesamt)</th>';
+    array_push($zusatzArray, "st_tore");
+    $spalten++;
+}
+if ($_POST['sa_assists'] == 1) {
+    $zusatz .= '<th>Vorlagen (Saison)</th>';
+    array_push($zusatzArray, "sa_assists");
+    $spalten++;
+}
+if ($_POST['st_assists'] == 1) {
+    $zusatz .= '<th>Vorlagen (Gesamt)</th>';
+    array_push($zusatzArray, "st_assists");
+    $spalten++;
+}
+
+$notiz = '<p align="center"><i>Keine</i></p>';
+if (!empty($_POST['notiz'])) {
+    $notiz = '<p align="left">'.nl2br($_POST['notiz']).'</p>';
+}
 
 $output = '
 <style>
@@ -40,29 +80,38 @@ table#playerTable p {
             <th>Alter</th>
             <th>Nationalität</th>
             <th>Marktwert</th>
+            '.$zusatz.'
         </tr>
     </thead>
     <tfoot>
         <tr>
-            <td colspan="5"><p align="center"><b>Bedingungen</b></p>
-            <p align="left">'.nl2br($_POST['notiz']).'</p></td>
+            <td colspan="'.$spalten.'"><p align="center"><b>Bedingungen</b></p>
+            '.$notiz.'</td>
         </tr>
     </tfoot>
     <tbody>';
+
+$if_array = array("notiz", "st_spiele", "st_tore", "st_assists", "sa_spiele", "sa_tore", "sa_assists");
+
 foreach ($_POST as $key => $value) {
 
-    if ($key == "notiz") {
+    if (in_array($key, $if_array, empty($key) && $key !== '0')) {
         continue;
     }
-
+    
     $spieler_id = mysqli_real_escape_string($dbconn, $value);
+    $spieler_id = intval($spieler_id);
+
+    if (!is_numeric($spieler_id)) {
+        continue;
+    }
 
     $query = "SELECT * FROM ws__spieler WHERE id = '".$spieler_id."'";
     $result = mysqli_query($dbconn, $query);
     $spieler = mysqli_fetch_array($result);
     mysqli_free_result($result);
 
-    if (empty($spieler['vorname']) && empty($spieler['vorname'])) {
+    if (empty($spieler['vorname']) && empty($spieler['nachname'])) {
         $name = $spieler['kunstname'];
     }
     else {
@@ -78,6 +127,11 @@ foreach ($_POST as $key => $value) {
         $positionen .= " | ".$spieler['position_second'];
     }
 
+    $zusatz = '';
+    foreach ($zusatzArray as $val) {
+        $zusatz .= '<td>'.$spieler[$val].'</td>';
+    }
+
     $output .= '
         <tr>
             <td>'.utf8_encode($spieler['position']).'<br /><i>'.utf8_encode($positionen).'</i></td>
@@ -85,6 +139,7 @@ foreach ($_POST as $key => $value) {
             <td>'.$alter->format('%y Jahre').'</td>
             <td>'.utf8_encode($spieler['nation']).'</td>
             <td>'.number_format($spieler['marktwert'], 0, ',', '.').' EUR</td>
+            '.$zusatz.'
         </tr>
     ';
 }
