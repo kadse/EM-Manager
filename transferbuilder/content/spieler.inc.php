@@ -122,7 +122,7 @@ mysqli_close($dbconn);
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <br /><br />
-                    <h2 class="section-heading">Bedinungen</h2>
+                    <h2 class="section-heading">Bedingungen</h2>
                     <hr class="primary">
                 </div>
             </div>
