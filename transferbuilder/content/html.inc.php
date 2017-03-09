@@ -10,17 +10,50 @@
 
 include ("config/config.inc.php");
 
-$output = "
-<table>
+$output = '
+<style>
+table#playerTable {
+    border: 2px solid #8fc837;
+}
+table#playerTable th {
+    padding: 5px;
+    text-align: center;
+    border-bottom: 1px solid #8fc837;
+} 
+table#playerTable td {
+    padding: 10px;
+    border-bottom: 1px dashed #656565;
+}
+table#playerTable tfoot {
+    border-top: 1px solid #8fc837;
+}
+table#playerTable p {
+    font-size: 14px;
+}
+</style>
+
+<table align="center" id="playerTable">
     <thead>
         <tr>
-            <th>Vorname</th>
-            <th>Nachname</th>
-            <th>Kunstname</th>
+            <th>Position</th>
+            <th>Name</th>
+            <th>Alter</th>
+            <th>Nationalität</th>
+            <th>Marktwert</th>
         </tr>
     </thead>
-    <tbody>";
+    <tfoot>
+        <tr>
+            <td colspan="5"><p align="center"><b>Bedingungen</b></p>
+            <p align="left">'.nl2br($_POST['notiz']).'</p></td>
+        </tr>
+    </tfoot>
+    <tbody>';
 foreach ($_POST as $key => $value) {
+
+    if ($key == "notiz") {
+        continue;
+    }
 
     $spieler_id = mysqli_real_escape_string($dbconn, $value);
 
@@ -29,13 +62,31 @@ foreach ($_POST as $key => $value) {
     $spieler = mysqli_fetch_array($result);
     mysqli_free_result($result);
 
-    $output .= "
+    if (empty($spieler['vorname']) && empty($spieler['vorname'])) {
+        $name = $spieler['kunstname'];
+    }
+    else {
+        $name = $spieler['vorname']." ".$spieler['nachname'];
+    }
+
+    $date1 = new DateTime($spieler['geburtstag']);
+    $date2 = new DateTime(date("Y-m-d"));
+    $alter = $date1->diff($date2);
+
+    $positionen = $spieler['position_main'];
+    if (!empty($spieler['position_second'])) {
+        $positionen .= " | ".$spieler['position_second'];
+    }
+
+    $output .= '
         <tr>
-            <td>".utf8_encode($spieler['vorname'])."</td>
-            <td>".utf8_encode($spieler['nachname'])."</td>
-            <td>".utf8_encode($spieler['kunstname'])."</td>
+            <td>'.utf8_encode($spieler['position']).'<br /><i>'.utf8_encode($positionen).'</i></td>
+            <td>'.utf8_encode($name).'</td>
+            <td>'.$alter->format('%y Jahre').'</td>
+            <td>'.utf8_encode($spieler['nation']).'</td>
+            <td>'.number_format($spieler['marktwert'], 0, ',', '.').' EUR</td>
         </tr>
-    ";
+    ';
 }
 
 $output .= "
@@ -46,6 +97,19 @@ mysqli_close($dbconn);
 ?>
 
 <section id="html">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">Vorschau</h2>
+                <hr class="primary">
+            </div>
+        </div>
+    </div>
+        <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center"><?php echo $output; ?><br /><br /><br /></div>
+        </div>
+    </div>
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">

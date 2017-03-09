@@ -1,3 +1,11 @@
+<style>
+    textarea {  
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box; 
+    width: 100%;}
+</style>
+
 <?php
 include ("config/config.inc.php");
 
@@ -53,6 +61,21 @@ mysqli_close($dbconn);
                 </table>
             </div>
         </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Bedinungen</h2>
+                    <hr class="primary">
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <textarea id="notiz" name="notiz" cols="100" rows="20"></textarea>
+                </div>
+            </div>
+        </div>        
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center form-group">
