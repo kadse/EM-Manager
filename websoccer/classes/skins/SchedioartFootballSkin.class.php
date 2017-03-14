@@ -52,6 +52,7 @@ class SchedioartFootballSkin extends DefaultBootstrapSkin {
 		}
 		
 		$files[] = '//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css';
+		$files[] = '//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css';
 	
 		return $files;
 	}

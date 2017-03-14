@@ -53,10 +53,10 @@
 									{% endfor %}</p>
 								
 									<p><strong>{{ i18n.getMessage("entity_club_finanz_budget") }}</strong><br>
-									{{ club.team_budget|number_format(0, ',', ' ') }} {{ env.getConfig("game_currency") }}</p>
+									{{ club.team_budget|number_format(0, ',', '.') }} {{ env.getConfig("game_currency") }}</p>
 									
 									<p><strong>{{ i18n.getMessage("entity_stadium") }}</strong><br>
-									{{ (club.stadium_p_steh + club.stadium_p_sitz + club.stadium_p_haupt_steh + club.stadium_p_haupt_sitz + club.stadium_p_vip)|number_format(0, ',', ' ') }}</p>
+									{{ (club.stadium_p_steh + club.stadium_p_sitz + club.stadium_p_haupt_steh + club.stadium_p_haupt_sitz + club.stadium_p_vip)|number_format(0, ',', '.') }}</p>
 								</small>
 							</td>
 							{% if env.getConfig("assign_team_automatically") %}

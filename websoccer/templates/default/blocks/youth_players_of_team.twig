@@ -43,7 +43,7 @@
 					{% if player.transfer_fee == 0 %}
 						-
 					{% else %}
-						<p>{{ player.transfer_fee|number_format(0, ',', ' ') }} {{ env.getConfig("game_currency") }}</p>
+						<p>{{ player.transfer_fee|number_format(0, ',', '.') }} {{ env.getConfig("game_currency") }}</p>
 						
 						{% if env.user.clubId > 0 and player.team_id != env.user.clubId %}
 							<a href="{{ env.getInternalUrl("youthplayer-buy", "id=" ~ player.id) }}" class="btn btn-small"><i class="icon-shopping-cart"></i> {{ i18n.getMessage("youthteam_action_buy") }}</a>

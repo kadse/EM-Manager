@@ -10,11 +10,11 @@
 
 {{ profile.infofield(i18n.getMessage("entity_youthplayer_strength"), player.strength ~ "%") }}
 
-{{ profile.infofield(i18n.getMessage("entity_player_vertrag_gehalt"), (player.strength * env.getConfig("youth_salary_per_strength"))|number_format(0, ',', ' ') ~ " " ~ env.getConfig("game_currency")) }}
+{{ profile.infofield(i18n.getMessage("entity_player_vertrag_gehalt"), (player.strength * env.getConfig("youth_salary_per_strength"))|number_format(0, ',', '.') ~ " " ~ env.getConfig("game_currency")) }}
 
 {% if player.transfer_fee > 0 %}
 	{{ profile.infofield(i18n.getMessage("entity_youthplayer_transfer_fee"), 
-		player.transfer_fee|number_format(0, ',', ' ') ~ " " ~ env.getConfig("game_currency")) }}
+		player.transfer_fee|number_format(0, ',', '.') ~ " " ~ env.getConfig("game_currency")) }}
 {% endif %}
 
 <p style="margin-top: 10px"><a href="#playerstatistics" class="btn btn-small" data-toggle="collapse"><i class="icon-zoom-in"></i> {{ i18n.getMessage("youthteam_showstatistics_tooltip") }}</a></p>

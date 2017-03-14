@@ -9,7 +9,7 @@
 
 <div class="well">
 	<p>{{ i18n.getMessage("premium-exchange-confirm_question") }}</p>
-	<p><strong>{{ env.getRequestParameter("amount") }} {{ env.getConfig("premium_credit_unit") }} = {{ (env.getRequestParameter("amount") * env.getConfig("premium_exchangerate_gamecurrency"))|number_format(0, ',', ' ') }} {{ env.getConfig("game_currency") }}</strong></p>
+	<p><strong>{{ env.getRequestParameter("amount") }} {{ env.getConfig("premium_credit_unit") }} = {{ (env.getRequestParameter("amount") * env.getConfig("premium_exchangerate_gamecurrency"))|number_format(0, ',', '.') }} {{ env.getConfig("game_currency") }}</strong></p>
 </div>
 
 <form class="form-horizontal" method="post">

@@ -9,10 +9,10 @@
 
 <div class="well">
 	<p>{{ i18n.getMessage("premium-exchange_intro") }}</p>
-	<p><strong>1 {{ env.getConfig("premium_credit_unit") }} = {{ env.getConfig("premium_exchangerate_gamecurrency")|number_format(0, ',', ' ') }} {{ env.getConfig("game_currency") }}</strong></p>
+	<p><strong>1 {{ env.getConfig("premium_credit_unit") }} = {{ env.getConfig("premium_exchangerate_gamecurrency")|number_format(0, ',', '.') }} {{ env.getConfig("game_currency") }}</strong></p>
 </div>
 
-<h4>{{ i18n.getMessage("entity_users_premium_balance") }}: {{ env.user.premiumBalance|number_format(0, ',', ' ') }} {{ env.getConfig("premium_credit_unit") }}</h4>
+<h4>{{ i18n.getMessage("entity_users_premium_balance") }}: {{ env.user.premiumBalance|number_format(0, ',', '.') }} {{ env.getConfig("premium_credit_unit") }}</h4>
 
 <form class="form-horizontal" method="post">
 

@@ -76,7 +76,7 @@
   
   {% if stadium.stadium_id is defined and stadium.stadium_id > 0 %}
   	{% set capacity = stadium.places_stands + stadium.places_seats + stadium.places_stands_grand + stadium.places_seats_grand + stadium.places_vip %}
-	{% set stadiumLabel = stadium.name ~ " (" ~ capacity|number_format(0, ',', ' ') ~ ")" %}
+	{% set stadiumLabel = stadium.name ~ " (" ~ capacity|number_format(0, ',', '.') ~ ")" %}
   {% else %}
   	{% set stadiumLabel = "-" %}
   {% endif %}
@@ -110,8 +110,8 @@
 		{% endif %}
 		{{ profile.infofield(i18n.getMessage("entity_player"), playerfacts.numberOfPlayers) }}
 		{{ profile.infofield('&empty; ' ~ i18n.getMessage("entity_player_age"), playerfacts.avgAge|round(2), true) }}
-		{{ profile.infofield('&sum; ' ~ i18n.getMessage("entity_player_marktwert"), playerfacts.sumMarketValue|number_format(0, ',', ' ') ~ " " ~ env.getConfig("game_currency"), true) }}
-		{{ profile.infofield('&empty; ' ~ i18n.getMessage("entity_player_marktwert"), playerfacts.avgMarketValue|number_format(0, ',', ' ') ~ " " ~ env.getConfig("game_currency"), true) }}
+		{{ profile.infofield('&sum; ' ~ i18n.getMessage("entity_player_marktwert"), playerfacts.sumMarketValue|number_format(0, ',', '.') ~ " " ~ env.getConfig("game_currency"), true) }}
+		{{ profile.infofield('&empty; ' ~ i18n.getMessage("entity_player_marktwert"), playerfacts.avgMarketValue|number_format(0, ',', '.') ~ " " ~ env.getConfig("game_currency"), true) }}
   {% endif %}
   </div>
   

@@ -39,7 +39,7 @@
 				</td>
 				<td>
 					{% if request.reward > 0 %}
-						{{ request.reward|number_format(0, ',', ' ') }} {{ env.getConfig("game_currency") }}
+						{{ request.reward|number_format(0, ',', '.') }} {{ env.getConfig("game_currency") }}
 					{% else %}
 						-
 					{% endif %}

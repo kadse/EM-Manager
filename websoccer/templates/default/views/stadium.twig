@@ -15,7 +15,7 @@
 	{{ profile.infofield(i18n.getMessage("entity_stadium_name"), stadium.name) }}
 	
 	{% set capacity = stadium.places_stands + stadium.places_seats + stadium.places_stands_grand + stadium.places_seats_grand + stadium.places_vip %}
-	{{ profile.infofield(i18n.getMessage("stadium_capacity"), capacity|number_format(0, ',', ' ')) }}
+	{{ profile.infofield(i18n.getMessage("stadium_capacity"), capacity|number_format(0, ',', '.')) }}
 	
 	<div class="row">
 		<div class="span12">
@@ -23,9 +23,9 @@
 				data-ratioside="{{ ((stadium.places_seats + stadium.places_stands) / env.getConfig("stadium_max_side") * 100)|number_format }}"
 				data-ratiogrand="{{ ((stadium.places_seats_grand + stadium.places_stands_grand) / env.getConfig("stadium_max_grand") * 100)|number_format }}"
 				data-ratiovip="{{ ((stadium.places_vip) / env.getConfig("stadium_max_vip") * 100)|number_format }}"
-				data-labelside="{{ i18n.getMessage("entity_stadium_p_steh") }}: {{ stadium.places_stands|number_format(0, ',', ' ') }}, {{ i18n.getMessage("entity_stadium_p_sitz") }}: {{ stadium.places_seats|number_format(0, ',', ' ') }}"
-				data-labelgrand="{{ i18n.getMessage("entity_stadium_p_steh") }}: {{ stadium.places_stands_grand|number_format(0, ',', ' ') }}, {{ i18n.getMessage("entity_stadium_p_sitz") }}: {{ stadium.places_seats_grand|number_format(0, ',', ' ') }}"
-				data-labelvip="{{ i18n.getMessage("entity_stadium_p_vip") }}: {{ stadium.places_vip|number_format(0, ',', ' ') }}"
+				data-labelside="{{ i18n.getMessage("entity_stadium_p_steh") }}: {{ stadium.places_stands|number_format(0, ',', '.') }}, {{ i18n.getMessage("entity_stadium_p_sitz") }}: {{ stadium.places_seats|number_format(0, ',', '.') }}"
+				data-labelgrand="{{ i18n.getMessage("entity_stadium_p_steh") }}: {{ stadium.places_stands_grand|number_format(0, ',', '.') }}, {{ i18n.getMessage("entity_stadium_p_sitz") }}: {{ stadium.places_seats_grand|number_format(0, ',', '.') }}"
+				data-labelvip="{{ i18n.getMessage("entity_stadium_p_vip") }}: {{ stadium.places_vip|number_format(0, ',', '.') }}"
 				data-standingratiogrand="{{ (stadium.places_stands_grand / (stadium.places_stands_grand + stadium.places_seats_grand) * 100)|number_format }}"
 				data-standingratioside="{{ (stadium.places_stands / (stadium.places_stands + stadium.places_seats) * 100)|number_format }}">
 				<p>Your browser does not support this feature.</p>
@@ -47,7 +47,7 @@
 				<td>
 					{% if stadium['level_' ~ upgradetype] < 5 %}
 						<small>{{ i18n.getMessage("stadium_maintenance_upgradecost_label") }}<br></small>
-						{{ upgradeCosts[upgradetype]|number_format(0, ',', ' ') }} {{ env.getConfig("game_currency") }}
+						{{ upgradeCosts[upgradetype]|number_format(0, ',', '.') }} {{ env.getConfig("game_currency") }}
 					{% else %}
 						-
 					{% endif %}
@@ -98,9 +98,9 @@
 			    		<p>{{ i18n.getMessage('stadium_extend_limitation_intro') }}:</p>
 			    		
 			    		<ul>
-			    			<li><strong>{{ i18n.getMessage('stadium_extend_limitation_side') }}:</strong> {{ maxSide|number_format(0, ',', ' ') }}</li>
-			    			<li><strong>{{ i18n.getMessage('stadium_extend_limitation_grand') }}:</strong> {{ maxGrand|number_format(0, ',', ' ') }}</li>
-			    			<li><strong>{{ i18n.getMessage('stadium_extend_limitation_vip') }}:</strong> {{ maxVip|number_format(0, ',', ' ') }}</li>
+			    			<li><strong>{{ i18n.getMessage('stadium_extend_limitation_side') }}:</strong> {{ maxSide|number_format(0, ',', '.') }}</li>
+			    			<li><strong>{{ i18n.getMessage('stadium_extend_limitation_grand') }}:</strong> {{ maxGrand|number_format(0, ',', '.') }}</li>
+			    			<li><strong>{{ i18n.getMessage('stadium_extend_limitation_vip') }}:</strong> {{ maxVip|number_format(0, ',', '.') }}</li>
 			    		</ul>
 			    		
 			    		<p>{{ i18n.getMessage('stadium_extend_limitation_instruction') }}</p>

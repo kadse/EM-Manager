@@ -90,16 +90,16 @@
 				{% endif %}
 				
 				<td>{{ env.getFormattedDatetime(player.transfer_deadline) }}</td>
-				<td>{{ player.contract_salary|number_format(0, ',', ' ')  }} {{ env.getConfig("game_currency") }}</td>
+				<td>{{ player.contract_salary|number_format(0, ',', '.')  }} {{ env.getConfig("game_currency") }}</td>
 				<td>
 				<p>{% if player.highestbid.contract_matches is defined and player.highestbid.contract_matches > 0 %}
 					<a href="{{ env.getInternalUrl("transfer-bid", "id=" ~ player.id) }}">{% if player.team_id > 0 %}
-					{{ player.highestbid.amount|number_format(0, ',', ' ') }} {{ env.getConfig("game_currency") }}
+					{{ player.highestbid.amount|number_format(0, ',', '.') }} {{ env.getConfig("game_currency") }}
 					{% else %}{{ i18n.getMessage("transfer_bid_withoutfee") }}{% endif %}</a>
 					<br/><small>(<a href="{{ env.getInternalUrl("user", "id=" ~ player.highestbid.user_id) }}">{{ player.highestbid.user_name }}</a>)</small>
 				{% else %}
 					{% if player.team_id > 0 %}
-					{{ player.min_bid|number_format(0, ',', ' ') }} {{ env.getConfig("game_currency") }}<br/>
+					{{ player.min_bid|number_format(0, ',', '.') }} {{ env.getConfig("game_currency") }}<br/>
 					<small>({{ i18n.getMessage('transfermarket_min_bid') }})</small>
 					{% else %}{{ i18n.getMessage("transfer_bid_withoutfee") }}{% endif %}
 				{% endif %}</p>

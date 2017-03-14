@@ -23,7 +23,7 @@
 	{{ profile.infofield(i18n.getMessage("match_details_stadium"), match.match_stadium_name) }}
 {% endif %}
 {% if match.match_audience > 0 %}
-	{% set audience = match.match_audience|number_format(0, ',', ' ') %}
+	{% set audience = match.match_audience|number_format(0, ',', '.') %}
 	{%  if match.match_soldout %}
 		{% set audience = audience ~ " (" ~ i18n.getMessage("entity_match_soldout") ~ ")" %}
 	{% endif %}

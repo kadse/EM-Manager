@@ -49,6 +49,7 @@ class DefaultBootstrapSkin implements ISkin {
 	public function getCssSources() {
 		$files[] = '//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css';
 		$files[] = '//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css';
+		$files[] = '//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css';
 		
 		$dir = $this->_websoccer->getConfig('context_root') . '/css/';
 		$files[] = $dir . 'defaultskin.css';

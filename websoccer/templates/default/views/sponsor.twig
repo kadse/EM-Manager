@@ -21,10 +21,10 @@
 	{% endif %}
 
 	{{ profile.infofield(i18n.getMessage("entity_sponsor_name"), sponsor.name) }}
-	{{ profile.infofield(i18n.getMessage("entity_sponsor_b_spiel"), sponsor.amount_match|number_format(0, ',', ' ') ~ " " ~ env.getConfig("game_currency")) }}
-	{{ profile.infofield(i18n.getMessage("entity_sponsor_b_heimzuschlag"), sponsor.amount_home_bonus|number_format(0, ',', ' ') ~ " " ~ env.getConfig("game_currency")) }}
-	{{ profile.infofield(i18n.getMessage("entity_sponsor_b_sieg"), sponsor.amount_win|number_format(0, ',', ' ') ~ " " ~ env.getConfig("game_currency")) }}
-	{{ profile.infofield(i18n.getMessage("entity_sponsor_b_meisterschaft"), sponsor.amount_championship|number_format(0, ',', ' ') ~ " " ~ env.getConfig("game_currency")) }}
+	{{ profile.infofield(i18n.getMessage("entity_sponsor_b_spiel"), sponsor.amount_match|number_format(0, ',', '.') ~ " " ~ env.getConfig("game_currency")) }}
+	{{ profile.infofield(i18n.getMessage("entity_sponsor_b_heimzuschlag"), sponsor.amount_home_bonus|number_format(0, ',', '.') ~ " " ~ env.getConfig("game_currency")) }}
+	{{ profile.infofield(i18n.getMessage("entity_sponsor_b_sieg"), sponsor.amount_win|number_format(0, ',', '.') ~ " " ~ env.getConfig("game_currency")) }}
+	{{ profile.infofield(i18n.getMessage("entity_sponsor_b_meisterschaft"), sponsor.amount_championship|number_format(0, ',', '.') ~ " " ~ env.getConfig("game_currency")) }}
 	{{ profile.infofield(i18n.getMessage("entity_club_sponsor_spiele"), sponsor.matchdays) }}
 
 {# choose sponsor #}
@@ -54,10 +54,10 @@
 					<td><p>{{ sponsor.name }}</p>
 					<p><a href="#" class="btn ajaxLink"
 						data-ajaxtarget="pagecontent" data-ajaxquerystr="page={{ env.getPageId() }}&amp;action=choose-sponsor&amp;id={{ sponsor.sponsor_id }}"><i class="icon-hand-right"></i> {{ i18n.getMessage("button_choose") }}</a></p></td>
-					<td>{{ sponsor.amount_match|number_format(0, ',', ' ') }} {{ env.getConfig("game_currency") }}</td>
-					<td>{{ sponsor.amount_home_bonus|number_format(0, ',', ' ') }} {{ env.getConfig("game_currency") }}</td>
-					<td>{{ sponsor.amount_win|number_format(0, ',', ' ') }} {{ env.getConfig("game_currency") }}</td>
-					<td>{{ sponsor.amount_championship|number_format(0, ',', ' ') }} {{ env.getConfig("game_currency") }}</td>
+					<td>{{ sponsor.amount_match|number_format(0, ',', '.') }} {{ env.getConfig("game_currency") }}</td>
+					<td>{{ sponsor.amount_home_bonus|number_format(0, ',', '.') }} {{ env.getConfig("game_currency") }}</td>
+					<td>{{ sponsor.amount_win|number_format(0, ',', '.') }} {{ env.getConfig("game_currency") }}</td>
+					<td>{{ sponsor.amount_championship|number_format(0, ',', '.') }} {{ env.getConfig("game_currency") }}</td>
 				</tr>
 			{% endfor %}
 			</tbody>

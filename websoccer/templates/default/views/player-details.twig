@@ -9,10 +9,16 @@
 {% block page_content %}
 
 {% if player.player_picture|length > 0 %}
-<div style="text-align: center; margin-bottom: 10px;">
-<img src="{{ env.getConfig("context_root") }}/uploads/player/{{ player.player_picture }}" class="img-rounded">
-</div>
+	{% set player_picture = player.player_picture %}
+{% else %}
+	{% set player_picture = 'nobody.png' %}
 {% endif %}
+
+<div style="text-align: center; margin-bottom: 10px;">
+<img src="{{ env.getConfig("context_root") }}/uploads/player/{{ player_picture }}" class="img-rounded" width="100px" />
+<br /><br />
+<b>{{ player.player_firstname }} {% if player.player_pseudonym|length > 0 %}"{{ player.player_pseudonym }}" {% endif %}{{ player.player_lastname }}</b>
+</div>
 
 <ul class="nav nav-tabs" id="playerTab">
   <li class="active"><a href="#general" data-toggle="tab">{{ i18n.getMessage("player_details_tab_general") }}</a></li>
@@ -36,12 +42,12 @@
 				  
 				  {% if player.player_position_main|length > 0 %}
 				  <dt>{{ i18n.getMessage("entity_player_position_main") }}</dt>
-				  <dd>{{ i18n.getMessage("option_" ~ player.player_position_main) }}</dd>
+				  <dd><img src="{{ env.getConfig("context_root") }}/uploads/positions/{{ i18n.getMessage("player_mainposition_" ~ player.player_position_main) }}.png" width="35px" /></dd>
 				  {% endif %}
 				  
 				  {% if player.player_position_second|length > 0 %}
 				  <dt>{{ i18n.getMessage("entity_player_position_second") }}</dt>
-				  <dd>{{ i18n.getMessage("option_" ~ player.player_position_second) }}</dd>
+				  <dd><img src="{{ env.getConfig("context_root") }}/uploads/positions/{{ i18n.getMessage("player_secondposition_" ~ player.player_position_second) }}.png" width="35px" /></dd>
 				  {% endif %}
 				  
 				  <dt>{{ i18n.getMessage("entity_player_verein_id") }}</dt>
@@ -80,8 +86,14 @@
 					{% else %}
 						{% set countryLabel = player.player_nationality_filename %}
 					{% endif %}
-				  <dd>{% if nationImg %}<img src="{{ nationImg }}" title="{{ countryLabel }}" alt="{{ countryLabel }}" />{% else %}{{ countryLabel }}{% endif %}</dd>
-			  
+				  <dd>{{ countryLabel }} {% if nationImg %}<img src="{{ nationImg }}" title="{{ countryLabel }}" alt="{{ countryLabel }}" />{% endif %}</dd>
+			   
+				</dl>
+		
+			</div>
+			<div class="span6">
+			
+				<dl class="dl-horizontal">
 				  <dt>{{ i18n.getMessage("entity_player_verletzt") }}</dt>
 				  <dd>{{ player.player_matches_injured  }} {{ i18n.getMessage("player_details_unit_matches") }}</dd>
 				  
@@ -91,31 +103,16 @@
 				  <dt>{{ i18n.getMessage("entity_player_gesperrt_cups") }}</dt>
 				  <dd>{{ player.player_matches_blocked_cups  }} {{ i18n.getMessage("player_details_unit_matches") }}</dd>
 				  
-				  <dt>{{ i18n.getMessage("entity_player_gesperrt_nationalteam") }}</dt>
-				  <dd>{{ player.player_matches_blocked_nationalteam  }} {{ i18n.getMessage("player_details_unit_matches") }}</dd>
-				  
-				</dl>
-		
-			</div>
-			<div class="span6">
-			
-				<dl class="dl-horizontal">
 				  <dt>{{ i18n.getMessage("entity_player_vertrag_gehalt") }}</dt>
-				  <dd>{{ player.player_contract_salary|number_format(0, ',', ' ')  }} {{ env.getConfig("game_currency") }}</dd>
-				  
-				  <dt>{{ i18n.getMessage("entity_player_vertrag_torpraemie") }}</dt>
-				  <dd>{{ player.player_contract_goalbonus|number_format(0, ',', ' ')  }} {{ env.getConfig("game_currency") }}</dd>
-				  
-				  <dt>{{ i18n.getMessage("entity_player_vertrag_spiele") }}</dt>
-				  <dd>{{ player.player_contract_matches  }} {{ i18n.getMessage("player_details_unit_matches") }}</dd>
-				  
+				  <dd>{{ player.player_contract_salary|number_format(0, ',', '.')  }} {{ env.getConfig("game_currency") }}</dd>
+				    		  
 				  {% if player.lending_matches > 0 %}
 					  <dt>{{ i18n.getMessage("entity_player_lending_matches") }}</dt>
 					  <dd>{{ player.lending_matches }} {{ i18n.getMessage("player_details_unit_matches") }}</dd>
 				  {% endif %}
 				  
 				  <dt>{{ i18n.getMessage("entity_player_marktwert") }}</dt>
-				  <dd>{{ player.player_marketvalue|number_format(0, ',', ' ')  }} {{ env.getConfig("game_currency") }}</dd>
+				  <dd>{{ player.player_marketvalue|number_format(0, ',', '.')  }} {{ env.getConfig("game_currency") }}</dd>
 				  
 				</dl>
 			</div>
@@ -134,7 +131,7 @@
 			</div>
 		{% elseif player.lending_owner_id == 0 and player.lending_fee > 0 and env.getConfig("lending_enabled") %}
 			<div class="alert alert-info">
-			<p>{{ i18n.getMessage("lending_player_lendable_info", player.lending_fee|number_format(0, ',', ' ') ~ " " ~ env.getConfig("game_currency"))|raw }}</p>
+			<p>{{ i18n.getMessage("lending_player_lendable_info", player.lending_fee|number_format(0, ',', '.') ~ " " ~ env.getConfig("game_currency"))|raw }}</p>
 			{% if env.getUser().getClubId() != player.team_id %}
 				<p><a class="btn btn-mini" href="{{ env.getInternalUrl("borrow-player", "id=" ~ player.player_id) }}"><i class="icon-share-alt"></i> {{ i18n.getMessage("lending_player_hire_button") }}</a></p>
 			{% endif %}
@@ -142,16 +139,159 @@
 		{% endif %}
   
   		{% if env.getConfig("hide_strength_attributes") != "1" %}
+
+			{% if player.player_strength_freshness < 15 %}
+				{% set number_freshness = 22 %}
+			{% elseif player.player_strength_freshness < 20 %}
+				{% set number_freshness = 21 %}
+			{% elseif player.player_strength_freshness < 25 %}
+				{% set number_freshness = 20 %}
+			{% elseif player.player_strength_freshness < 30 %}
+				{% set number_freshness = 19 %}
+			{% elseif player.player_strength_freshness < 35 %}
+				{% set number_freshness = 18 %}							
+			{% elseif player.player_strength_freshness < 40 %}
+				{% set number_freshness = 17 %}
+			{% elseif player.player_strength_freshness < 45 %}
+				{% set number_freshness = 16 %}
+			{% elseif player.player_strength_freshness < 50 %}
+				{% set number_freshness = 15 %}
+			{% elseif player.player_strength_freshness < 55 %}
+				{% set number_freshness = 14 %}
+			{% elseif player.player_strength_freshness < 59 %}
+				{% set number_freshness = 13 %}
+			{% elseif player.player_strength_freshness < 63 %}
+				{% set number_freshness = 12 %}
+			{% elseif player.player_strength_freshness < 65 %}
+				{% set number_freshness = 11 %}
+			{% elseif player.player_strength_freshness < 69 %}
+				{% set number_freshness = 10 %}
+			{% elseif player.player_strength_freshness < 73 %}
+				{% set number_freshness = 9 %}
+			{% elseif player.player_strength_freshness < 76 %}
+				{% set number_freshness = 8 %}
+			{% elseif player.player_strength_freshness < 81 %}
+				{% set number_freshness = 7 %}
+			{% elseif player.player_strength_freshness < 86 %}
+				{% set number_freshness = 6 %}
+			{% elseif player.player_strength_freshness < 90 %}
+				{% set number_freshness = 5 %}
+			{% elseif player.player_strength_freshness < 94 %}
+				{% set number_freshness = 4 %}
+			{% elseif player.player_strength_freshness < 97 %}
+				{% set number_freshness = 3 %}
+			{% elseif player.player_strength_freshness < 100 %}
+				{% set number_freshness = 2 %}
+			{% else %}
+				{% set number_freshness = 1 %}
+			{% endif %}	
+
+			{% if player.player_strength_stamina < 15 %}
+				{% set number_stamina = 22 %}
+			{% elseif player.player_strength_stamina < 20 %}
+				{% set number_stamina = 21 %}
+			{% elseif player.player_strength_stamina < 25 %}
+				{% set number_stamina = 20 %}
+			{% elseif player.player_strength_stamina < 30 %}
+				{% set number_stamina = 19 %}
+			{% elseif player.player_strength_stamina < 35 %}
+				{% set number_stamina = 18 %}							
+			{% elseif player.player_strength_stamina < 40 %}
+				{% set number_stamina = 17 %}
+			{% elseif player.player_strength_stamina < 45 %}
+				{% set number_stamina = 16 %}
+			{% elseif player.player_strength_stamina < 50 %}
+				{% set number_stamina = 15 %}
+			{% elseif player.player_strength_stamina < 55 %}
+				{% set number_stamina = 14 %}
+			{% elseif player.player_strength_stamina < 59 %}
+				{% set number_stamina = 13 %}
+			{% elseif player.player_strength_stamina < 63 %}
+				{% set number_stamina = 12 %}
+			{% elseif player.player_strength_stamina < 65 %}
+				{% set number_stamina = 11 %}
+			{% elseif player.player_strength_stamina < 69 %}
+				{% set number_stamina = 10 %}
+			{% elseif player.player_strength_stamina < 73 %}
+				{% set number_stamina = 9 %}
+			{% elseif player.player_strength_stamina < 76 %}
+				{% set number_stamina = 8 %}
+			{% elseif player.player_strength_stamina < 81 %}
+				{% set number_stamina = 7 %}
+			{% elseif player.player_strength_stamina < 86 %}
+				{% set number_stamina = 6 %}
+			{% elseif player.player_strength_stamina < 90 %}
+				{% set number_stamina = 5 %}
+			{% elseif player.player_strength_stamina < 94 %}
+				{% set number_stamina = 4 %}
+			{% elseif player.player_strength_stamina < 97 %}
+				{% set number_stamina = 3 %}
+			{% elseif player.player_strength_stamina < 100 %}
+				{% set number_stamina = 2 %}
+			{% else %}
+				{% set number_stamina = 1 %}
+			{% endif %}	
+
+			{% if player.player_strength_satisfaction < 15 %}
+				{% set number_satisfaction = 22 %}
+			{% elseif player.player_strength_satisfaction < 20 %}
+				{% set number_satisfaction = 21 %}
+			{% elseif player.player_strength_satisfaction < 25 %}
+				{% set number_satisfaction = 20 %}
+			{% elseif player.player_strength_satisfaction < 30 %}
+				{% set number_satisfaction = 19 %}
+			{% elseif player.player_strength_satisfaction < 35 %}
+				{% set number_satisfaction = 18 %}							
+			{% elseif player.player_strength_satisfaction < 40 %}
+				{% set number_satisfaction = 17 %}
+			{% elseif player.player_strength_satisfaction < 45 %}
+				{% set number_satisfaction = 16 %}
+			{% elseif player.player_strength_satisfaction < 50 %}
+				{% set number_satisfaction = 15 %}
+			{% elseif player.player_strength_satisfaction < 55 %}
+				{% set number_satisfaction = 14 %}
+			{% elseif player.player_strength_satisfaction < 59 %}
+				{% set number_satisfaction = 13 %}
+			{% elseif player.player_strength_satisfaction < 63 %}
+				{% set number_satisfaction = 12 %}
+			{% elseif player.player_strength_satisfaction < 65 %}
+				{% set number_satisfaction = 11 %}
+			{% elseif player.player_strength_satisfaction < 69 %}
+				{% set number_satisfaction = 10 %}
+			{% elseif player.player_strength_satisfaction < 73 %}
+				{% set number_satisfaction = 9 %}
+			{% elseif player.player_strength_satisfaction < 76 %}
+				{% set number_satisfaction = 8 %}
+			{% elseif player.player_strength_satisfaction < 81 %}
+				{% set number_satisfaction = 7 %}
+			{% elseif player.player_strength_satisfaction < 86 %}
+				{% set number_satisfaction = 6 %}
+			{% elseif player.player_strength_satisfaction < 90 %}
+				{% set number_satisfaction = 5 %}
+			{% elseif player.player_strength_satisfaction < 94 %}
+				{% set number_satisfaction = 4 %}
+			{% elseif player.player_strength_satisfaction < 97 %}
+				{% set number_satisfaction = 3 %}
+			{% elseif player.player_strength_satisfaction < 100 %}
+				{% set number_satisfaction = 2 %}
+			{% else %}
+				{% set number_satisfaction = 1 %}
+			{% endif %}
+
 			<h4>{{ i18n.getMessage("player_details_strength_title") }}</h4>
-			
-			<p><em>{{ i18n.getMessage('entity_player_w_kondition') }} ({{ player.player_strength_stamina }}%)</em></p>
-			{{ statisticelements.progressbar(player.player_strength_stamina) }}
-			
-			<p><em>{{ i18n.getMessage('entity_player_w_frische') }} ({{ player.player_strength_freshness }}%)</em></p>
-			{{ statisticelements.progressbar(player.player_strength_freshness) }}
-			
-			<p><em>{{ i18n.getMessage('entity_player_w_zufriedenheit') }} ({{ player.player_strength_satisfaction }}%)</em></p>
-			{{ statisticelements.progressbar(player.player_strength_satisfaction) }}
+			<br />
+			<table style="text-align: center;" width="100%">
+				<thead>
+					<th>{{ i18n.getMessage('entity_player_w_kondition') }}</th>
+					<th>{{ i18n.getMessage('entity_player_w_frische') }}</th>
+					<th>{{ i18n.getMessage('entity_player_w_zufriedenheit') }}</th>
+				</thead>
+				<tbody>
+					<td width="33%" style="padding:10px"><img src="{{ env.getConfig("context_root") }}/uploads/strength/{{ number_freshness }}.png" /></td>
+					<td width="33%" style="padding:10px"><img src="{{ env.getConfig("context_root") }}/uploads/strength/{{ number_stamina }}.png" /></td>
+					<td width="33%" style="padding:10px"><img src="{{ env.getConfig("context_root") }}/uploads/strength/{{ number_satisfaction }}.png" /></td>
+				</tbody>
+			</table>
 		{% endif %}
 
   

@@ -93,7 +93,7 @@
 					{% endif %}
 					<span class="badge {{ changeCssClass }}" title="{{ i18n.getMessage("entity_youthplayer_strength_last_change") }}">{{ changeLabel }}</span>
 				</td>
-				<td>{{ (player.strength * env.getConfig("youth_salary_per_strength"))|number_format(0, ',', ' ') }} {{ env.getConfig("game_currency") }}</td>
+				<td>{{ (player.strength * env.getConfig("youth_salary_per_strength"))|number_format(0, ',', '.') }} {{ env.getConfig("game_currency") }}</td>
 				<td>{{ player.st_matches }} <a href="#statistics{{ player.id }}" data-toggle="collapse" title="{{ i18n.getMessage("youthteam_showstatistics_tooltip") }}"><i class="icon-zoom-in darkIcon"></i></a>
 					<div id="statistics{{ player.id }}" class="collapse">
 					<dl>

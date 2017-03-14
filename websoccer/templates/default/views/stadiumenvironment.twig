@@ -40,7 +40,7 @@
 					{% endif %}
 					{% if building.effect_income != 0 %}
 						<p><strong>{{ i18n.getMessage("entity_stadiumbuilding_effect_income") }}:</strong>
-						{{ building.effect_income|number_format(0, ',', ' ')  }} {{ env.getConfig("game_currency") }}</p>
+						{{ building.effect_income|number_format(0, ',', '.')  }} {{ env.getConfig("game_currency") }}</p>
 					{% endif %}
 				</td>
 			</tr>
@@ -86,7 +86,7 @@
 				
 				<dl class="dl-horizontal">
 					<dt>{{ i18n.getMessage("entity_stadiumbuilding_costs") }}</dt>
-					<dd>{{ building.costs|number_format(0, ',', ' ')  }} {{ env.getConfig("game_currency") }}
+					<dd>{{ building.costs|number_format(0, ',', '.')  }} {{ env.getConfig("game_currency") }}
 					{% if building.premiumfee %}
 						{{ premium.premiumbadge(building.premiumfee) }}
 					{% endif %}
@@ -97,7 +97,7 @@
 					
 					{% if building.effect_income != 0 %}
 						<dt>{{ i18n.getMessage("entity_stadiumbuilding_effect_income") }}</dt>
-						<dd>{{ building.effect_income|number_format(0, ',', ' ')  }} {{ env.getConfig("game_currency") }}</dd>
+						<dd>{{ building.effect_income|number_format(0, ',', '.')  }} {{ env.getConfig("game_currency") }}</dd>
 					{% endif %}
 				</dl>
 				

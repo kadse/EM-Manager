@@ -16,16 +16,16 @@
 
   {% if player.team_id > 0 %}
   <dt>{{ i18n.getMessage("transfer_bid_amount") }}</dt>
-  <dd>{{ highestbid.amount|number_format(0, ',', ' ')  }} {{ env.getConfig("game_currency") }}</dd>
+  <dd>{{ highestbid.amount|number_format(0, ',', '.')  }} {{ env.getConfig("game_currency") }}</dd>
   {% else %}
   <dt>{{ i18n.getMessage("transfer_bid_handmoney") }}</dt>
-  <dd>{{ highestbid.hand_money|number_format(0, ',', ' ')  }} {{ env.getConfig("game_currency") }}</dd>
+  <dd>{{ highestbid.hand_money|number_format(0, ',', '.')  }} {{ env.getConfig("game_currency") }}</dd>
   {% endif %}
   <dt>{{ i18n.getMessage("entity_player_vertrag_gehalt") }}</dt>
-  <dd>{{ highestbid.contract_salary|number_format(0, ',', ' ')  }} {{ env.getConfig("game_currency") }}</dd>
+  <dd>{{ highestbid.contract_salary|number_format(0, ',', '.')  }} {{ env.getConfig("game_currency") }}</dd>
   
   <dt>{{ i18n.getMessage("entity_player_vertrag_torpraemie") }}</dt>
-  <dd>{{ highestbid.contract_goalbonus|number_format(0, ',', ' ')  }} {{ env.getConfig("game_currency") }}</dd>
+  <dd>{{ highestbid.contract_goalbonus|number_format(0, ',', '.')  }} {{ env.getConfig("game_currency") }}</dd>
   
   <dt>{{ i18n.getMessage("entity_player_vertrag_spiele") }}</dt>
   <dd>{{ highestbid.contract_matches  }} {{ i18n.getMessage("player_details_unit_matches") }}</dd>

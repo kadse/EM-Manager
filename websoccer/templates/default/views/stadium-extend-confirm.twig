@@ -32,7 +32,7 @@
 						<dd>{{ env.getFormattedDate(offer.deadline) }} ({{ i18n.getMessage("stadium_extend_builders_constructiontime", offer.deadline_days) }})</dd>
 						
 						<dt>{{ i18n.getMessage("stadium_extend_builders_totalcosts") }}</dt>
-						<dd>{{ offer.totalCosts|number_format(0, ',', ' ') }} {{ env.getConfig("game_currency") }}</dd>
+						<dd>{{ offer.totalCosts|number_format(0, ',', '.') }} {{ env.getConfig("game_currency") }}</dd>
 						
 						{% if env.getConfig("stadium_hide_builders_reliability") != "1" %}
 							<dt>{{ i18n.getMessage("entity_stadiumbuilder_reliability") }}</dt>
@@ -44,22 +44,22 @@
 					<div id="details{{ offer.builder_id }}" class="collapse">
 						<dl>
 							<dt>{{ i18n.getMessage("entity_stadiumbuilder_fixedcosts") }}</dt>
-							<dd>{{ offer.fixedcosts|number_format(0, ',', ' ') }} {{ env.getConfig("game_currency") }}</dd>
+							<dd>{{ offer.fixedcosts|number_format(0, ',', '.') }} {{ env.getConfig("game_currency") }}</dd>
 							
 							<dt>{{ i18n.getMessage("entity_stadium_p_steh") }}</dt>
-							<dd>{{ offer.costsSideStanding|number_format(0, ',', ' ') }} {{ env.getConfig("game_currency") }}</dd>
+							<dd>{{ offer.costsSideStanding|number_format(0, ',', '.') }} {{ env.getConfig("game_currency") }}</dd>
 							
 							<dt>{{ i18n.getMessage("entity_stadium_p_sitz") }}</dt>
-							<dd>{{ offer.costsSideSeats|number_format(0, ',', ' ') }} {{ env.getConfig("game_currency") }}</dd>
+							<dd>{{ offer.costsSideSeats|number_format(0, ',', '.') }} {{ env.getConfig("game_currency") }}</dd>
 							
 							<dt>{{ i18n.getMessage("entity_stadium_p_haupt_steh") }}</dt>
-							<dd>{{ offer.costsGrandStanding|number_format(0, ',', ' ') }} {{ env.getConfig("game_currency") }}</dd>
+							<dd>{{ offer.costsGrandStanding|number_format(0, ',', '.') }} {{ env.getConfig("game_currency") }}</dd>
 							
 							<dt>{{ i18n.getMessage("entity_stadium_p_haupt_sitz") }}</dt>
-							<dd>{{ offer.costsGrandSeats|number_format(0, ',', ' ') }} {{ env.getConfig("game_currency") }}</dd>
+							<dd>{{ offer.costsGrandSeats|number_format(0, ',', '.') }} {{ env.getConfig("game_currency") }}</dd>
 							
 							<dt>{{ i18n.getMessage("entity_stadium_p_vip") }}</dt>
-							<dd>{{ offer.costsVip|number_format(0, ',', ' ') }} {{ env.getConfig("game_currency") }}</dd>
+							<dd>{{ offer.costsVip|number_format(0, ',', '.') }} {{ env.getConfig("game_currency") }}</dd>
 						</dl>
 					</div>
 					

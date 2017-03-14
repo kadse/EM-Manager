@@ -37,6 +37,7 @@ class GreenBootstrapSkin extends DefaultBootstrapSkin {
 		$files[] = $dir . 'bootstrap-responsive.min.css';
 		
 		$files[] = '//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css';
+		$files[] = '//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css';
 	
 		if ($this->_websoccer->getPageId() == 'formation'
 				|| $this->_websoccer->getPageId() == 'training') {

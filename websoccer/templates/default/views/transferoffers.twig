@@ -41,11 +41,11 @@
 					</td>
 					<td><a href="{{ env.getInternalUrl("player", "id=" ~ offer.player_id) }}">{% if offer.player_pseudonym|length > 0 %}{{ offer.player_pseudonym }}{% else %}{{ offer.player_firstname }} {{ offer.player_lastname }}{% endif %}</a>
 						{% if offer.player_position_main|length > 0 %}({{ i18n.getMessage("player_mainposition_" ~ offer.player_position_main) }}){% endif %}<br>
-					<small>{{ i18n.getMessage("entity_player_vertrag_gehalt") }}: {{ offer.player_salary|number_format(0, ',', ' ') }} {{ env.getConfig("game_currency") }}<br>
-					{{ i18n.getMessage("entity_player_marktwert") }}: {{ offer.player_marketvalue|number_format(0, ',', ' ') }} {{ env.getConfig("game_currency") }}</small></td>
+					<small>{{ i18n.getMessage("entity_player_vertrag_gehalt") }}: {{ offer.player_salary|number_format(0, ',', '.') }} {{ env.getConfig("game_currency") }}<br>
+					{{ i18n.getMessage("entity_player_marktwert") }}: {{ offer.player_marketvalue|number_format(0, ',', '.') }} {{ env.getConfig("game_currency") }}</small></td>
 					<td><a href="{{ env.getInternalUrl("team", "id=" ~ offer.sender_club_id) }}">{{ offer.sender_club_name }}</a><br> (<a href="{{ env.getInternalUrl("user", "id=" ~ offer.sender_user_id) }}">{{ offer.sender_user_name }}</a>)</td>
 					<td>
-						<span>{{ offer.offer_amount|number_format(0, ',', ' ') }} {{ env.getConfig("game_currency") }}</span>
+						<span>{{ offer.offer_amount|number_format(0, ',', '.') }} {{ env.getConfig("game_currency") }}</span>
 						{% if offer.explayer1_id > 0 or offer.explayer2_id > 0 %}
 							<ul class="unstyled">
 								{% if offer.explayer1_id > 0  %}

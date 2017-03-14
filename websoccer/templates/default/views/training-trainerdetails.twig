@@ -18,7 +18,7 @@
 {% set bar_tech = statisticelements.progressbar(trainer.p_technique) %}
 {% set bar_stamina = statisticelements.progressbar(trainer.p_stamina) %}
 
-{{ profile.infofield(i18n.getMessage("entity_trainer_salary"), trainer.salary|number_format(0, ',', ' ') ~ " " ~ env.getConfig("game_currency")) }}
+{{ profile.infofield(i18n.getMessage("entity_trainer_salary"), trainer.salary|number_format(0, ',', '.') ~ " " ~ env.getConfig("game_currency")) }}
 {{ profile.infofield(i18n.getMessage("entity_trainer_p_technique"), bar_tech|raw, true) }}
 {{ profile.infofield(i18n.getMessage("entity_trainer_p_stamina"), bar_stamina|raw, true) }}
 

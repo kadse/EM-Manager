@@ -5,18 +5,22 @@
 	<table class="table table-striped">
 		<thead>
 			<tr>
-				<th><abbr title="{{ i18n.getMessage("playertable_head_position") }}">{{ i18n.getMessage("playertable_head_position_abbr") }}</abbr></th>
-				<th>{{ i18n.getMessage("playertable_head_name") }}</th>
+				<th><abbr title="{{ i18n.getMessage("playertable_head_position") }}"><i class="fa fa-spinner fa-lg"></i></abbr></th>
+				<th><abbr title="{{ i18n.getMessage("playertable_head_name") }}"><i class="fa fa-user fa-lg"></i></abbr></th>
+				<th><abbr title="{{ i18n.getMessage("playertable_head_age") }}"><i class="fa fa-refresh fa-lg"></i></abbr></th>
 				
 				{% if env.getConfig("hide_strength_attributes") != "1" %}
-					<th><abbr title="{{ i18n.getMessage("playertable_head_strength_freshness") }}">{{ i18n.getMessage("playertable_head_strength_freshness_abbr") }}</abbr></th>
-					<th><abbr title="{{ i18n.getMessage("playertable_head_strength_stamina") }}">{{ i18n.getMessage("playertable_head_strength_stamina_abbr") }}</abbr></th>
-					<th><abbr title="{{ i18n.getMessage("playertable_head_strength_satisfaction") }}">{{ i18n.getMessage("playertable_head_strength_satisfaction_abbr") }}</abbr></th>
+					<th><abbr title="{{ i18n.getMessage("playertable_head_zustand") }}"><i class="fa fa-bar-chart fa-lg"></i></abbr></th>
 				{% endif %}
 				
-				<th>{{ i18n.getMessage("playertable_head_age") }}</th>
-				<th>{{ i18n.getMessage("playertable_head_blocked") }}</th>
-			</tr>
+				<th><abbr title="{{ i18n.getMessage("entity_player_marktwert") }}"><i class="fa fa-area-chart fa-lg"></i></abbr></th>
+				<th><abbr title="{{ i18n.getMessage("entity_player_sa_spiele") }}"><i class="fa fa-street-view fa-lg"></i></abbr></th>
+				<th><abbr title="{{ i18n.getMessage("entity_player_sa_tore") }}"><i class="fa fa-futbol-o fa-lg"></i></abbr></th>
+				<th><abbr title="{{ i18n.getMessage("entity_player_sa_assists") }}"><i class="fa fa-star fa-lg"></i></abbr></th>
+				<th><abbr title="{{ i18n.getMessage("entity_player_note_last") }}"><i class="fa fa-cubes fa-lg"></i></abbr></th>
+				<th><abbr title="{{ i18n.getMessage("entity_player_note_schnitt") }}"><i class="fa fa-line-chart fa-lg"></i></abbr></th>
+				<th><abbr title="{{ i18n.getMessage("playertable_head_blocked") }}"><i class="fa fa-medkit fa-lg"></i> / <i class="fa fa-ban fa-lg"></i></abbr></th>
+			</tr>			
 		</thead>
 		<tbody>
 		

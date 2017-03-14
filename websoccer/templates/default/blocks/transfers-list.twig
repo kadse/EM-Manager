@@ -24,14 +24,14 @@
 				<td>
 					{% if transfer.hand_money > 0 %}
 						<p><small>{{ i18n.getMessage("transfer_bid_handmoney") }}</small><br>
-						{{ transfer.hand_money|number_format(0, ',', ' ')  }} {{ env.getConfig("game_currency") }}</p>
+						{{ transfer.hand_money|number_format(0, ',', '.')  }} {{ env.getConfig("game_currency") }}</p>
 					{% endif %}
 				
 					<p>
 						{% if transfer.directtransfer_amount > 0 %}
-							{{ transfer.directtransfer_amount|number_format(0, ',', ' ')  }} {{ env.getConfig("game_currency") }}
+							{{ transfer.directtransfer_amount|number_format(0, ',', '.')  }} {{ env.getConfig("game_currency") }}
 						{% else %}
-							{{ transfer.amount|number_format(0, ',', ' ')  }} {{ env.getConfig("game_currency") }}
+							{{ transfer.amount|number_format(0, ',', '.')  }} {{ env.getConfig("game_currency") }}
 						{% endif %}
 						
 						{% if transfer.exchangeplayer1_id > 0 or transfer.exchangeplayer2_id > 0 %}

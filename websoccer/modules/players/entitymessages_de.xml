@@ -38,7 +38,7 @@
 	<message id="entity_player_vertrag_spiele">Restspiele bei Verein</message>				
 	<message id="entity_player_vertrag_torpraemie">Torprämie</message>
 	<message id="entity_player_marktwert">Marktwert</message>	
-	<message id="entity_player_marktwert_help">falls der Marktwert nicht automatisch berechnet werden soll (siehe Systemeinstellungen).</message>	
+	<message id="entity_player_marktwert_help">falls der Marktwert nicht automatisch berechnet werden soll (siehe Systemeinstellungen).</message>
 	
 	<message id="entity_player_sa_tore">Tore (diese Saison)</message>	
 	<message id="entity_player_sa_assists">Vorlagen (diese Saison)</message>	
@@ -53,6 +53,9 @@
 	<message id="entity_player_st_karten_gelb">Gelbe Karten (gesamt)</message>	
 	<message id="entity_player_st_karten_gelb_rot">Gelb-Rote Karten (gesamt)</message>	
 	<message id="entity_player_st_karten_rot">Rote Karten (gesamt)</message>	
+
+	<message id="entity_player_note_last">Note im letzten Spiel</message>
+	<message id="entity_player_note_schnitt">Durchschnittsnote</message>
 	
 	<message id="entity_player_history">Historie</message>		
 	
@@ -61,8 +64,8 @@
 	<message id="entity_player_lending_owner_id">Verleiher</message>	
 	<message id="entity_player_lending_fee">Leihgebühr pro Spieltag</message>	
 	<message id="entity_player_lending_matches">Ausgeliehene Spiele</message>	
-					
-    <message id="player_position_goaly">Torwart</message>
+
+	<message id="player_position_goaly">Torwart</message>
     <message id="option_Torwart">Torwart</message>
     <message id="player_position_defense">Abwehr</message>
     <message id="option_Abwehr">Abwehr</message>

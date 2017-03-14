@@ -114,9 +114,9 @@
 					</div>
 				</td>
 				<td>
-					{{ player.transfer_fee|number_format(0, ',', ' ') }} {{ env.getConfig("game_currency") }}<br>
+					{{ player.transfer_fee|number_format(0, ',', '.') }} {{ env.getConfig("game_currency") }}<br>
 					<small><em>{{ i18n.getMessage("entity_player_vertrag_gehalt") }}:</em><br>
-					{{ (player.strength * env.getConfig("youth_salary_per_strength"))|number_format(0, ',', ' ') }} {{ env.getConfig("game_currency") }}</small>
+					{{ (player.strength * env.getConfig("youth_salary_per_strength"))|number_format(0, ',', '.') }} {{ env.getConfig("game_currency") }}</small>
 				</td>
 			</tr>
 		{% endfor %}

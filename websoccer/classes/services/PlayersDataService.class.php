@@ -121,6 +121,7 @@ class PlayersDataService {
 				'picture' => 'picture',
 				'sa_tore' => 'st_goals',
 				'sa_spiele' => 'st_matches',
+				'sa_assists' => 'st_assists',
 				'sa_karten_gelb' => 'st_cards_yellow',
 				'sa_karten_gelb_rot' => 'st_cards_yellow_red',
 				'sa_karten_rot' => 'st_cards_red',
@@ -131,7 +132,9 @@ class PlayersDataService {
 				'lending_matches' => 'lending_matches',
 				'lending_fee' => 'lending_fee',
 				'lending_owner_id' => 'lending_owner_id',
-				'transfermarkt' => 'transfermarket'
+				'transfermarkt' => 'transfermarket',
+				'note_last' => 'note_last',
+				'note_schnitt' => 'note_schnitt'
 		);
 		
 		if ($websoccer->getConfig('players_aging') == 'birthday') {
@@ -166,6 +169,7 @@ class PlayersDataService {
 		$players = array();
 		while ($player = $result->fetch_array()) {
 			$player['position'] = self::_convertPosition($player['position']);
+			$player['player_nationality_filename'] = self::getFlagFilename($player['player_nationality']);
 			$players[$player['id']] = $player;
 		}
 		$result->free();
@@ -498,6 +502,7 @@ class PlayersDataService {
 		$columns['P.vorname'] = 'firstname';
 		$columns['P.nachname'] = 'lastname';
 		$columns['P.kunstname'] = 'pseudonym';
+		$columns['P.nation'] = 'player_nationality';
 		
 		$columns['P.position'] = 'position';
 		$columns['P.position_main'] = 'position_main';
@@ -514,6 +519,13 @@ class PlayersDataService {
 		
 		$columns['P.vertrag_gehalt'] = 'contract_salary';
 		$columns['P.vertrag_spiele'] = 'contract_matches';
+		$columns['P.marktwert'] = 'marketvalue';
+
+		$columns['P.sa_tore'] = 'st_goals';
+		$columns['P.sa_spiele'] = 'st_matches';
+		$columns['P.sa_assists'] = 'st_assists';
+		$columns['P.note_last'] = 'note_last';
+		$columns['P.note_schnitt'] = 'note_schnitt';
 		
 		$columns['P.lending_owner_id'] = 'lending_owner_id';
 		$columns['P.lending_fee'] = 'lending_fee';
@@ -521,6 +533,13 @@ class PlayersDataService {
 		
 		$columns['C.id'] = 'team_id';
 		$columns['C.name'] = 'team_name';	
+
+		if ($websoccer->getConfig('players_aging') == 'birthday') {
+			$ageColumn = 'TIMESTAMPDIFF(YEAR,geburtstag,CURDATE())';
+		} else {
+			$ageColumn = 'age';
+		}
+		$columns[$ageColumn] = 'age';
 		
 		$limit = $startIndex .','. $entries_per_page;
 		$result = self::executeFindQuery($websoccer, $db, $columns, $limit, $firstName, $lastName, $clubName, $position, $strengthMax, $lendableOnly);
@@ -528,6 +547,7 @@ class PlayersDataService {
 		$players = array();
 		while ($player = $result->fetch_array()) {
 			$player['position'] = self::_convertPosition($player['position']);
+			$player['player_nationality_filename'] = self::getFlagFilename($player['player_nationality']);
 			$players[] = $player;
 			
 		}
