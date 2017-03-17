@@ -139,7 +139,7 @@ if ($show == "add" || $show == "edit" || $show == "add_players") {
 			// validate
 			$dbcolumns = array();
 			if ($show == "add_players") {
-				for ($i = 1; $i <= 2; $i++) {
+				for ($i = 1; $i <= $_REQUEST["count"]; $i++) {
 					foreach ($formFields as $fieldId => $fieldInfo) {					
 
 						if ($fieldId != "verein_id") $formFieldId = $fieldId."_".$i;

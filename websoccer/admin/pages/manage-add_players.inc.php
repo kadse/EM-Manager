@@ -51,6 +51,7 @@ function playersCount() {
 	<input type="hidden" name="entity" value="<?php echo $entity; ?>">
 	<input type="hidden" name="action" value="save">
 	<input type="hidden" name="site" value="<?php echo $site; ?>">
+	<input type="hidden" name="count" value="<?php echo $count; ?>">
 	
 	<fieldset>
     <legend><?php echo $i18n->getMessage("manage_add_title"); ?></legend>
