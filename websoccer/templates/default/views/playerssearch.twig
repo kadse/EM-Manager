@@ -31,24 +31,6 @@
 		</div>
 	</div>
 	
-	{% if env.getConfig("hide_strength_attributes") != "1" %}
-	<div class="control-group">
-		<label class="control-label" for="strength">
-			{{ i18n.getMessage("entity_player_w_staerke") }}
-		</label>
-		<div class="controls">
-	  		<select name="strength" id="strength">
-	  			<option></option>
-	  			<option value="20"{% if env.getRequestParameter("strength") == "20" %} selected{% endif %}>1% - 20%</option>
-	  			<option value="40"{% if env.getRequestParameter("strength") == "40" %} selected{% endif %}>21% - 40%</option>
-	  			<option value="60"{% if env.getRequestParameter("strength") == "60" %} selected{% endif %}>41% - 60%</option>
-	  			<option value="80"{% if env.getRequestParameter("strength") == "80" %} selected{% endif %}>61% - 80%</option>
-	  			<option value="100"{% if env.getRequestParameter("strength") == "100" %} selected{% endif %}>81% - 100%</option>
-	  		</select>
-		</div>
-	</div>
-	{% endif %}
-	
 	{% if env.getConfig("lending_enabled") %}
 		{{ formelements.checkbox('lendable', i18n.getMessage('lending_player_marker_lendable'), env.getRequestParameter('lendable')) }}
 	{% endif %}
