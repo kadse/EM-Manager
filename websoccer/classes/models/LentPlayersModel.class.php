@@ -55,6 +55,7 @@ class LentPlayersModel implements IModel {
 				"vorname" => "firstname",
 				"nachname" => "lastname",
 				"kunstname" => "pseudonym",
+				"picture" => "picture",
 				"position" => "position",
 				"position_main" => "position_main",
 				"position_second" => "position_second",
