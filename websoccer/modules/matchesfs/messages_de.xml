@@ -11,5 +11,5 @@
     <message id="gast_verein_label">Gastmannschaft</message>
     <message id="stadion_label">Stadion</message>
 
-    <message id="button_save">Spiel ansetzen</message>
+    <message id="button_save_fs">Spiel ansetzen</message>
 </messages>
