@@ -15,24 +15,24 @@
 	{% if env.getUser().clubId == match.match_home_id %}
 		{% set teamName = match.match_guest_name %}
 		{% set teamID = match.match_guest_id %}		
-		{% set teamPicture = "<img src=\""~ env.getConfig("context_root") ~ "/uploads/club/" ~ match.match_guest_picture ~ "\" style=\"height: 20px;\" />" %}
+		{% set teamPicture = "<img src=\""~ env.getConfig("context_root") ~ "/uploads/club/" ~ match.match_guest_picture ~ "\" style=\"width: 20px;\" />" %}
 	{% else %}
 		{% set teamName = match.match_home_name %}
 		{% set teamID = match.match_home_id %}
-		{% set teamPicture = "<img src=\""~ env.getConfig("context_root") ~ "/uploads/club/" ~ match.match_home_picture ~ "\" style=\"height: 20px;\" />" %}
+		{% set teamPicture = "<img src=\""~ env.getConfig("context_root") ~ "/uploads/club/" ~ match.match_home_picture ~ "\" style=\"width: 20px;\" />" %}
 	{% endif %}
 	
 	{% if match.match_type == 'friendly' %}
-		{% set matchType = 'FS' %}
+		{% set matchType = '<i class="fa fa-handshake-o"></i>' %}
 	{% elseif match.match_type == 'league' %}
-		{% set matchType = 'L' %}
+		{% set matchType = '<i class="fa fa-globe"></i>' %}
 	{% else %}
-		{% set matchType = 'P' %}
+		{% set matchType = '<i class="fa fa-trophy"></i>' %}
 	{% endif %}
 
 	  <tr>
 	  	<td width="25%">{{ env.getFormattedDatetime(match.match_date) }}</td>
-	  	<td> {{ matchType }}</td>
+	  	<td> {{ matchType|raw }}</td>
 	    <td style="text-align: center"> vs. </td>
 	    <td style="text-align: left"><a href="{{ env.getInternalUrl("team", "id=" ~ teamID) }}">{{ teamName }}</a></td>
 	    <td style="text-align: center">{{ teamPicture|raw }}</td>

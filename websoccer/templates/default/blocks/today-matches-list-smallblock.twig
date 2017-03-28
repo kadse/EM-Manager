@@ -11,8 +11,18 @@
 	{% for match in matches %}
 	{% set homeTeamPicture = "<img src=\""~ env.getConfig("context_root") ~ "/uploads/club/" ~ match.home_team_picture ~ "\" style=\"height: 25px;\" />" %}
 	{% set guestTeamPicture = "<img src=\""~ env.getConfig("context_root") ~ "/uploads/club/" ~ match.guest_team_picture ~ "\" style=\"height: 25px;\" />" %}
+
+	{% if match.type == 'Freundschaft' %}
+		{% set matchType = '<i class="fa fa-handshake-o"></i>' %}
+	{% elseif match.type == 'Ligaspiel' %}
+		{% set matchType = '<i class="fa fa-globe"></i>' %}
+	{% else %}
+		{% set matchType = '<i class="fa fa-trophy"></i>' %}
+	{% endif %}
+
 	  <tr>
 	  	<td>{{ env.getFormattedDatetime(match.date) }}</td>
+	  	<td>{{ matchType|raw }}</td>
 	  	<td style="text-align: center">{{ homeTeamPicture|raw }}</td>
 	    <td style="text-align: right"><a href="{{ env.getInternalUrl("team", "id=" ~ match.home_id) }}">{{ match.home_team }}</a></td>
 	    <td style="text-align: center"> vs. </td>
