@@ -1,0 +1,35 @@
+{% extends "box.twig" %}
+
+{% block box_title %}
+{{ i18n.getMessage('all_next_matches_block_title') }}
+{% endblock %}
+
+{% block box_content %}
+
+{% if matches|length > 0 %}
+<table class="table table-borderless table-striped">
+	{% for match in matches %}
+	{% set homeTeamPicture = "<img src=\""~ env.getConfig("context_root") ~ "/uploads/club/" ~ match.home_team_picture ~ "\" style=\"height: 25px;\" />" %}
+	{% set guestTeamPicture = "<img src=\""~ env.getConfig("context_root") ~ "/uploads/club/" ~ match.guest_team_picture ~ "\" style=\"height: 25px;\" />" %}
+	  <tr>
+	  	<td>{{ env.getFormattedDatetime(match.date) }}</td>
+	  	<td style="text-align: center">{{ homeTeamPicture|raw }}</td>
+	    <td style="text-align: right"><a href="{{ env.getInternalUrl("team", "id=" ~ match.home_id) }}">{{ match.home_team }}</a></td>
+	    <td style="text-align: center"> vs. </td>
+	    <td style="text-align: left"><a href="{{ env.getInternalUrl("team", "id=" ~ match.guest_id) }}">{{ match.guest_team }}</a></td>
+	    <td style="text-align: center">{{ guestTeamPicture|raw }}</td>
+	    {% if match.simulated %}
+	    	<td style="text-align: center"><a href="{{ env.getInternalUrl("match", "id=" ~ match.id) }}" title="{{ i18n.getMessage("match_navlabel") }}">{{ match.home_goals }}:{{ match.guest_goals }}</a></td>
+	    {% else %}
+	    	<td style="text-align: center"><a href="{{ env.getInternalUrl("match", "id=" ~ match.id) }}" title="{{ i18n.getMessage("match_navlabel") }}"><i class="fa fa-info-circle" aria-hidden="true"></i>
+</a></td>
+	    {% endif %}
+	  </tr>
+	{% endfor %}
+</table>
+{% else %}
+<div class="alert alert-info" role="alert">Keine Spiele angesetzt</div>
+{% endif %}
+
+{% endblock %}
+

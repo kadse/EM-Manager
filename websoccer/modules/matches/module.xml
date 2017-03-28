@@ -230,7 +230,17 @@
             area="content_top"
             weight="2"
             role="user" />
-        
+
+
+        <block
+            id="nextmatch-userprofile"
+            template="nextmatch_userprofile"
+            model="NextMatchModel"
+            includepages="none"
+            area="custom"
+            weight="2"
+            role="user" />
+
         <block
             id="livematch"
             template="livematch"

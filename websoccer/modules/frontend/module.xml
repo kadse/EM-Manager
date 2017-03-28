@@ -30,6 +30,15 @@
             area="custom"
             weight="0"
             role="user,guest" />
+
+        <block
+            id="today-matches-summary"
+            template="today-matches-list-smallblock"
+            model="TodaysMatchesBlockModel"
+            includepages="none"
+            area="custom"
+            weight="0"
+            role="user,guest" />            
         
     </blocks>
     

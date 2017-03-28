@@ -10,18 +10,20 @@
 {% block page_header %}
 
 {% if env.user.id == null %}
-<div class="hero-unit">
-  <h1>{{ block("browser_title") }}</h1>
-  <p>{{ i18n.getMessage("home_teaser") }}</p>
-  
-  	{% if env.getConfig("allow_userregistration") or env.getConfig("registration_url")|length > 0 %}
-		{% set registerUrl = env.getInternalUrl("register") %}
-		{% if env.getConfig("registration_url")|length > 0 %}
-			{% set registerUrl = env.getConfig("registration_url") %}
-		{% endif %}
-		<div style="text-align:center;"><a href="{{ registerUrl }}" class="btn btn-large">{{ i18n.getMessage("home_teaser_link_register") }}</a></div>
-	{% endif %} 
-  
+<div class="row">
+	<div class="hero-unit">
+	  <h1>{{ block("browser_title") }}</h1>
+	  <p>{{ i18n.getMessage("home_teaser") }}</p>
+	  
+	  	{% if env.getConfig("allow_userregistration") or env.getConfig("registration_url")|length > 0 %}
+			{% set registerUrl = env.getInternalUrl("register") %}
+			{% if env.getConfig("registration_url")|length > 0 %}
+				{% set registerUrl = env.getConfig("registration_url") %}
+			{% endif %}
+			<div style="text-align:center;"><a href="{{ registerUrl }}" class="btn btn-large">{{ i18n.getMessage("home_teaser_link_register") }}</a></div>
+		{% endif %} 
+	  
+	</div>
 </div>
 {% endif %}
 
@@ -42,20 +44,21 @@
 </div>
 
 <div class="row">
-	<div class="span4">
-		{{ viewHandler.renderBlock('news')|raw }}
+	<div class="span3">
+		<div class="ajaxLoadedBlock" id="latestActivitiesBlock" 
+				data-ajaxblock="user-activities-all" data-ignoreemptymessages="true" data-refreshperiod="10">
+		</div>
 		
 		<div class="ajaxLoadedBlock" id="projectStatisticsBlock" 
 			data-ajaxblock="projectstatistics" data-ignoreemptymessages="true">
 		</div>
 	</div>
-	<div class="span4">
-		
-		<div class="ajaxLoadedBlock" id="latestResultsBlock" 
-				data-ajaxblock="latest-results-summary" data-ignoreemptymessages="true"></div>
-				
-			<div class="ajaxLoadedBlock" id="latestActivitiesBlock" 
-				data-ajaxblock="user-activities-all" data-ignoreemptymessages="true" data-refreshperiod="10"></div>
+	<div class="span7">
+
+		<div class="ajaxLoadedBlock" id="todayMatchesBlock" 
+				data-ajaxblock="today-matches-summary" data-ignoreemptymessages="true">
+		</div>	
+						
 	</div>
 		
 	<div class="span4">

@@ -38,8 +38,10 @@ class MatchesDataService {
 		$columns['M.spieltyp'] = 'match_type';
 		$columns['HOME.id'] = 'match_home_id';
 		$columns['HOME.name'] = 'match_home_name';
+		$columns['HOME.bild'] = 'match_home_picture';
 		$columns['GUEST.id'] = 'match_guest_id';
 		$columns['GUEST.name'] = 'match_guest_name';
+		$columns['GUEST.bild'] = 'match_guest_picture';
 	
 		$result = $db->querySelect($columns, $fromTable, $whereCondition, $parameters, $maxNumber);
 		$matches = array();
@@ -84,6 +86,17 @@ class MatchesDataService {
 		
 		return $matchinfo;
 	}
+
+	public static function getAllNextMatches(WebSoccer $websoccer, DbConnection $db, $maxNumber) {
+		
+		$startTs = mktime (0, 0, 1, date('n'), date('j'), date('Y'));
+		
+		// where
+		$whereCondition = 'M.datum >= %d ORDER BY M.datum ASC';
+		$parameters = array($startTs);
+	
+		return self::getMatchesByCondition($websoccer, $db, $whereCondition, $parameters, $maxNumber);
+	}	
 	
 	public static function getLiveMatch(WebSoccer $websoccer, DbConnection $db) {
 		$fromTable = self::_getFromPart($websoccer);

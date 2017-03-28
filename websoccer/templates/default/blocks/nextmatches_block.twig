@@ -1,0 +1,39 @@
+{% extends "box.twig" %}
+
+{% import "macros/statisticelements.twig" as statisticelements %}
+
+{% block box_title %}
+{{ i18n.getMessage('next_matches_block_title') }}
+{% endblock %}
+
+{% block box_content %}
+
+
+{% if nextMatches|length > 0 %}
+<table class="table table-borderless table-striped">
+	{% for match in nextMatches %}
+	{% if env.getUser().clubId == match.match_home_id %}
+		{% set teamName = match.match_guest_name %}
+		{% set teamID = match.match_guest_id %}		
+		{% set teamPicture = "<img src=\""~ env.getConfig("context_root") ~ "/uploads/club/" ~ match.match_guest_picture ~ "\" style=\"height: 20px;\" />" %}
+	{% else %}
+		{% set teamName = match.match_home_name %}
+		{% set teamID = match.match_home_id %}
+		{% set teamPicture = "<img src=\""~ env.getConfig("context_root") ~ "/uploads/club/" ~ match.match_home_picture ~ "\" style=\"height: 20px;\" />" %}
+	{% endif %}
+	
+	  <tr>
+	  	<td width="25%">{{ env.getFormattedDatetime(match.date) }}</td>
+	    <td style="text-align: center"> vs. </td>
+	    <td style="text-align: left"><a href="{{ env.getInternalUrl("team", "id=" ~ teamID) }}">{{ teamName }}</a></td>
+	    <td style="text-align: center">{{ teamPicture|raw }}</td>
+    	<td style="text-align: center"><a href="{{ env.getInternalUrl("match", "id=" ~ match.match_id) }}" title="{{ i18n.getMessage("match_navlabel") }}"><i class="fa fa-info-circle" aria-hidden="true"></i>
+</a></td>
+	  </tr>
+	{% endfor %}
+</table>
+{% else %}
+<div class="alert alert-info" role="alert">{{ i18n.getMessage('next_matches_block_no_nextmatch') }}</div>
+{% endif %}
+{% endblock %}
+
