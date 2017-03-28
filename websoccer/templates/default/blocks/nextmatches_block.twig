@@ -34,8 +34,8 @@
 	  	<td width="25%">{{ env.getFormattedDatetime(match.match_date) }}</td>
 	  	<td> {{ matchType|raw }}</td>
 	    <td style="text-align: center"> vs. </td>
+	    <td style="text-align: center">{{ teamPicture|raw }}</td>	    
 	    <td style="text-align: left"><a href="{{ env.getInternalUrl("team", "id=" ~ teamID) }}">{{ teamName }}</a></td>
-	    <td style="text-align: center">{{ teamPicture|raw }}</td>
     	<td style="text-align: center"><a href="{{ env.getInternalUrl("match", "id=" ~ match.match_id) }}" title="{{ i18n.getMessage("match_navlabel") }}"><i class="fa fa-info-circle" aria-hidden="true"></i>
 </a></td>
 	  </tr>
@@ -45,4 +45,3 @@
 <div class="alert alert-info" role="alert">{{ i18n.getMessage('next_matches_block_no_nextmatch') }}</div>
 {% endif %}
 {% endblock %}
-

@@ -242,6 +242,15 @@
             role="user" />
 
         <block
+            id="nextMatchesBlock"
+            template="nextmatches_block"
+            model="NextMatchesBlockModel"
+            includepages="all"
+            area="sidebar"
+            weight="2"
+            role="user" />            
+
+        <block
             id="livematch"
             template="livematch"
             model="LiveMatchBlockModel"

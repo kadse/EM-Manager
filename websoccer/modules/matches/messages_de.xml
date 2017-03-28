@@ -10,6 +10,11 @@
     
     <message id="last_match_block_title">Mein letztes Spiel</message>
     <message id="last_match_block_no_lastmatch">Ihr Team hat noch kein Spiel bestritten.</message>
+
+    <message id="next_matches_block_title">Vorschau</message>
+    <message id="next_matches_block_no_nextmatch">Keine anstehenden Spiele.</message>    
+
+    <message id="all_next_matches_block_title">Kommende Spiele</message>
     
     <message id="match_details_date">Datum</message>
     <message id="match_details_type">Typ</message>

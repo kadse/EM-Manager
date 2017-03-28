@@ -23,11 +23,11 @@
 	  <tr>
 	  	<td>{{ env.getFormattedDatetime(match.date) }}</td>
 	  	<td>{{ matchType|raw }}</td>
-	  	<td style="text-align: center">{{ homeTeamPicture|raw }}</td>
 	    <td style="text-align: right"><a href="{{ env.getInternalUrl("team", "id=" ~ match.home_id) }}">{{ match.home_team }}</a></td>
+	    <td style="text-align: center">{{ homeTeamPicture|raw }}</td>
 	    <td style="text-align: center"> vs. </td>
-	    <td style="text-align: left"><a href="{{ env.getInternalUrl("team", "id=" ~ match.guest_id) }}">{{ match.guest_team }}</a></td>
 	    <td style="text-align: center">{{ guestTeamPicture|raw }}</td>
+	    <td style="text-align: left"><a href="{{ env.getInternalUrl("team", "id=" ~ match.guest_id) }}">{{ match.guest_team }}</a></td>
 	    {% if match.simulated %}
 	    	<td style="text-align: center"><a href="{{ env.getInternalUrl("match", "id=" ~ match.id) }}" title="{{ i18n.getMessage("match_navlabel") }}">{{ match.home_goals }}:{{ match.guest_goals }}</a></td>
 	    {% else %}
