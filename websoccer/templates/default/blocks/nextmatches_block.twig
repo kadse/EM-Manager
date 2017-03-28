@@ -22,8 +22,17 @@
 		{% set teamPicture = "<img src=\""~ env.getConfig("context_root") ~ "/uploads/club/" ~ match.match_home_picture ~ "\" style=\"height: 20px;\" />" %}
 	{% endif %}
 	
+	{% if match.match_type == 'friendly' %}
+		{% set matchType = 'FS' %}
+	{% elseif match.match_type == 'league' %}
+		{% set matchType = 'L' %}
+	{% else %}
+		{% set matchType = 'P' %}
+	{% endif %}
+
 	  <tr>
-	  	<td width="25%">{{ env.getFormattedDatetime(match.date) }}</td>
+	  	<td width="25%">{{ env.getFormattedDatetime(match.match_date) }}</td>
+	  	<td> {{ matchType }}</td>
 	    <td style="text-align: center"> vs. </td>
 	    <td style="text-align: left"><a href="{{ env.getInternalUrl("team", "id=" ~ teamID) }}">{{ teamName }}</a></td>
 	    <td style="text-align: center">{{ teamPicture|raw }}</td>
