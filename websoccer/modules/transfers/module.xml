@@ -69,6 +69,20 @@
                         type="text"
                         sort="true"
                         filter="true" />
+
+                    <column
+                        id="entity_transfer_offer_lending"
+                        field="ELT(TransferTab.lending, 'Kaufangebot', 'Leihe bis WP', 'Leihe bis SE', 'Leihe 2 Saisons')"
+                        type="text"
+                        sort="true"
+                        filter="true" />                        
+
+                    <column
+                        id="entity_transfer_offer_comment"
+                        field="TransferTab.comment"
+                        type="text"
+                        sort="true"
+                        filter="true" />                           
                     
                     <join type="INNER" jointable="spieler AS PlayerTab" joincondition="TransferTab.spieler_id = PlayerTab.id" />
                 	<join type="INNER" jointable="verein AS BuyerTab" joincondition="TransferTab.buyer_club_id = BuyerTab.id" />

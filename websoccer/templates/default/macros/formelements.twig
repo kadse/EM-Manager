@@ -119,3 +119,20 @@
 	</div>
 </div>
 {% endmacro %}
+
+{% macro selectBuyType(fieldId, label) %}
+
+<div class="control-group">
+	<label class="control-label" for="{{ fieldId }}">
+		{{ label }}
+	</label>
+	<div class="controls">
+		<select name="{{ fieldId }}" id="{{ fieldId }}">
+			<option value="0">Kaufangebot</option>
+			<option value="1">Leihe bis zur Winterpause</option>
+			<option value="2">Leihe bis zum Saisonende</option>
+			<option value="3">Leihe über 2 Saisons</option>
+		</select>
+	</div>
+</div>
+{% endmacro %}

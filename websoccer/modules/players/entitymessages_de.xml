@@ -65,6 +65,11 @@
 	<message id="entity_player_lending_owner_id">Verleiher</message>	
 	<message id="entity_player_lending_fee">Leihgebühr pro Spieltag</message>	
 	<message id="entity_player_lending_matches">Ausgeliehene Spiele</message>	
+	<message id="entity_player_lending">Leihdauer</message>	
+	<message id="entity_player_comment">Klausel</message>
+	<message id="option_1">bis zur Winterpause</message>
+	<message id="option_2">bis zum Saisonende</message>
+	<message id="option_3">über 2 Saisons</message>
 
 	<message id="player_position_goaly">Torwart</message>
     <message id="option_Torwart">Torwart</message>
@@ -91,4 +96,5 @@
     <message id="option_RS">Rechtsaußen</message>
     <message id="option_OM">Offensives Mittelfeld</message>
     <message id="option_DM">Defensives Mittelfeld</message>
+
 </messages>

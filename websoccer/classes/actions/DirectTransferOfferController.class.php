@@ -116,7 +116,7 @@ class DirectTransferOfferController implements IActionController {
 		// submit offer
 		DirectTransfersDataService::createTransferOffer($this->_websoccer, $this->_db, 
 			$player["player_id"], $this->_websoccer->getUser()->id, $clubId, $player["team_user_id"], $player["team_id"], 
-				$parameters["amount"], $parameters["comment"], $parameters["exchangeplayer1"], $parameters["exchangeplayer2"]);
+				$parameters["amount"], $parameters["comment"], $parameters["exchangeplayer1"], $parameters["exchangeplayer2"], $parameters["lending"]);
 		
 		// show success message
 		$this->_websoccer->addFrontMessage(new FrontMessage(MESSAGE_TYPE_SUCCESS,

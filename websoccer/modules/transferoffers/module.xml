@@ -63,6 +63,20 @@
                         type="text"
                         sort="true"
                         filter="true" />
+
+                    <column
+                        id="entity_transfer_offer_lending"
+                        field="ELT(OfferTab.lending, 'Kaufangebot', 'Leihe bis WP', 'Leihe bis SE', 'Leihe 2 Saisons')"
+                        type="text"
+                        sort="true"
+                        filter="true" />                        
+
+                    <column
+                        id="entity_transfer_offer_comment"
+                        field="OfferTab.offer_message"
+                        type="text"
+                        sort="true"
+                        filter="true" />                          
                     
                     <column
                         id="entity_transfer_offer_rejected_date"
@@ -167,6 +181,7 @@
 			<param id="exchangeplayer1" type="number" />
 			<param id="exchangeplayer2" type="number" />
 			<param id="comment" type="text" max="255" />
+            <param id="lending" type="number" />
 		</action>
 		
 		<action id="directtransfer-accept" controller="DirectTransferAcceptController" role="user">

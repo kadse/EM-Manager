@@ -13,4 +13,6 @@
 	<message id="entity_transfer_offer_offer_player1">Tauschspieler 1</message>
 	<message id="entity_transfer_offer_offer_player2">Tauschspieler 2</message>
 	<message id="entity_transfer_offer_rejected_date">Abgelehnt am</message>
+	<message id="entity_transfer_offer_lending">Angebotstyp</message>
+	<message id="entity_transfer_offer_comment">Klausel</message>
 </messages>

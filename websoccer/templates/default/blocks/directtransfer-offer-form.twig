@@ -9,7 +9,9 @@
 
 {% if showForm %}
 	{{ formelements.textfield('amount', i18n.getMessage('transferoffer_label_amount'), env.getRequestParameter("amount"), true, validationMsg, 'number', env.getConfig("game_currency")) }}
-	
+
+	{{ formelements.selectBuyType('lending', i18n.getMessage('transferoffer_label_lending')) }}
+
 	{{ formelements.textarea('comment', i18n.getMessage('transferoffer_label_comment'), env.getRequestParameter("comment"), false, validationMsg, null, 3) }}
 	
 	
@@ -24,21 +26,6 @@
 		
 	</fieldset>
 	
-	<fieldset>
-		<legend>{{ i18n.getMessage('transferoffer_label_fieldset_contract') }}</legend>
-		
-		<dl class="dl-horizontal">
-		  <dt>{{ i18n.getMessage("entity_player_vertrag_gehalt") }}</dt>
-		  <dd>{{ player.player_contract_salary|number_format(0, ',', '.')  }} {{ env.getConfig("game_currency") }}</dd>
-		  
-		  <dt>{{ i18n.getMessage("entity_player_vertrag_torpraemie") }}</dt>
-		  <dd>{{ player.player_contract_goalbonus|number_format(0, ',', '.')  }} {{ env.getConfig("game_currency") }}</dd>
-		  
-		  <dt>{{ i18n.getMessage("entity_player_vertrag_spiele") }}</dt>
-		  <dd>{{ env.getConfig("transferoffers_contract_matches")  }} {{ i18n.getMessage("player_details_unit_matches") }}</dd>
-		</dl>
-		
-	</fieldset>
 {% else %}
 	<script>
 	$("#offerSubmit").hide();

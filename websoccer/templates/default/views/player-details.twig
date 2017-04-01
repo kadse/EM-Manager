@@ -55,8 +55,18 @@
 				  {% if player.team_id > 0 %}
 				  	<a href="{{ env.getInternalUrl("team", "id=" ~ player.team_id) }}">{{ player.team_name }}</a>
 				  	
+					{% if player.lending == 0 %}
+						{% set lending = "Kaufangebot" %}
+					{% elseif player.lending == 1 %}
+						{% set lending = "Leihe bis WP" %}
+					{% elseif player.lending == 2 %}
+						{% set lending = "Leihe bis SE" %}
+					{% else %}
+						{% set lending = "Leihe 2 Saisons" %}
+					{% endif %}	
+
 				  	{% if player.lending_owner_id > 0 %}
-						<i class="icon-star-empty" title="{{ i18n.getMessage("lending_player_marker_tooltip") }}"></i></em>
+						<i class="icon-star-empty" title="{{ lending }}"></i></em>
 					{% endif %}
 				  {% else %}
 				  	-
@@ -113,7 +123,29 @@
 				  
 				  <dt>{{ i18n.getMessage("entity_player_marktwert") }}</dt>
 				  <dd>{{ player.player_marketvalue|number_format(0, ',', '.')  }} {{ env.getConfig("game_currency") }}</dd>
-				  
+
+				  {% if player.lending_comment|length > 0 %}
+				  	<dt><br/></dt>
+				  	<dd><br/></dd>
+
+				  	<dt></dt>
+					<dd><a href="#lendingComment" class="btn btn-small ajaxLink" role="button" data-toggle="modal"><i class="fa fa-file-text-o"></i> {{ i18n.getMessage("player_details_lending_comment") }}</a></dd>
+					
+					<div id="lendingComment" class="modal hide fade" tabindex="-1" role="dialog" 
+						aria-labelledby="statModalLabel" aria-hidden="true">
+					  <div class="modal-header">
+					    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					    <h3 id="statModalLabel">{{ i18n.getMessage("player_details_lending_comment") }}</h3>
+					  </div>
+					  <div class="modal-body">
+					  	<div id="playerStatisticsPerCompetition">{{ player.lending_comment }}</div>
+					  </div>
+					  <div class="modal-footer">
+					    <a href="#" class="btn btn-primary" data-dismiss="modal" aria-hidden="true">{{ i18n.getMessage("button_close") }}</a>
+					  </div>
+					</div>
+				  {% endif %}
+
 				</dl>
 			</div>
 		</div>  

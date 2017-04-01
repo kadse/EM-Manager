@@ -63,15 +63,24 @@
 					<a class="ajaxLink" href="#" title="{{ i18n.getMessage("myteam_unsellable_unmark_tooltip") }}"
 								data-ajaxtarget="pagecontent" data-ajaxquerystr="page=myteam&action=unmarkUnsellable&id={{ player.id }}"><i class="icon-eye-close darkIcon"></i></a>
 				{% endif %}
-				{% if player.lending_fee > 0 and player.lending_owner_id == 0 %}
-					<a class="ajaxLink wstooltip" href="#" title="{{ i18n.getMessage("lending_lendable_unmark", player.lending_fee) }}"
-								data-ajaxtarget="pagecontent" data-ajaxquerystr="page=myteam&action=unmarkLendable&id={{ player.id }}"><i class="icon-share-alt darkIcon"></i></a>
-				{% endif %}
 				{% if player.transfermarket %}
 					<a class="wstooltip" href="{{ env.getInternalUrl("transfer-bid", "id=" ~ player.id) }}" title="{{ i18n.getMessage("entity_player_transfermarkt") }}"><i class="icon-hand-up darkIcon"></i></a>
 				{% endif %}
 				{% if player.id == captain_id %}
 					<i class="icon-group wstooltip" title="{{ i18n.getMessage("myteam_captain_tooltip") }}"></i>
+				{% endif %}
+
+				{% if player.lending == 0 %}
+					{% set lending = "Kaufangebot" %}
+				{% elseif player.lending == "1" %}
+					{% set lending = "Leihe bis WP" %}
+				{% elseif player.lending == 2 %}
+					{% set lending = "Leihe bis SE" %}
+				{% else %}
+					{% set lending = "Leihe 2 Saisons" %}
+				{% endif %}						
+				{% if player.lending > 0 %}
+					<i class="icon-star-empty" title="{{ lending }}"></i>
 				{% endif %}
 				</p>
 				
@@ -86,19 +95,16 @@
 						<ul class="dropdown-menu">
 						
 							{% if player.unsellable == 0 %}
-								{% if env.getConfig("transfermarket_enabled") and player.lending_fee == 0 %}
+								{% if env.getConfig("transfermarket_enabled") and player.lending == 0 %}
 									<li><a href="{{ env.getInternalUrl("sell-player", "id=" ~ player.id) }}"><i class="icon-share"></i> {{ i18n.getMessage("myteam_player_sell") }}</a></li>
 								{% endif %}
+								{% if player.lending == 0 %}
 									<li><a class="ajaxLink" href="#" title="{{ i18n.getMessage("myteam_unsellable_tooltip") }}"
 										data-ajaxtarget="pagecontent" data-ajaxquerystr="page=myteam&action=markAsUnsellable&id={{ player.id }}"><i class="icon-eye-close"></i> {{ i18n.getMessage("myteam_unsellable") }}</a></li>
-							
-								{% if player.transfermarket == 0 and player.lending_fee == 0 and env.getConfig("lending_enabled") %}
-									<li><a href="{{ env.getInternalUrl("lend-player", "id=" ~ player.id) }}"><i class="icon-share-alt"></i> {{ i18n.getMessage("lending_lend_button") }}</a></li>
 								{% endif %}
-							
 							{% endif %}
 							
-							{% if player.contract_matches <= env.getConfig("contract_max_number_of_remaining_matches") %}
+							{% if player.contract_matches <= env.getConfig("contract_max_number_of_remaining_matches") and player.lending == 0 %}
 								<li><a href="{{ env.getInternalUrl("extend-contract", "id=" ~ player.id) }}"><i class="icon-briefcase"></i> {{ i18n.getMessage("myteam_player_extend_contract") }}</a></li>
 							{% endif %}
 							
@@ -106,7 +112,7 @@
 								<li><a href="{{ env.getInternalActionUrl("select-captain", "id=" ~ player.id) }}"><i class="icon-group"></i> {{ i18n.getMessage("myteam_player_select_as_captain") }}</a></li>
 							{% endif %}
 							
-							{% if env.getConfig("enable_player_resignation") %}
+							{% if env.getConfig("enable_player_resignation") and player.lending == 0 %}
 								<li><a href="#fire{{ player.id }}Modal" role="button" data-toggle="modal"><i class="icon-remove-circle"></i> {{ i18n.getMessage("fireplayer_button") }}</a></li>
 							{% endif %}
 						</ul>
@@ -290,11 +296,7 @@
 				
 				<td>{{ player.age }} Jahre</td>
 				<td>{{ player.marketvalue|number_format(0, ',', '.')  }} {{ env.getConfig("game_currency") }}</td>
-				<td>{{ player.contract_salary|number_format(0, ',', '.')  }} {{ env.getConfig("game_currency") }}
-					{% if player.lending_fee > 0 and player.lending_owner_id > 0 %}
-						<br><small>+ {{ i18n.getMessage("entity_player_lending_fee") }}: {{ player.lending_fee|number_format(0, ',', '.')  }} {{ env.getConfig("game_currency") }}</small> 
-					{% endif %}
-				</td>
+				<td>{{ player.contract_salary|number_format(0, ',', '.')  }} {{ env.getConfig("game_currency") }}</td>
 				<td>{{ player.st_matches }}</td>
 				<td>{{ player.st_goals }}</td>
 				<td>{{ player.st_assists }}</td>

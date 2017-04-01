@@ -26,6 +26,7 @@
 					<th>{{ i18n.getMessage("entity_transfer_offer_player_id") }}</th>
 					<th>{{ i18n.getMessage("entity_transfer_offer_sender_club_id") }}</th>
 					<th>{{ i18n.getMessage("entity_transfer_offer_offer_amount") }}</th>
+					<th>{{ i18n.getMessage("transferoffers_offer_lending") }}</th>					
 					<th>{{ i18n.getMessage("transferoffers_offer_reaction") }}</th>
 				</tr>
 			</thead>
@@ -58,6 +59,17 @@
 							</ul>
 						{% endif %}
 					</td>
+					{% if offer.lending == 0 %}
+						{% set lendingOffer = "Kaufangebot" %}
+					{% elseif offer.lending == 1 %}
+						{% set lendingOffer = "Leihe bis WP" %}
+					{% elseif offer.lending == 2 %}
+						{% set lendingOffer = "Leihe bis SE" %}
+					{% else %}
+						{% set lendingOffer = "Leihe 2 Saisons" %}
+					{% endif %}
+
+					<td>{{ lendingOffer }}</td>					
 					<td>
 						{% if offer.offer_admin_approval_pending %}
 							<span class="label label-info">{{ i18n.getMessage("transferoffers_offer_status_adminapprovalpending") }}</span>

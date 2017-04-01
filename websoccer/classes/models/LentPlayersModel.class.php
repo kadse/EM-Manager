@@ -70,6 +70,7 @@ class LentPlayersModel implements IModel {
 				"P.note_schnitt" => "note_schnitt",
 				"lending_matches" => "lending_matches",
 				"lending_fee" => "lending_fee",
+				"lending" => "lending",
 				"C.id" => "team_id",
 				"C.name" => "team_name"
 		);
@@ -85,7 +86,7 @@ class LentPlayersModel implements IModel {
 		$fromTable = $dbPrefix . "_spieler P INNER JOIN " . $dbPrefix . "_verein C ON C.id = P.verein_id";
 		$whereCondition = "P.status = 1 AND lending_owner_id = %d";
 		
-		$whereCondition .= " ORDER BY lending_matches ASC, position ASC, position_main ASC, nachname ASC, vorname ASC";
+		$whereCondition .= " ORDER BY lending ASC, position ASC, position_main ASC, nachname ASC, vorname ASC";
 		
 		$result = $this->_db->querySelect($columns, $fromTable, $whereCondition, $teamId, 50);
 		

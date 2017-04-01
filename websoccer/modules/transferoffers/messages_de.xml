@@ -7,7 +7,8 @@
     <message id="transferoffer_modal_title">Transferangebot</message>
     
     <message id="transferoffer_label_amount">Ablösesumme</message>
-    <message id="transferoffer_label_comment">Kommentar</message>
+    <message id="transferoffer_label_comment">Klausel</message>
+    <message id="transferoffer_label_lending">Art des Angebots</message>
     <message id="transferoffer_label_fieldset_playerexchange">Spielertausch (optional)</message>
     <message id="transferoffer_label_exchangeplayer1">Spieler</message>
     <message id="transferoffer_label_exchangeplayer2">2. Spieler</message>
@@ -48,8 +49,10 @@
 	<message id="transferoffers_offer_status_adminapprovalpending">Warten auf Freigabe</message>
 	<message id="transferoffers_offer_status_rejected">abgelehnt</message>
 	
-	<message id="transferoffers_offer_showcomment">Kommentar anzeigen</message>
+	<message id="transferoffers_offer_showcomment">Klausel anzeigen</message>
 	<message id="transferoffers_offer_comment_title">%s schrieb:</message>
+
+	<message id="transferoffers_offer_lending">Angebottyp</message>
 	
 	<message id="transferoffer_accepted_title">Das Angebot wurde angenommen!</message>
 	<message id="transferoffer_accepted_message">Der Spieler hat erfolgreich das Team gewechselt.</message>

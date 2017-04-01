@@ -45,7 +45,7 @@ class DirectTransfersDataService {
 	 */
 	public static function createTransferOffer(WebSoccer $websoccer, DbConnection $db, $playerId, 
 			$senderUserId, $senderClubId, $receiverUserId, $receiverClubId,
-			$offerAmount, $offerMessage, $offerPlayerId1 = null, $offerPlayerId2 = null) {
+			$offerAmount, $offerMessage, $offerPlayerId1 = null, $offerPlayerId2 = null, $lending = 0) {
 		
 		$columns = array(
 				"player_id" => $playerId,
@@ -56,7 +56,8 @@ class DirectTransfersDataService {
 				"offer_amount" => $offerAmount,
 				"offer_message" => $offerMessage,
 				"offer_player1" => $offerPlayerId1,
-				"offer_player2" => $offerPlayerId2
+				"offer_player2" => $offerPlayerId2,
+				"lending" => $lending
 				);
 		
 		$db->queryInsert($columns, $websoccer->getConfig("db_prefix") . "_transfer_offer");
@@ -92,7 +93,7 @@ class DirectTransfersDataService {
 		
 		// move player (and create transfer log)
 		self::_transferPlayer($websoccer, $db, $offer["player_id"], $offer["sender_club_id"], $offer["sender_user_id"], 
-				$currentTeam["user_id"], $offer["receiver_club_id"], $offer["offer_amount"], $offer["offer_player1"], $offer["offer_player2"]);
+				$currentTeam["user_id"], $offer["receiver_club_id"], $offer["offer_amount"], $offer["offer_player1"], $offer["offer_player2"], $offer["lending"], $offer['offer_message']);
 		
 		// credit amount
 		BankAccountDataService::creditAmount($websoccer, $db, $offer["receiver_club_id"], $offer["offer_amount"], "directtransfer_subject", 
@@ -135,10 +136,21 @@ class DirectTransfersDataService {
 	
 	private static function _transferPlayer(WebSoccer $websoccer, DbConnection $db, $playerId, 
 			$targetClubId, $targetUserId, $currentUserId, $currentClubId, $amount, 
-			$exchangePlayer1 = 0, $exchangePlayer2 = 0) {
-		$db->queryUpdate(array("verein_id" => $targetClubId, 
-				"vertrag_spiele" => $websoccer->getConfig("transferoffers_contract_matches")), 
+			$exchangePlayer1 = 0, $exchangePlayer2 = 0, $lending = 0, $comment = null) {
+		$db->queryUpdate(array(
+				"verein_id" => $targetClubId, 
+				"vertrag_spiele" => $websoccer->getConfig("transferoffers_contract_matches"),
+				"lending" => $lending,
+				"comment" => $comment
+				), 
 				$websoccer->getConfig("db_prefix") . "_spieler", "id = %d", $playerId);
+
+		if ($lending > 0) {
+			$db->queryUpdate(array(
+				"lending_owner_id" => $currentClubId,
+				"lending_matches" => $websoccer->getConfig("transferoffers_contract_matches")
+				),$websoccer->getConfig("db_prefix") . "_spieler", "id = %d", $playerId);
+		}
 		
 		// create log
 		$db->queryInsert(array(
@@ -151,7 +163,9 @@ class DirectTransfersDataService {
 				"buyer_club_id" => $targetClubId,
 				"directtransfer_amount" => $amount,
 				"directtransfer_player1" => $exchangePlayer1,
-				"directtransfer_player2" => $exchangePlayer2
+				"directtransfer_player2" => $exchangePlayer2,
+				"lending" => $lending,
+				"comment" => $comment
 				), $websoccer->getConfig("db_prefix") . "_transfer");
 	}
 	
@@ -251,6 +265,7 @@ class DirectTransfersDataService {
 				"O.rejected_message" => "offer_rejected_message",
 				"O.rejected_allow_alternative" => "offer_rejected_allow_alternative",
 				"O.admin_approval_pending" => "offer_admin_approval_pending",
+				"O.lending" => "lending",
 				"P.id" => "player_id",
 				"P.vorname" => "player_firstname",
 				"P.nachname" => "player_lastname",
