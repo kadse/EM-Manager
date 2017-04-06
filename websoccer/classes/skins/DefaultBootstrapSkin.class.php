@@ -55,7 +55,7 @@ class DefaultBootstrapSkin implements ISkin {
 		$files[] = $dir . 'defaultskin.css';
 		$files[] = $dir . 'websoccer.css';
 		$files[] = $dir . 'bootstrap-responsive.min.css';
-		
+
 		return $files;
 	}
 	
@@ -65,7 +65,7 @@ class DefaultBootstrapSkin implements ISkin {
 	public function getJavaScriptSources() {
 		$dir = $this->_websoccer->getConfig('context_root') . '/js/';
 		$files[] = '//code.jquery.com/jquery-1.11.1.min.js';
-		
+
 		if (DEBUG) {
 			$files[] = $dir . 'bootstrap.min.js';
 			$files[] = $dir . 'jquery.blockUI.js';

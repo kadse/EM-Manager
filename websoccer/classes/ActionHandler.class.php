@@ -117,7 +117,7 @@ class ActionHandler {
 			}
 			
 			// validate 'required'
-			if ($required && $paramValue == null) {
+			if ($required && ($paramValue == null || empty($paramValue))) {
 				$errorMessages[$paramId] = $i18n->getMessage('validation_error_required');
 			} else if ($paramValue != null) {
 				

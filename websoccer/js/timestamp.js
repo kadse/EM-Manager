@@ -54,6 +54,12 @@ $(function() {
 	    minuteStep: 1,
 	    showMeridian: false
 	});	
+
+	$(".datepicker").datepicker({
+		format: "d.m.yyyy",
+		language: "de",
+		autoclose: true
+	});	
 	
 	// start (cron) job
 	$(document).on("click", ".startStopJobLink", function(e) {

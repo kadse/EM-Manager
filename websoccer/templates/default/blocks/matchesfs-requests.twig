@@ -1,0 +1,79 @@
+{% import "macros/paginator.twig" as pagination %}
+{% import "macros/messagebox.twig" as messagebox %}
+
+{% if count > 0 %}
+
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>{{ i18n.getMessage("matchesfs_nav_matchdate") }}</th>
+				<th>{{ i18n.getMessage("matchesfs_nav_opponent") }}</th>
+				<th>{{ i18n.getMessage("matchesfs_nav_stadium") }}</th>
+				<th style="text-align: center">{{ i18n.getMessage("matchesfs_nav_shootout") }}</th>
+				<th style="width:30px"></th>
+				<th style="width:30px"></th>
+			</tr>
+		</thead>
+		<tbody>
+		{% for match in requests %}
+			<tr>
+				<td><b>{{ env.getFormattedDatetime(match.match_date) }}</b></td>
+				<td>
+					{% if match.home_picture|length > 0 %}
+						<img src="{{ env.getConfig("context_root") }}/uploads/club/{{ match.home_picture }}" class="img-rounded" style="max-width: 30px; max-height: 30px">
+					{% endif %}				
+					<a href="{{ env.getInternalUrl("team", "id=" ~ match.home_id) }}">{{ match.home_name }}</a>
+				</td>
+				<td>
+					{% if match.stadium|length > 0 %}
+						{{ match.stadium }}
+					{% else %}
+						Ausweichstadion
+					{% endif %}
+				</td>
+				<td style="text-align: center">
+					{% if match.match_shootout == 1 %}
+						<i class="fa fa-check"></i>
+					{% else %}
+						<i class="fa fa-close"></i>
+					{% endif %}
+				</td>
+				<td>
+					<a href="#" class="btn btn-success btn-small btn-block ajaxLink"
+						data-ajaxtarget="pagecontent"
+						data-ajaxquerystr="page=matchesfs&action=matchesfs-accept&id={{ match.match_id }}"><i class="fa fa-check"></i></a>
+				</td>
+				</td>
+				<td>
+					<a href="#rejectModal{{ match.match_id }}" role="button" data-toggle="modal" class="btn btn-danger btn-small btn-block"><i class="fa fa-close"></i></a>
+
+					<form method="post" class="form-horizontal">
+						<div id="rejectModal{{ match.match_id }}" class="modal hide fade" tabindex="-1" role="dialog" 
+							aria-labelledby="rejectModalLabel{{ match.match_id }}" aria-hidden="true">
+						  <div class="modal-header">
+						    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						    <h3 id="rejectModalLabel{{ match.match_id }}">{{ i18n.getMessage("matchesfs_reject_match") }}</h3>
+						  </div>
+						  <div class="modal-body">
+						  	Willst Du wirklich das Spiel gegen {{ match.home_name }} absagen?
+						  </div>
+						  <div class="modal-footer">
+						  	<button type="submit" class="btn btn-danger ajaxSubmit"
+						  	data-ajaxtarget="pagecontent"
+						  	data-dismiss="modal" aria-hidden="true">{{ i18n.getMessage("matchesfs_button_reject") }}</button>
+						    <a href="#" class="btn" data-dismiss="modal" aria-hidden="true">{{ i18n.getMessage("button_cancel") }}</a>
+						  </div>
+						</div>
+						
+						<input type="hidden" name="page" value="matchesfs">
+						<input type="hidden" name="id" value="{{ match.match_id }}">
+						<input type="hidden" name="action" value="matchesfs-reject">
+					</form>					
+				</td>	
+			</tr>
+		{% endfor %}
+		</tbody>
+	</table>
+{% else %}
+	{{ messagebox.box(i18n.getMessage("matchesfs_no_sent_requests"), "", "info") }}
+{% endif %}

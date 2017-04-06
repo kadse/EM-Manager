@@ -1,15 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE messages SYSTEM "../messages.dtd">
 <messages>
-    <message id="matchesfs_navlabel">FS Spiele</message>
+    <message id="matchesfs_navlabel">Freundschaftsspiele</message>
 
-    <message id="datum_label">Datum</message>
-    <message id="spieltyp_label">Spieltyp</message>
-    <message id="elfmeter_label">Elfmeterschießen bei Unentschieden?</message>
+    <message id="matchesfs_tab_schedule">FS ansetzen</message>
+    <message id="matchesfs_tab_requests">FS Anfragen</message>
 
-    <message id="home_verein_label">Heimmannschaft</message>
-    <message id="gast_verein_label">Gastmannschaft</message>
-    <message id="stadion_label">Stadion</message>
+	<message id="matchesfs_title_schedule">Freundschaftsspiel ansetzen</message>
+    <message id="matchesfs_title_requests">Offene Freundschaftsspiel-Anfragen</message>
 
-    <message id="button_save_fs">Spiel ansetzen</message>
+    <message id="matchesfs_date_label">Datum</message>
+    <message id="matchesfs_opponent_label">Gegner</message>
+    <message id="matchesfs_shootout_label">Elfmeterschießen bei Unentschieden?</message>
+
+    <message id="button_save_fs">Spielanfrage abschicken</message>
+
+    <message id="matchesfs_nav_matchdate">Spieldatum</message>
+    <message id="matchesfs_nav_opponent">Gegner</message>
+    <message id="matchesfs_nav_stadium">Stadion</message>
+    <message id="matchesfs_nav_shootout">Elfmeterschießen</message>
+
+    <message id="matchesfs_opponent_has_no_manager">Der gewählte Gegner hat keinen Manager.</message>
+    <message id="matchesfs_error_team_opponent_equal">Du kannst nicht gegen Deinen eigenen Verein spielen.</message>
+    <message id="matchesfs_date_in_past">Der Spieltermin muss mindestens 10 Minuten in der Zukunft liegen.</message>
+    <message id="matchesfs_too_many_requests_home">Du hast schon %d oder mehr Freundschaftsspiel-Termine angesetzt.</message>
+    <message id="matchesfs_too_many_requests_guest">Der Gegner hat schon %d oder mehr Freundschaftsspiel-Termine angesetzt.</message>
+
+    <message id="matchesfs_matchrequest_create_success">Die Spielanfrage wurde erfolgreich verschickt.</message>
+    <message id="matchesfs_notification_matchrequest"><strong>{sendername}</strong> hat Ihnen eine FS Anfrage geschickt.</message>
+
+    <message id="matchesfs_no_sent_requests">Derzeit hast Du keine Freundschaftsspiel Anfragen.</message>
+
+    <message id="matchesfs_reject_match">Freundschaftsspiel ablehnen?</message>
+    <message id="matchesfs_button_reject">Ablehnen</message>
+
+    <message id="matchesfs_request_notfound">Die Spielanfrage wurde nicht gefunden.</message>
+    <message id="matchesfs_notification_rejected"><strong>{sendername}</strong> hat Ihre FS Anfrage abgelehnt.</message>
+    <message id="matchesfs_request_reject_success">Absage übermittelt.</message>
+    <message id="matchesfs_notification_accepted"><strong>{sendername}</strong> hat Ihre FS Anfrage angenommen.</message>
+    <message id="matchesfs_request_accept_success">Die Zusage wurde übermittelt und das Freundschaftsspiel angesetzt.</message>
 </messages>

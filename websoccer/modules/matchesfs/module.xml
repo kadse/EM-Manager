@@ -10,6 +10,7 @@
         <page
             id="matchesfs"
             template="matchesfs"
+            model="MatchesFSModel"
             navitem="true"
             navweight="0"
             role="user"
@@ -22,26 +23,49 @@
                 <script file="bootstrap-slider.js" />
                 <script file="bootstrap-switch.js" />
                 <script file="bootstrap-datepicker.js" />
+                <script file="bootstrap-datepicker.de.js" />
                 <script file="bootstrap-timepicker.min.js" />
+                <script file="timestamp.js" />
+                <script file="select2.min.js" />
+                <script file="select2_locale_de.js" />
+                <script file="set_de.js" />
+                <script file="jquery.markitup.js" />               
                 
                 <css file="slider.css"/>
                 <css file="formation.css"/>
                 <css file="bootstrap-switch.css"/>       
                 <css file="bootstrap-datepicker.css"/>       
-                <css file="bootstrap-timepicker.css"/>       
+                <css file="bootstrap-timepicker.min.css"/>       
         </page>
-    </pages> 
-    
-  <actions>
-	<action id="add-fs-match" controller="AddMatchFSController" role="user">
-        <param id="datum" type="timestamp" required="true"  />
-        <param id="spieltyp" type="select" selection="Freundschaft" required="true"  />                  
-        <param id="elfmeter" type="boolean" />
+    </pages>
+
+
+    <blocks>
         
-        <param id="home_verein" type="foreign_key" entity="club" jointable="verein" cascade="delete" labelcolumns="name"  required="true" />
-        <param id="gast_verein" type="foreign_key" entity="club" jointable="verein" cascade="delete" labelcolumns="name"  required="true" />
-        <param id="stadion_id" type="foreign_key" entity="stadium" jointable="stadion" labelcolumns="id,name" />    
-	</action>
-  </actions>
+        <block
+            id="matchesfs-requests"
+            template="matchesfs-requests"
+            model="MatchesFSRequestsModel"
+            includepages="none"
+            area="custom"
+            role="user" />
+    </blocks>
+    
+    <actions>
+        <action id="matchesfs-add-request" controller="MatchesFSAddRequestController" role="user">
+            <param id="date_date" type="timestamp" required="true"  />
+            <param id="date_time" type="timestamp" required="true"  />
+            <param id="opponent" type="select" required="true"  />
+            <param id="shootout" type="boolean" />
+        </action>
+
+        <action id="matchesfs-accept" controller="MatchesFSAcceptRequestController" role="user">
+            <param id="id" type="number" required="true" />
+        </action>
+        
+        <action id="matchesfs-reject" controller="MatchesFSRejectRequestController" role="user">
+            <param id="id" type="number" required="true" />
+        </action>        
+    </actions>
     
 </module>

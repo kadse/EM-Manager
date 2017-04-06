@@ -122,3 +122,7 @@
 01.04.2017, 18:38;Cris;92.206.14.212;edit;player;{"vorname":"Sebastian","nachname":"Rode","kunstname":null,"verein_id":"392","position":"Mittelfeld"}
 06.04.2017, 13:12;Cris;92.206.14.212;edit;player;{"vorname":"Sebastian","nachname":"Rode","kunstname":null,"verein_id":"392","position":"Mittelfeld"}
 06.04.2017, 13:16;Cris;92.206.14.212;edit;player;{"vorname":"Arjen","nachname":"Robben","kunstname":null,"verein_id":"443","position":"Sturm"}
+06.04.2017, 20:34;Cris;92.206.14.212;edit;club;{"name":"Manchester United FC","liga_id":"27"}
+06.04.2017, 22:01;Cris;92.206.14.212;edit;club;{"name":"Manchester United FC","liga_id":"27"}
+06.04.2017, 22:02;Cris;92.206.14.212;edit;club;{"name":"Manchester United FC","liga_id":"27"}
+06.04.2017, 22:07;Cris;92.206.14.212;edit;club;{"name":"Manchester United FC","liga_id":"27"}
