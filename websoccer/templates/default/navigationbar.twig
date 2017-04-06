@@ -1,7 +1,6 @@
 {% import "macros/navitem.twig" as navitemTemplate %}
-
 <div class="navbar navbar-fixed-top">
-	<div class="navbar-inner">
+	<div class="navbar-inner" style="line-height: 30px">
 		<div class="container">
 			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> 
 					<span class="icon-bar"></span> 
@@ -11,27 +10,82 @@
 			<a class="brand" href="{{ env.getConfig("context_root") }}" title="{{ i18n.getNavigationLabel("home") }}">{{ env.getConfig("projectname") }}</a>
 			
 			<div class="nav-collapse collapse">
-				<ul class="nav" role="menu">
-					{% for navItem in navItems %}
-					
-					{% if navItem.children|length > 0 %}
-					<li role="menuitem" class="dropdown{% if navItem.isActive %}  active{% endif %}">
-						<a class="dropdown-toggle" id="label{{ navItem.pageId }}" role="button"
+				<ul class="nav" role="menu" style="padding-left: 50px;">
+					<li role="menuitem"><a href="{{ env.getInternalUrl("home") }}">Startseite</a></li>
+					<li role="menuitem"><a href="/forum/board/">Forum</a></li>
+
+					<li role="menuitem" class="dropdown">
+						<a class="dropdown-toggle" id="labeloffice" role="button"
 							data-toggle="dropdown" href="#">
-							{{ navItem.label }} <b class="caret"></b>
+							Büro <b class="caret caret2"></b>
 						</a>
-						<ul class="dropdown-menu" role="menu" aria-labelledby="label{{ navItem.pageId }}">
-							{{ navitemTemplate.item(navItem.pageId, navItem.label, false) }}
-							{% for navChild in navItem.children %}
-							{{ navitemTemplate.item(navChild.pageId, navChild.label, navChild.isActive) }}
-							{% endfor %}
+						<ul class="dropdown-menu" role="menu" aria-labelledby="labeloffice">
+							<li role="menuitem"><a href="{{ env.getInternalUrl("myteam") }}">Mein Kader</a></li>
+							<li role="menuitem"><a href="{{ env.getInternalUrl("formation") }}">Aufstellung</a></li>
+							<li role="menuitem"><a href="{{ env.getInternalUrl("matchesfs") }}">FS Spiele</a></li>							
+							<li role="menuitem"><a href="{{ env.getInternalUrl("training") }}">Training</a></li>
+							<li role="menuitem"><a href="{{ env.getInternalUrl("myschedule") }}">Spielplan</a></li>
+							<li role="menuitem"><a href="{{ env.getInternalUrl("messages") }}">Nachrichten</a></li>
+							<li role="menuitem"><a href="{{ env.getInternalUrl("absence") }}">Abwesenheit</a></li>
 						</ul>
 					</li>
-					{% else %}
-					{{ navitemTemplate.item(navItem.pageId, navItem.label, navItem.isActive) }}
-					{% endif %}
 
-					{% endfor %}
+					<li role="menuitem" class="dropdown">
+						<a class="dropdown-toggle" id="labelstats" role="button"
+							data-toggle="dropdown" href="#">
+							Statistiken <b class="caret"></b>
+						</a>
+						<ul class="dropdown-menu" role="menu" aria-labelledby="labelstats">
+							<li role="menuitem"><a href="{{ env.getInternalUrl("leagues") }}">Tabelle</a></li>
+							<li role="menuitem"><a href="{{ env.getInternalUrl("results") }}">Ergebnisse & Spielplan</a></li>
+							<li role="menuitem"><a href="{{ env.getInternalUrl("todaysmatches") }}">Heutige Spiele</a></li>							
+							<li role="menuitem"><a href="{{ env.getInternalUrl("topstrikers") }}">Torjäger</a></li>
+							<li role="menuitem"><a href="{{ env.getInternalUrl("topscorers") }}">Scorer</a></li>
+							<li role="menuitem"><a href="{{ env.getInternalUrl("teamoftheday") }}">Elf des Tages</a></li>
+							<li role="menuitem"><a href="{{ env.getInternalUrl("alltimetable") }}">Ewige Tabelle</a></li>
+							<li role="menuitem"><a href="{{ env.getInternalUrl("halloffame") }}">Hall of Fame</a></li>
+							<li role="menuitem"><a href="{{ env.getInternalUrl("highscore") }}">Highscore</a></li>							
+						</ul>
+					</li>		
+
+					<li role="menuitem" class="dropdown">
+						<a class="dropdown-toggle" id="labelmanagement" role="button"
+							data-toggle="dropdown" href="#">
+							Management <b class="caret"></b>
+						</a>
+						<ul class="dropdown-menu" role="menu" aria-labelledby="labelmanagement">
+							<li role="menuitem"><a href="{{ env.getInternalUrl("transferoffers") }}">Transferangebote</a></li>
+							<li role="menuitem"><a href="{{ env.getInternalUrl("playerssearch") }}">Spielersuche</a></li>
+							<li role="menuitem"><a href="{{ env.getInternalUrl("finances") }}">Finanzen</a></li>
+							<li role="menuitem"><a href="{{ env.getInternalUrl("sponsor") }}">Sponsor</a></li>							
+						</ul>
+					</li>	
+
+					<li role="menuitem" class="dropdown">
+						<a class="dropdown-toggle" id="labelstadium" role="button"
+							data-toggle="dropdown" href="#">
+							Stadion <b class="caret"></b>
+						</a>
+						<ul class="dropdown-menu" role="menu" aria-labelledby="labelstadium">
+							<li role="menuitem"><a href="{{ env.getInternalUrl("stadium") }}">Stadionplan</a></li>
+							<li role="menuitem"><a href="{{ env.getInternalUrl("stadiumenvironment") }}">Stadionumfeld</a></li>
+							<li role="menuitem"><a href="{{ env.getInternalUrl("tickets") }}">Tickets</a></li>
+						</ul>
+					</li>	
+
+					<li role="menuitem" class="dropdown">
+						<a class="dropdown-toggle" id="labelnationalteam" role="button"
+							data-toggle="dropdown" href="#">
+							Nationalteam <b class="caret"></b>
+						</a>
+						<ul class="dropdown-menu" role="menu" aria-labelledby="labelnationalteam">
+							<li role="menuitem"><a href="{{ env.getInternalUrl("nationalteam") }}">Kader</a></li>
+							<li role="menuitem"><a href="{{ env.getInternalUrl("nominate-national-players") }}">Spieler nominieren</a></li>
+							<li role="menuitem"><a href="{{ env.getInternalUrl("nationalmatches") }}">Spiele</a></li>
+						</ul>
+					</li>	
+
+					<li role="menuitem"><a href="{{ env.getInternalUrl("freeclubs") }}">Freie Vereine</a></li>
 				</ul>
 			</div>
 		</div>

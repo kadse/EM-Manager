@@ -51,10 +51,7 @@
 									{% for strengthlevel in 1..5 %}
 										<i class="icon-star{% if (30 + strengthlevel * 10) > club.team_strength %}-empty{% endif %}"></i>
 									{% endfor %}</p>
-								
-									<p><strong>{{ i18n.getMessage("entity_club_finanz_budget") }}</strong><br>
-									{{ club.team_budget|number_format(0, ',', '.') }} {{ env.getConfig("game_currency") }}</p>
-									
+															
 									<p><strong>{{ i18n.getMessage("entity_stadium") }}</strong><br>
 									{{ (club.stadium_p_steh + club.stadium_p_sitz + club.stadium_p_haupt_steh + club.stadium_p_haupt_sitz + club.stadium_p_vip)|number_format(0, ',', '.') }}</p>
 								</small>

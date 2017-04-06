@@ -1,5 +1,5 @@
 body {
-  padding-top: 60px;
+  padding-top: 100px;
   padding-bottom: 40px;
 }
 
@@ -23,4 +23,12 @@ body {
 .box > h4 {
 	border-bottom: 1px solid #eeeeee;
 	padding-bottom: 7px;
+}
+
+.navbar .nav .dropdown-toggle .caret {
+	margin-top: 13px;
+}
+
+li {
+	line-height: 30px;
 }

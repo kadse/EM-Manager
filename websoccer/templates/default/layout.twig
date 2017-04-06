@@ -30,6 +30,9 @@
 		{{ env.getConfig("head_code")|raw }}
 	</head>
 	<body style="background-image: url('http://www.exklusiv-manager.de/forum/images/nero/background.jpg'); background-attachment:fixed;">
+
+		<p><img src="http://www.exklusiv-manager.de/forum/images/styleLogo-878351fed5423d27ed6f879834967331c008ef94.png" style="padding-left: 100px" /></p>
+		<br />
 	
 		{% block navigation %}
 		{% include 'navigationbar.twig' %}
@@ -41,6 +44,7 @@
 			{% endblock %}
 		
 			{% block page_columns %}
+
 			<div class="row">
 				<div class="span10" id="contentArea">
 					<div class="box">
