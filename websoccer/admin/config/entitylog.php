@@ -120,3 +120,5 @@
 28.03.2017, 11:29;Cris;92.206.14.212;edit;club;{"name":"FC Barcelona","liga_id":"26"}
 01.04.2017, 15:52;Cris;92.206.14.212;edit;club;{"name":"Manchester United FC","liga_id":"27"}
 01.04.2017, 18:38;Cris;92.206.14.212;edit;player;{"vorname":"Sebastian","nachname":"Rode","kunstname":null,"verein_id":"392","position":"Mittelfeld"}
+06.04.2017, 13:12;Cris;92.206.14.212;edit;player;{"vorname":"Sebastian","nachname":"Rode","kunstname":null,"verein_id":"392","position":"Mittelfeld"}
+06.04.2017, 13:16;Cris;92.206.14.212;edit;player;{"vorname":"Arjen","nachname":"Robben","kunstname":null,"verein_id":"443","position":"Sturm"}

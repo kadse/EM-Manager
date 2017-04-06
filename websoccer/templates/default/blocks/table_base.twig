@@ -54,13 +54,6 @@
 					{% endif %}
 					
 					<a href="{{ env.getInternalUrl("team", "id=" ~ team.id) }}">{{ team.name }}</a>
-					{% if team.user_id > 0 %}
-						<br>
-						{% if team.user_picture|length > 0 %}
-							<a href="{{ env.getInternalUrl("user", "id=" ~ team.user_id) }}"><img src="{{ team.user_picture }}" style="width: 20px; height: 20px"/></a>
-						{% endif %}
-						<small><a href="{{ env.getInternalUrl("user", "id=" ~ team.user_id) }}">{{ team.user_name }}</a></small>
-					{% endif %}
 					{% if (env.getUser().id > 0 and team.user_id == env.getUser().id) %}<strong>{% endif %}
 					</td>
 					<td>{{ team.matches }}</td>

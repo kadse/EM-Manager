@@ -40,9 +40,9 @@
 	<div id="report_result">
 		<span id="report_goals_home">
 		{% if match.match_home_picture|length %}<img src="{{ env.getConfig("context_root") }}/uploads/club/{{ match.match_home_picture }}" style="max-height: 120px; margin-right: 20px"/>{% endif %}
-		{{ match.match_goals_home }}</span>
+		<img src="{{ env.getConfig("context_root") }}/uploads/numbers/{{ match.match_goals_home }}.png" width="50px" /></span>
 		<span id="report_goals_separator">-</span>
-		<span id="report_goals_guest">{{ match.match_goals_guest }}
+		<span id="report_goals_guest"><img src="{{ env.getConfig("context_root") }}/uploads/numbers/{{ match.match_goals_guest }}.png" width="50px" />
 		{% if match.match_guest_picture|length %}<img src="{{ env.getConfig("context_root") }}/uploads/club/{{ match.match_guest_picture }}" style="max-height: 120px; margin-left: 20px"/>{% endif %}
 		</span>
 		<div class="row" style="margin: -10px 0 10px 0">

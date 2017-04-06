@@ -118,6 +118,7 @@
 					<field id="lending_matches" type="number" />
                     <field id="lending" type="select" selection="1,2,3" />
                     <field id="comment" type="textarea" />
+                    <field id="clausel" type="textarea" />
 					
 					<field id="marktwert" type="number" />
 					

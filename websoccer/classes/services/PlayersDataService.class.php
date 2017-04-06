@@ -133,6 +133,7 @@ class PlayersDataService {
 				'lending_fee' => 'lending_fee',
 				'lending_owner_id' => 'lending_owner_id',
 				'lending' => 'lending',
+				'clausel' => 'clausel',
 				'transfermarkt' => 'transfermarket',
 				'note_last' => 'note_last',
 				'note_schnitt' => 'note_schnitt'
@@ -351,6 +352,7 @@ class PlayersDataService {
 		$columns['P.lending_matches'] = 'lending_matches';
 		$columns['P.lending'] = 'lending';
 		$columns['P.comment'] = 'lending_comment';
+		$columns['P.clausel'] = 'clausel';
 		
 		$columns['C.id'] = 'team_id';
 		$columns['C.name'] = 'team_name';
@@ -629,7 +631,7 @@ class PlayersDataService {
 		}
 		
 		if ($lendableOnly) {
-			$whereCondition .= ' AND P.lending > 0 AND (P.lending_owner_id IS NULL OR P.lending_owner_id = 0)';
+			$whereCondition .= ' AND P.lending > 0 AND P.lending_owner_id > 0';
 		}
 		
 		$fromTable = $websoccer->getConfig('db_prefix') . '_spieler AS P';

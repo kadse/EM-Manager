@@ -71,6 +71,7 @@ class LentPlayersModel implements IModel {
 				"lending_matches" => "lending_matches",
 				"lending_fee" => "lending_fee",
 				"lending" => "lending",
+				"clausel" => "clausel",
 				"C.id" => "team_id",
 				"C.name" => "team_name"
 		);

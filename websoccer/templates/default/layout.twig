@@ -29,7 +29,7 @@
 		{% endif %}
 		{{ env.getConfig("head_code")|raw }}
 	</head>
-	<body style="background-image: url('http://www.testws5.exklusiv-manager.de/forum/images/nero/background.jpg'); background-attachment:fixed;">
+	<body style="background-image: url('http://www.exklusiv-manager.de/forum/images/nero/background.jpg'); background-attachment:fixed;">
 	
 		{% block navigation %}
 		{% include 'navigationbar.twig' %}
@@ -42,8 +42,7 @@
 		
 			{% block page_columns %}
 			<div class="row">
-				<div class="span1"></div>
-				<div class="span9" id="contentArea">
+				<div class="span10" id="contentArea">
 					<div class="box">
 					
 						{% include 'breadcrumb.twig' %}

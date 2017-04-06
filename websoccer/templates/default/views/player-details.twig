@@ -124,22 +124,31 @@
 				  <dt>{{ i18n.getMessage("entity_player_marktwert") }}</dt>
 				  <dd>{{ player.player_marketvalue|number_format(0, ',', '.')  }} {{ env.getConfig("game_currency") }}</dd>
 
-				  {% if player.lending_comment|length > 0 %}
+				  {% if player.lending_comment|length > 0 or player.clausel|length > 0 %}
 				  	<dt><br/></dt>
 				  	<dd><br/></dd>
 
 				  	<dt></dt>
-					<dd><a href="#lendingComment" class="btn btn-small ajaxLink" role="button" data-toggle="modal"><i class="fa fa-file-text-o"></i> {{ i18n.getMessage("player_details_lending_comment") }}</a></dd>
+					<dd><a href="#lendingComment" class="btn btn-small ajaxLink" role="button" data-toggle="modal"><i class="fa fa-book"></i> {{ i18n.getMessage("player_details_lending_comment") }}</a></dd>
 					
 					<div id="lendingComment" class="modal hide fade" tabindex="-1" role="dialog" 
 						aria-labelledby="statModalLabel" aria-hidden="true">
 					  <div class="modal-header">
 					    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-					    <h3 id="statModalLabel">{{ i18n.getMessage("player_details_lending_comment") }}</h3>
+					    <h3 id="statModalLabel">{{ i18n.getMessage("player_details_lending_comment_title") }}</h3>
 					  </div>
+					  {% if player.clausel|length > 0 %}
 					  <div class="modal-body">
+					  	<h4>{{ i18n.getMessage("player_details_clausel") }}</h4>
+					  	<div id="playerStatisticsPerCompetition">{{ player.clausel }}</div>
+					  </div>					  
+					  {% endif %}
+					  {% if player.lending_comment|length > 0 %}					  
+					  <div class="modal-body">
+					  	<h4>{{ i18n.getMessage("player_details_lending_comment") }}</h4>
 					  	<div id="playerStatisticsPerCompetition">{{ player.lending_comment }}</div>
 					  </div>
+					  {% endif %}
 					  <div class="modal-footer">
 					    <a href="#" class="btn btn-primary" data-dismiss="modal" aria-hidden="true">{{ i18n.getMessage("button_close") }}</a>
 					  </div>

@@ -38,10 +38,15 @@
 					{% endif %}
 					{% if (player.position_second|length > 0) %}
 						<img src="{{ env.getConfig("context_root") }}/uploads/positions/{{ i18n.getMessage("player_secondposition_" ~ player.position_second) }}.png" width="25px" />
-					{% endif %}
+					{% endif %}			
 					</p>
 				</td>
-				<td><a href="{{ env.getInternalUrl("player", "id=" ~ player.id) }}">{{ player.firstname }} {% if player.pseudonym|length > 0 %}"{{ player.pseudonym }}" {% endif %}{{ player.lastname }}</a></td>
+				<td>
+					<a href="{{ env.getInternalUrl("player", "id=" ~ player.id) }}">{{ player.firstname }} {% if player.pseudonym|length > 0 %}"{{ player.pseudonym }}" {% endif %}{{ player.lastname }}</a>
+					{% if player.clausel|length > 0 %}
+						<i class="fa fa-book" title="{{ player.clausel }}"></i>
+					{% endif %}					
+				</td>
 				<td>{{ player.age }} Jahre</td>
 				<td>{{ player.marketvalue|number_format(0, ',', '.')  }} {{ env.getConfig("game_currency") }}</td>
 				<td>{{ player.contract_salary|number_format(0, ',', '.')  }} {{ env.getConfig("game_currency") }}</td>

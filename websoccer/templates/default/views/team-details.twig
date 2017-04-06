@@ -93,13 +93,6 @@
 	  	{{ profile.infofield(i18n.getMessage("entity_club_min_target_rank"), i18n.getMessage("team_details_season_place", team.team_min_target_rank)) }}
 	  {% endif %}
 	  
-	  {{ profile.infofield(i18n.getMessage("entity_club_stadion_id"), stadiumLabel, true) }}
-	  {% if stadium.stadium_id is defined and stadium.stadium_id > 0 and stadium.picture|length > 0 %}
-		<div style="text-align: center; margin: 10px;">
-		<img src="{{ env.getConfig("context_root") }}/uploads/stadium/{{ stadium.picture }}" class="img-rounded">
-		</div>
-	  {% endif %}
-	
 		{% if team.team_sponsor_name|length > 0 %}	
 			{{ profile.infofield(i18n.getMessage("entity_club_sponsor_id"), team.team_sponsor_name) }}
 			{% if team.team_sponsor_picture|length > 0 %}
@@ -113,6 +106,13 @@
 		{{ profile.infofield('&sum; ' ~ i18n.getMessage("entity_player_marktwert"), playerfacts.sumMarketValue|number_format(0, ',', '.') ~ " " ~ env.getConfig("game_currency"), true) }}
 		{{ profile.infofield('&empty; ' ~ i18n.getMessage("entity_player_marktwert"), playerfacts.avgMarketValue|number_format(0, ',', '.') ~ " " ~ env.getConfig("game_currency"), true) }}
   {% endif %}
+	  {{ profile.infofield(i18n.getMessage("entity_club_stadion_id"), stadiumLabel, true) }}
+	  {% if stadium.stadium_id is defined and stadium.stadium_id > 0 and stadium.picture|length > 0 %}
+		<div style="text-align: center; margin: 10px;">
+		<img src="{{ env.getConfig("context_root") }}/uploads/stadium/{{ stadium.picture }}" class="img-rounded" width="600px">
+		</div>
+	  {% endif %}
+
   </div>
   
   <div class="tab-pane" id="statistic">

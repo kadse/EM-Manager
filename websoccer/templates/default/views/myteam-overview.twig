@@ -82,6 +82,10 @@
 				{% if player.lending > 0 %}
 					<i class="icon-star-empty" title="{{ lending }}"></i>
 				{% endif %}
+
+				{% if player.clausel|length > 0 %}
+					<i class="fa fa-book" title="{{ player.clausel }}"></i>
+				{% endif %}
 				</p>
 				
 				{% if player.lending_owner_id == 0 and

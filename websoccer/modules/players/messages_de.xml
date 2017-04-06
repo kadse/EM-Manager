@@ -58,7 +58,9 @@
     <message id="player_details_avaiable_on_transfermarket">Der Spieler steht derzeit zum Verkauf auf dem Transfermarkt.</message>
     <message id="player_details_unsellable">Der Manager des Vereins hat den Spieler als unverkäuflich markiert.</message>
 
-    <message id="player_details_lending_comment">Spielerklausel</message>
+    <message id="player_details_lending_comment_title">Klauseln</message>
+    <message id="player_details_lending_comment">Spielerklauseln</message>
+    <message id="player_details_clausel">Vertragsklauseln</message>
     
     <message id="player_mainposition_T">TW</message>
     <message id="player_mainposition_LV">LV</message>

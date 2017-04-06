@@ -65,9 +65,15 @@ class TeamDetailsModel implements IModel {
 					'NP.team_id = %d', $team['team_id']);
 			$players = $result->fetch_array();
 			$result->free();
-			if ($players) {
-				$team['team_strength'] = $players['avgstrength'];
-			}
+		}
+		else {
+			$dbPrefix = $this->_websoccer->getConfig('db_prefix') ;
+			$result = $this->_db->querySelect('AVG(w_staerke) AS avgstrength', $dbPrefix . '_spieler', 'verein_id = %d', $team['team_id']);
+			$players = $result->fetch_array();
+			$result->free();
+		}
+		if ($players) {
+			$team['team_strength'] = $players['avgstrength'];
 		}
 		
 		if (!$team['is_nationalteam']) {

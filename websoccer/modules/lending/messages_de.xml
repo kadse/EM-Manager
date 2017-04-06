@@ -2,7 +2,7 @@
 <!DOCTYPE module SYSTEM "../messages.dtd">
 <messages>
     <message id="lending_player_marker_tooltip">Spieler ist ausgeliehen</message>
-    <message id="lending_player_marker_lendable">Spieler kann ausgeliehen werden</message>
+    <message id="lending_player_marker_lendable">Ausgeliehene Spieler</message>
     
     <message id="lending_lend_button">Zum Leihen anbieten</message>
     <message id="lending_lendable_unmark">Spieler ist zur Ausleihe angeboten (Leihgebühr: %d). Angebot entfernen.</message>
