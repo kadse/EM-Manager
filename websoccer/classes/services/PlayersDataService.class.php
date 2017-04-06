@@ -508,6 +508,7 @@ class PlayersDataService {
 		$columns['P.nachname'] = 'lastname';
 		$columns['P.kunstname'] = 'pseudonym';
 		$columns['P.nation'] = 'player_nationality';
+		$columns['P.picture'] = 'picture';
 		
 		$columns['P.position'] = 'position';
 		$columns['P.position_main'] = 'position_main';
