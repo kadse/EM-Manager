@@ -8,9 +8,11 @@
 {% block page_content %}
 
 <p style="font-size: 20px; margin-top: -15px">
-{% for strengthlevel in 1..5 %}
-	<i class="icon-star{% if (30 + strengthlevel * 10) > team.team_strength %}-empty{% endif %}"></i>
-{% endfor %}
+	<i class="icon-star{% if 50 > team.team_strength %}-empty{% endif %}"></i>	
+	<i class="icon-star{% if 70 > team.team_strength %}-empty{% endif %}"></i>
+	<i class="icon-star{% if 74 > team.team_strength %}-empty{% endif %}"></i>
+	<i class="icon-star{% if 78 > team.team_strength %}-empty{% endif %}"></i>
+	<i class="icon-star{% if 82 > team.team_strength %}-empty{% endif %}"></i>
 </p>
 
 {% if team.team_logo|length > 0 %}
