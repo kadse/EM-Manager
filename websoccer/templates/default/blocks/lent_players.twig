@@ -43,9 +43,13 @@
 				</td>
 				<td>
 					<a href="{{ env.getInternalUrl("player", "id=" ~ player.id) }}">{{ player.firstname }} {% if player.pseudonym|length > 0 %}"{{ player.pseudonym }}" {% endif %}{{ player.lastname }}</a>
+					{% if player.comment|length > 0 and player.lending > 0 %}
+						<i class="fa fa-book" title="{{ player.comment }}"></i>
+					{% endif %}
+
 					{% if player.clausel|length > 0 %}
-						<i class="fa fa-book" title="{{ player.clausel }}"></i>
-					{% endif %}					
+						<i class="fa fa-gavel" title="{{ player.clausel }}"></i>
+					{% endif %}			
 				</td>
 				<td>{{ player.age }} Jahre</td>
 				<td>{{ player.marketvalue|number_format(0, ',', '.')  }} {{ env.getConfig("game_currency") }}</td>

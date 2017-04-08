@@ -66,8 +66,8 @@
 	<message id="entity_player_lending_fee">Leihgebühr pro Spieltag</message>	
 	<message id="entity_player_lending_matches">Ausgeliehene Spiele</message>	
 	<message id="entity_player_lending">Leihdauer</message>	
-	<message id="entity_player_comment">Spielerklausel</message>
-	<message id="entity_player_clausel">Vertragsklausel</message>
+	<message id="entity_player_comment">Vertragsklausel</message>
+	<message id="entity_player_clausel">Spielerklausel</message>
 	<message id="option_1">bis zur Winterpause</message>
 	<message id="option_2">bis zum Saisonende</message>
 	<message id="option_3">über 2 Saisons</message>

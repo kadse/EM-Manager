@@ -133,6 +133,7 @@ class PlayersDataService {
 				'lending_fee' => 'lending_fee',
 				'lending_owner_id' => 'lending_owner_id',
 				'lending' => 'lending',
+				'comment' => 'comment',
 				'clausel' => 'clausel',
 				'transfermarkt' => 'transfermarket',
 				'note_last' => 'note_last',

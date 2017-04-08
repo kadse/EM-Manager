@@ -381,7 +381,7 @@ class TeamsDataService {
 		$columns['C.name'] = 'team_name';
 		$columns['C.finanz_budget'] = 'team_budget';
 		$columns['C.bild'] = 'team_picture';
-		$columns['C.strength'] = 'team_strength';
+		$columns['C.nationalteam'] = 'team_is_nationalteam';
 		$columns['L.id'] = 'league_id';
 		$columns['L.name'] = 'league_name';
 		$columns['L.land'] = 'league_country';
@@ -398,6 +398,26 @@ class TeamsDataService {
 		
 		$result = $db->querySelect($columns, $fromTable, $whereCondition, array(), 300);
 		while ($team = $result->fetch_array()) {
+
+		// compute strength level of national team
+			if ($team['team_is_nationalteam']) {
+				$dbPrefix = $websoccer->getConfig('db_prefix') ;
+				$res = $db->querySelect('AVG(P.w_staerke) AS avgstrength', 
+						$dbPrefix . '_spieler AS P INNER JOIN ' . $dbPrefix . '_nationalplayer AS NP ON P.id = NP.player_id', 
+						'NP.team_id = %d', $team['team_id']);
+				$players = $res->fetch_array();
+				$res->free();
+			}
+			else {
+				$dbPrefix = $websoccer->getConfig('db_prefix') ;
+				$res = $db->querySelect('AVG(w_staerke) AS avgstrength', $dbPrefix . '_spieler', 'verein_id = %d', $team['team_id']);
+				$players = $res->fetch_array();
+				$res->free();
+			}
+			if ($players) {
+				$team['team_strength'] = $players['avgstrength'];
+			}
+
 			$teams[$team['league_country']][] = $team;
 		}
 		$result->free();

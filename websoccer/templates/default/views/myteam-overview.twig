@@ -83,8 +83,12 @@
 					<i class="icon-star-empty" title="{{ lending }}"></i>
 				{% endif %}
 
+				{% if player.comment|length > 0 and player.lending > 0 %}
+					<i class="fa fa-book" title="{{ player.comment }}"></i>
+				{% endif %}
+
 				{% if player.clausel|length > 0 %}
-					<i class="fa fa-book" title="{{ player.clausel }}"></i>
+					<i class="fa fa-gavel" title="{{ player.clausel }}"></i>
 				{% endif %}
 				</p>
 				
