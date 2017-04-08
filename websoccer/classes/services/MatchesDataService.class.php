@@ -92,7 +92,7 @@ class MatchesDataService {
 		$startTs = mktime (0, 0, 1, date('n'), date('j'), date('Y'));
 		
 		// where
-		$whereCondition = 'M.datum >= %d ORDER BY M.datum ASC';
+		$whereCondition = 'M.berechnet != \'1\' AND M.datum >= %d ORDER BY M.datum ASC';
 		$parameters = array($startTs);
 	
 		return self::getMatchesByCondition($websoccer, $db, $whereCondition, $parameters, $maxNumber);
