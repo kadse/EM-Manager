@@ -13,7 +13,7 @@ $verein_id = mysqli_real_escape_string($dbconn, $_POST['verein']);
 $verein_id = intval($verein_id);
 
 if (is_numeric($verein_id)) {
-    $query = "SELECT id,position,position_main,position_second,vorname,nachname,kunstname,geburtstag,nation,marktwert FROM ws__spieler WHERE verein_id = '".$verein_id."' ORDER BY position,nachname,vorname,kunstname ASC";
+    $query = "SELECT id,position,position_main,position_second,vorname,nachname,kunstname,geburtstag,nation,marktwert FROM _spieler WHERE verein_id = '".$verein_id."' ORDER BY position,nachname,vorname,kunstname ASC";
     $result = mysqli_query($dbconn, $query);
     $spieler = mysqli_fetch_all($result);
     mysqli_free_result($result);    
@@ -35,28 +35,33 @@ mysqli_close($dbconn);
                 <table class="table form-group">
                     <thead>
                         <tr>
-                            <th>
+                            <th style="text-align: center">
                                 <div class="checkbox">
                                     <label>
                                         <input type="checkbox" value="" id="checkAll" checked="">
                                         <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
-                                        <b>Alle</b>
                                     </label>
                                 </div>
                             </th>
-                            <th>Position</th>
+                            <th style="text-align: center">Position</th>
                             <th>Name</th>
                             <th>Alter</th>
-                            <th>Nationalität</th>
+                            <th style="text-align: center">Nationalität</th>
                             <th>Marktwert</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
                             foreach ($spieler as $key => $spieler_id) {
-                                $positionen = $spieler_id[2];
+                                if ($spieler_id[2] == "T") $spieler_id[2] = "TW";
+                                if ($spieler_id[2] == "RS") $spieler_id[2] = "RA";
+                                if ($spieler_id[2] == "LS") $spieler_id[2] = "LA";
+                                $positionen = '<img src="http://www.exklusiv-manager.de/uploads/positions/'.$spieler_id[2].'.png" height="30px" />';
                                 if (!empty($spieler_id[3])) {
-                                    $positionen .= " | ".$spieler_id[3];
+                                    if ($spieler_id[3] == "T") $spieler_id[3] = "TW";
+                                    if ($spieler_id[3] == "RS") $spieler_id[3] = "RA";
+                                    if ($spieler_id[3] == "LS") $spieler_id[3] = "LA";
+                                    $positionen .= ' | <img src="http://www.exklusiv-manager.de/uploads/positions/'.$spieler_id[3].'.png" height="30px" />';
                                 }
 
                                 if (empty($spieler_id_id[4]) && empty($spieler_id[5])) {
@@ -70,12 +75,20 @@ mysqli_close($dbconn);
                                 $date2 = new DateTime(date("Y-m-d"));
                                 $alter = $date1->diff($date2);
 
+                                $nation = utf8_encode($spieler_id[8]);
+                                $nation = str_replace('ä', 'ae', $nation);
+                                $nation = str_replace('Ä', 'Ae', $nation);
+                                $nation = str_replace('ö', 'oe', $nation);
+                                $nation = str_replace('Ö', 'Oe', $nation);
+                                $nation = str_replace('ü', 'ue', $nation);
+                                $nation = str_replace('Ü', 'Ue', $nation);
+
                                 echo '<tr>';
-                                    echo '<td><div class="checkbox"><label><input type="checkbox" value="'.$spieler_id[0].'" name="'.$key.'" checked=""/><span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span></label></div</td>';
-                                    echo '<td>'.utf8_encode($spieler_id[1]).'<br /><i>'.utf8_encode($positionen).'</i></td>';
+                                    echo '<td style="text-align: center"><div class="checkbox"><label><input type="checkbox" value="'.$spieler_id[0].'" name="'.$key.'" checked=""/><span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span></label></div</td>';
+                                    echo '<td style="text-align: center">'.utf8_encode($spieler_id[1]).'<br /><i>'.utf8_encode($positionen).'</i></td>';
                                     echo '<td>'.utf8_encode($name).'</td>';
                                     echo '<td>'.$alter->format('%y Jahre').'</td>';
-                                    echo '<td>'.utf8_encode($spieler_id[8]).'</td>';
+                                    echo '<td style="text-align: center"><img src="http://www.exklusiv-manager.de/img/flags/players/'.$nation.'.png" /></td>';
                                     echo '<td>'.number_format($spieler_id[9], 0, ',', '.').' EUR</td>';
                                 echo '</tr>';
                             };

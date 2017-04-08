@@ -9,7 +9,7 @@
 <?php
 include ("config/config.inc.php");
 
-$spalten = 5;
+$spalten = 6;
 
 $zusatzArray = array();
 $zusatz = '';
@@ -53,19 +53,19 @@ if (!empty($_POST['notiz'])) {
 $output = '
 <style>
 table#playerTable {
-    border: 2px solid #8fc837;
+    border: 2px solid #4395bb;
 }
 table#playerTable th {
     padding: 5px;
     text-align: center;
-    border-bottom: 1px solid #8fc837;
+    border-bottom: 1px solid #4395bb;
 } 
 table#playerTable td {
     padding: 10px;
     border-bottom: 1px dashed #656565;
 }
 table#playerTable tfoot {
-    border-top: 1px solid #8fc837;
+    border-top: 1px solid #4395bb;
 }
 table#playerTable p {
     font-size: 14px;
@@ -75,6 +75,7 @@ table#playerTable p {
 <table align="center" id="playerTable">
     <thead>
         <tr>
+            <th></th>
             <th>Position</th>
             <th>Name</th>
             <th>Alter</th>
@@ -106,7 +107,7 @@ foreach ($_POST as $key => $value) {
         continue;
     }
 
-    $query = "SELECT * FROM ws__spieler WHERE id = '".$spieler_id."'";
+    $query = "SELECT * FROM _spieler WHERE id = '".$spieler_id."'";
     $result = mysqli_query($dbconn, $query);
     $spieler = mysqli_fetch_array($result);
     mysqli_free_result($result);
@@ -122,9 +123,16 @@ foreach ($_POST as $key => $value) {
     $date2 = new DateTime(date("Y-m-d"));
     $alter = $date1->diff($date2);
 
-    $positionen = $spieler['position_main'];
+    if ($spieler['position_main'] == "T") $spieler['position_main'] = "TW";
+    if ($spieler['position_main'] == "RS") $spieler['position_main'] = "RA";
+    if ($spieler['position_main'] == "LS") $spieler['position_main'] = "LA";
+    $positionen = '<img src="http://www.exklusiv-manager.de/uploads/positions/'.$spieler['position_main'].'.png" height="30px" />';
+
     if (!empty($spieler['position_second'])) {
-        $positionen .= " | ".$spieler['position_second'];
+        if ($spieler['position_second'] == "T") $spieler['position_second'] = "TW";
+        if ($spieler['position_second'] == "RS") $spieler['position_second'] = "RA";
+        if ($spieler['position_second'] == "LS") $spieler['position_second'] = "LA";        
+        $positionen .= ' | <img src="http://www.exklusiv-manager.de/uploads/positions/'.$spieler['position_second'].'.png" height="30px" />';
     }
 
     $zusatz = '';
@@ -132,12 +140,23 @@ foreach ($_POST as $key => $value) {
         $zusatz .= '<td>'.$spieler[$val].'</td>';
     }
 
+    $nation = utf8_encode($spieler['nation']);
+    $nation = str_replace('ä', 'ae', $nation);
+    $nation = str_replace('Ä', 'Ae', $nation);
+    $nation = str_replace('ö', 'oe', $nation);
+    $nation = str_replace('Ö', 'Oe', $nation);
+    $nation = str_replace('ü', 'ue', $nation);
+    $nation = str_replace('Ü', 'Ue', $nation);
+
+    if (empty($spieler['picture'])) $spieler['picture'] = "nobody.png";
+
     $output .= '
         <tr>
+            <td><img src="http://www.exklusiv-manager.de/uploads/player/'.$spieler['picture'].'" height="50px" /></td>
             <td>'.utf8_encode($spieler['position']).'<br /><i>'.utf8_encode($positionen).'</i></td>
-            <td>'.utf8_encode($name).'</td>
+            <td><a href="http://www.exklusiv-manager.de/?page=player&id='.$spieler['id'].'">'.utf8_encode($name).'</a></td>
             <td>'.$alter->format('%y Jahre').'</td>
-            <td>'.utf8_encode($spieler['nation']).'</td>
+            <td><img src="http://www.exklusiv-manager.de/img/flags/players/'.$nation.'.png" /></td>
             <td>'.number_format($spieler['marktwert'], 0, ',', '.').' EUR</td>
             '.$zusatz.'
         </tr>

@@ -5,7 +5,7 @@ $liga_id = mysqli_real_escape_string($dbconn, $_POST['liga']);
 $liga_id = intval($liga_id);
 
 if (is_numeric($liga_id)) {
-    $query = "SELECT name,id FROM ws__verein WHERE liga_id = '".$liga_id."' ORDER BY name ASC";
+    $query = "SELECT name,id FROM _verein WHERE liga_id = '".$liga_id."' ORDER BY name ASC";
     $result = mysqli_query($dbconn, $query);
     $verein = mysqli_fetch_all($result);
     mysqli_free_result($result);

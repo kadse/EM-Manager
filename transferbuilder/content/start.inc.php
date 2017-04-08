@@ -1,7 +1,7 @@
 <?php
 include ("config/config.inc.php");
 
-$query = "SELECT name,id FROM ws__liga ORDER BY name ASC";
+$query = "SELECT name,id FROM _liga WHERE id != 32 AND id != 35 ORDER BY name ASC";
 $result = mysqli_query($dbconn, $query);
 $liga = mysqli_fetch_all($result);
 mysqli_free_result($result);

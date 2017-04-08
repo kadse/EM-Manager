@@ -55,10 +55,10 @@
                         <a href="index.php">Neue Liste</a>
                     </li>
                     <li>
-                        <a href="#forum">Zum Forum</a>
+                        <a href="http://www.exklusiv-manager.de/forum/board/">Zum Forum</a>
                     </li>
                     <li>
-                        <a href="#websocer">Zum Websoccer</a>
+                        <a href="http://www.exklusiv-manager.de/">Zum Websoccer</a>
                     </li>
                 </ul>
             </div>
