@@ -15,32 +15,32 @@ $zusatzArray = array();
 $zusatz = '';
 
 if ($_POST['sa_spiele'] == 1) {
-    $zusatz .= '<th>Spiele (Saison)</th>';
+    $zusatz .= '<th>S (S)</th>';
     array_push($zusatzArray, "sa_spiele");
     $spalten++;
 }
 if ($_POST['st_spiele'] == 1) {
-    $zusatz .= '<th>Spiele (Gesamt)</th>';
+    $zusatz .= '<th>S (G)</th>';
     array_push($zusatzArray, "st_spiele");
     $spalten++;
 }
 if ($_POST['sa_tore'] == 1) {
-    $zusatz .= '<th>Tore (Saison)</th>';
+    $zusatz .= '<th>T (S)</th>';
     array_push($zusatzArray, "sa_tore");
     $spalten++;
 }
 if ($_POST['st_tore'] == 1) {
-    $zusatz .= '<th>Tore (Gesamt)</th>';
+    $zusatz .= '<th>T (G)</th>';
     array_push($zusatzArray, "st_tore");
     $spalten++;
 }
 if ($_POST['sa_assists'] == 1) {
-    $zusatz .= '<th>Vorlagen (Saison)</th>';
+    $zusatz .= '<th>V (S)</th>';
     array_push($zusatzArray, "sa_assists");
     $spalten++;
 }
 if ($_POST['st_assists'] == 1) {
-    $zusatz .= '<th>Vorlagen (Gesamt)</th>';
+    $zusatz .= '<th>V (G)</th>';
     array_push($zusatzArray, "st_assists");
     $spalten++;
 }
@@ -79,7 +79,7 @@ table#playerTable p {
             <th>Position</th>
             <th>Name</th>
             <th>Alter</th>
-            <th>Nationalität</th>
+            <th>Nation</th>
             <th>Marktwert</th>
             '.$zusatz.'
         </tr>
@@ -126,18 +126,18 @@ foreach ($_POST as $key => $value) {
     if ($spieler['position_main'] == "T") $spieler['position_main'] = "TW";
     if ($spieler['position_main'] == "RS") $spieler['position_main'] = "RA";
     if ($spieler['position_main'] == "LS") $spieler['position_main'] = "LA";
-    $positionen = '<img src="http://www.exklusiv-manager.de/uploads/positions/'.$spieler['position_main'].'.png" height="30px" />';
+    $positionen = '<img src="http://www.exklusiv-manager.de/uploads/positions_small/'.$spieler['position_main'].'.png" />';
 
     if (!empty($spieler['position_second'])) {
         if ($spieler['position_second'] == "T") $spieler['position_second'] = "TW";
         if ($spieler['position_second'] == "RS") $spieler['position_second'] = "RA";
         if ($spieler['position_second'] == "LS") $spieler['position_second'] = "LA";        
-        $positionen .= ' | <img src="http://www.exklusiv-manager.de/uploads/positions/'.$spieler['position_second'].'.png" height="30px" />';
+        $positionen .= ' | <img src="http://www.exklusiv-manager.de/uploads/positions_small/'.$spieler['position_second'].'.png" />';
     }
 
     $zusatz = '';
     foreach ($zusatzArray as $val) {
-        $zusatz .= '<td>'.$spieler[$val].'</td>';
+        $zusatz .= '<td style="text-align: center">'.$spieler[$val].'</td>';
     }
 
     $nation = utf8_encode($spieler['nation']);
@@ -152,11 +152,11 @@ foreach ($_POST as $key => $value) {
 
     $output .= '
         <tr>
-            <td><img src="http://www.exklusiv-manager.de/uploads/player/'.$spieler['picture'].'" height="50px" /></td>
-            <td>'.utf8_encode($spieler['position']).'<br /><i>'.utf8_encode($positionen).'</i></td>
+            <td style="text-align: center"><img src="http://www.exklusiv-manager.de/uploads/player/'.$spieler['picture'].'" height="50px" /></td>
+            <td style="text-align: center">'.utf8_encode($spieler['position']).'<br /><i>'.utf8_encode($positionen).'</i></td>
             <td><a href="http://www.exklusiv-manager.de/?page=player&id='.$spieler['id'].'">'.utf8_encode($name).'</a></td>
-            <td>'.$alter->format('%y Jahre').'</td>
-            <td><img src="http://www.exklusiv-manager.de/img/flags/players/'.$nation.'.png" /></td>
+            <td style="text-align: center">'.$alter->format('%y').'</td>
+            <td style="text-align: center"><img src="http://www.exklusiv-manager.de/img/flags/players/'.$nation.'.png" /></td>
             <td>'.number_format($spieler['marktwert'], 0, ',', '.').' EUR</td>
             '.$zusatz.'
         </tr>
