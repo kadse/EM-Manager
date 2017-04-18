@@ -153,7 +153,7 @@ foreach ($_POST as $key => $value) {
     $output .= '
         <tr>
             <td style="text-align: center"><img src="http://www.exklusiv-manager.de/uploads/player/'.$spieler['picture'].'" height="50px" /></td>
-            <td style="text-align: center">'.utf8_encode($spieler['position']).'<br /><i>'.utf8_encode($positionen).'</i></td>
+            <td style="text-align: center"><i>'.utf8_encode($positionen).'</i></td>
             <td><a href="http://www.exklusiv-manager.de/?page=player&id='.$spieler['id'].'">'.utf8_encode($name).'</a></td>
             <td style="text-align: center">'.$alter->format('%y').'</td>
             <td style="text-align: center"><img src="http://www.exklusiv-manager.de/img/flags/players/'.$nation.'.png" /></td>
