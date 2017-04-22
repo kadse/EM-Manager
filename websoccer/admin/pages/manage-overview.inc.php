@@ -272,6 +272,7 @@ if (!$rows['hits']) {
 		
 		// columns
 		$first = TRUE;
+		$firstPlayer = 1;
 		foreach($outputColumns as $fieldId => $columnInfo) {
 			echo "<td id=\"item". $row["id"] . "\">";
 			
@@ -318,17 +319,29 @@ if (!$rows['hits']) {
 					$columnValue = $i18n->getMessage("option_" . $columnValue);
 				}
 				
-				if ($first && $editEnabled) {
-					echo "<a href=\"". $editUrl . "\">";
+				if ($entity == "player") {
+					if ($firstPlayer < 4 && $editEnabled) {
+						echo "<a href=\"". $editUrl . "\">";
+					}
+					echo escapeOutput($columnValue);
+					if ($firstPlayer < 4 && $editEnabled) {
+						echo "</a>";
+					}				
 				}
-				echo escapeOutput($columnValue);
-				if ($first && $editEnabled) {
-					echo "</a>";
+				else {
+					if ($first && $editEnabled) {
+						echo "<a href=\"". $editUrl . "\">";
+					}
+					echo escapeOutput($columnValue);
+					if ($first && $editEnabled) {
+						echo "</a>";
+					}					
 				}
 			}
 		
 			echo "</td>";
 			$first = FALSE;
+			$firstPlayer++;
 		}		
 		
 		// action columns
