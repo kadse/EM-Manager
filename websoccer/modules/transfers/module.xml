@@ -25,7 +25,7 @@
                     
                     <column
                         id="entity_transfers_spieler_id"
-                        field="CONCAT(PlayerTab.vorname, ' ', PlayerTab.nachname)"
+                        field="CONCAT(IFNULL(PlayerTab.vorname, ''), ' ', IF(PlayerTab.kunstname IS NOT NULL, CONCAT('\'\'', PlayerTab.kunstname, '\'\' '), ''), IFNULL(PlayerTab.nachname, ''))"
                         type="text"
                         sort="true"
                         filter="true" />
@@ -58,14 +58,14 @@
                     
                     <column
                         id="entity_transfer_offer_offer_player1"
-                        field="CONCAT(ExPlayer1Tab.vorname, ' ', ExPlayer1Tab.nachname)"
+                        field="CONCAT(IFNULL(ExPlayer1Tab.vorname, ''), ' ', IF(ExPlayer1Tab.kunstname IS NOT NULL, CONCAT('\'\'', ExPlayer1Tab.kunstname, '\'\' '), ''), IFNULL(ExPlayer1Tab.nachname, ''))"
                         type="text"
                         sort="true"
                         filter="true" />
                     
                     <column
                         id="entity_transfer_offer_offer_player2"
-                        field="CONCAT(ExPlayer2Tab.vorname, ' ', ExPlayer2Tab.nachname)"
+                        field="CONCAT(IFNULL(ExPlayer2Tab.vorname, ''), ' ', IF(ExPlayer2Tab.kunstname IS NOT NULL, CONCAT('\'\'', ExPlayer2Tab.kunstname, '\'\' '), ''), IFNULL(ExPlayer2Tab.nachname, ''))"
                         type="text"
                         sort="true"
                         filter="true" />
