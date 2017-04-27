@@ -25,38 +25,31 @@
                         filter="true" />
                     
                     <column
-                        id="entity_trainer_salary"
-                        field="salary"
+                        id="entity_trainer_p_frische"
+                        field="p_frische"
                         type="number"
                         sort="true" />
                     
                     <column
-                        id="entity_trainer_p_technique"
-                        field="p_technique"
-                        type="percent"
-                        sort="true" />
-                    
-                    <column
-                        id="entity_trainer_p_stamina"
-                        field="p_stamina"
-                        type="percent"
-                        sort="true" />
-                    
-                    <column
-                        id="entity_trainer_premiumfee"
-                        field="premiumfee"
+                        id="entity_trainer_p_kondition"
+                        field="p_kondition"
                         type="number"
                         sort="true" />
                     
+                    <column
+                        id="entity_trainer_p_zufriedenheit"
+                        field="p_zufriedenheit"
+                        type="number"
+                        sort="true" />
+                   
                 </overview>
 
                 <editform>
                     
                     <field id="name" type="text" required="true" />
-					<field id="salary" type="number" required="true" />
-					<field id="p_technique" type="percent" required="true" />
-					<field id="p_stamina" type="percent" required="true" />
-					<field id="premiumfee" type="number" required="false" />
+					<field id="p_frische" type="number" required="true" />
+					<field id="p_kondition" type="number" required="true" />
+					<field id="p_zufriedenheit" type="number" required="true" />
                 </editform>
             </entity>
         </adminpage>
@@ -90,13 +83,10 @@
   <actions>
 	<action id="choose-trainer" controller="ChooseTrainerController" role="user">
 	    <param id="id" type="number" required="true" min="1" max="2000000000" />
-		<param id="units" type="number" required="true" min="5" max="20" />
 	</action>
 	
 	<action id="execute-training" controller="ExecuteTrainingController" role="user" log="true">
 	    <param id="id" type="number" required="true" min="1" max="2000000000" />
-		<param id="focus" type="text" required="true" min="2" max="3" />
-		<param id="intensity" type="number" required="true" min="1" max="100" />
 	</action>
 	
   </actions>

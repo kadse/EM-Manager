@@ -47,11 +47,6 @@ class PlayerTrainedEvent extends AbstractEvent {
 	public $effectFreshness;
 	
 	/**
-	 * @var reference reference to integer indicating training effect of attribute technique.
-	 */
-	public $effectTechnique;
-	
-	/**
 	 * @var reference reference to integer indicating training effect of attribute stamina.
 	 */
 	public $effectStamina;
@@ -67,13 +62,12 @@ class PlayerTrainedEvent extends AbstractEvent {
 	 * @param DbConnection $db DB connection.
 	 * @param I18n $i18n Messages context.
 	 * @param int $effectFreshness training effect.
-	 * @param int $effectTechnique training effect.
 	 * @param int $effectStamina training effect.
 	 * @param int $effectSatisfaction training effect.
 	 */
 	function __construct(WebSoccer $websoccer, DbConnection $db, I18n $i18n,
 			$playerId, $teamId, $trainerId,
-			&$effectFreshness, &$effectTechnique, &$effectStamina, &$effectSatisfaction) {
+			&$effectFreshness, &$effectStamina, &$effectSatisfaction) {
 		parent::__construct($websoccer, $db, $i18n);
 		
 		$this->playerId = $playerId;
@@ -81,7 +75,6 @@ class PlayerTrainedEvent extends AbstractEvent {
 		$this->trainerId = $trainerId;
 		
 		$this->effectFreshness =& $effectFreshness;
-		$this->effectTechnique =& $effectTechnique;
 		$this->effectStamina =& $effectStamina;
 		$this->effectSatisfaction =& $effectSatisfaction;
 	}

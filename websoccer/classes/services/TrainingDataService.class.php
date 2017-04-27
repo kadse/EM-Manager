@@ -45,7 +45,7 @@ class TrainingDataService {
 		$fromTable = $websoccer->getConfig("db_prefix") . "_trainer";
 	
 		// where
-		$whereCondition = "1=1 ORDER BY salary DESC";
+		$whereCondition = "1=1 ORDER BY name ASC";
 	
 		// select
 		$columns = "*";

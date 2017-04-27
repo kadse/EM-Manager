@@ -209,6 +209,7 @@
 {% macro matchResultPlayers(match, players) %}
 	{% if players is defined and players|length > 0 %}
 		{% set ageSum = 0 %}
+		{% set strengthSum = 0 %}
 		{% set gradeSum = 0 %}
 		<table class="table table-striped table-condensed">
 			<colgroup>
@@ -224,6 +225,7 @@
 			<tbody>
 			{% for player in players %}
 				{% set ageSum = ageSum + player.age %}
+				{% set strengthSum = strengthSum + player.strength %}
 				{% set gradeSum = gradeSum + player.grade %}
 				<tr>
 					{% if player.position_main is not empty %}
@@ -296,6 +298,9 @@
 		
 		<p><strong>&#216; {{ i18n.getMessage("match_details_players_grade") }}:</strong> {{ (gradeSum/players|length)|number_format(2) }}</p>
 		<p><strong>&#216; {{ i18n.getMessage("match_details_players_age") }}:</strong> {{ (ageSum/players|length)|number_format(2) }}</p>
+		{% if env.getConfig("hide_strength_attributes") != "1" %}
+		<p><strong>&#216; {{ i18n.getMessage("entity_player_w_staerke") }}:</strong> {{ (strengthSum/players|length)|number_format(0) }}%</p>
+		{% endif %}
 	{% else %}
 	<p>{{ i18n.getMessage("match_details_noplayersset") }}</p>
 	{% endif %}

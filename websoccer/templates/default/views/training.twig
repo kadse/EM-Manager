@@ -2,7 +2,6 @@
 {% import "macros/statisticelements.twig" as statisticelements %}
 {% import "macros/paginator.twig" as pagination %}
 {% import "macros/profileelements.twig" as profile %}
-{% import "macros/premium.twig" as premium %}
 
 {% extends "base.twig" %}
 
@@ -13,8 +12,6 @@
 {% block page_content %}
 
 {# last training execution #}
-
-{{ profile.infofield(i18n.getMessage("training_units_count"), unitsCount) }}
 
 {% if lastExecution > 0 %}
 	{{ profile.infofield(i18n.getMessage("training_last_execution"), env.getFormattedDatetime(lastExecution)) }}
@@ -32,7 +29,6 @@
 		<thead>
 			<tr>
 				<th>{{ i18n.getMessage("entity_player") }}</th>
-				<th>{{ i18n.getMessage("entity_player_w_technik") }}</th>
 				<th>{{ i18n.getMessage("entity_player_w_kondition") }}</th>
 				<th>{{ i18n.getMessage("entity_player_w_frische") }}</th>
 				<th>{{ i18n.getMessage("entity_player_w_zufriedenheit") }}</th>
@@ -42,18 +38,6 @@
 		{% for playerId,effect in trainingEffects %}
 			<tr>
 				<td><a href="{{ env.getInternalUrl("player", "id=" ~ playerId) }}" target="_blank" title="{{ i18n.getMessage("player_navlabel") }}">{{ effect.name }}</a></td>
-				<td>
-					{% set changeLabel = effect.technique %}
-					{% if changeLabel > 0 %}
-						{% set changeCssClass = "badge-success" %}
-						{% set changeLabel = "+" ~ changeLabel %}
-					{% elseif changeLabel < 0 %}
-						{% set changeCssClass = "badge-important" %}
-					{% else %}
-						{% set changeCssClass = "" %}
-					{% endif %}
-					<span class="badge {{ changeCssClass }}">{{ changeLabel }}</span>
-				</td>
 				<td>
 					{% set changeLabel = effect.stamina %}
 					{% if changeLabel > 0 %}
@@ -108,22 +92,19 @@
 		<thead>
 			<tr>
 				<th>{{ i18n.getMessage("entity_trainer_name") }}</th>
-				<th>{{ i18n.getMessage("entity_trainer_salary") }}</th>
-				<th>{{ i18n.getMessage("entity_trainer_p_technique") }}</th>
-				<th>{{ i18n.getMessage("entity_trainer_p_stamina") }}</th>
+				<th style="text-align: center">{{ i18n.getMessage("entity_trainer_p_frische") }}</th>
+				<th style="text-align: center">{{ i18n.getMessage("entity_trainer_p_kondition") }}</th>
+				<th style="text-align: center">{{ i18n.getMessage("entity_trainer_p_zufriedenheit") }}</th>
 			</tr>
 		</thead>
 		<tbody>
 		{% for trainer in trainers %}
 			<tr>
 				<td><p>{{ trainer.name }}</p>
-				{% if trainer.premiumfee %}
-					<p>{{ premium.premiumbadge(trainer.premiumfee) }}</p>
-				{% endif %}
 				<p><a href="{{ env.getInternalUrl("trainer-details", "id=" ~ trainer.id) }}" class="btn"><i class="icon-hand-right"></i> {{ i18n.getMessage("button_choose") }}</a></p></td>
-				<td>{{ trainer.salary|number_format(0, ',', '.') }} {{ env.getConfig("game_currency") }}</td>
-				<td>{{ statisticelements.progressbar(trainer.p_technique) }}</td>
-				<td>{{ statisticelements.progressbar(trainer.p_stamina) }}</td>
+				<td style="text-align: center">{{ trainer.p_frische }}</td>
+				<td style="text-align: center">{{ trainer.p_kondition }}</td>
+				<td style="text-align: center">{{ trainer.p_zufriedenheit }}</td>
 			</tr>
 		{% endfor %}
 		</tbody>
@@ -140,41 +121,12 @@
 
 	<h3>{{ i18n.getMessage("training_trainer_details") }}</h3>
 
-	{% set bar_tech = statisticelements.progressbar(training_unit.trainer.p_technique) %}
-	{% set bar_stamina = statisticelements.progressbar(training_unit.trainer.p_stamina) %}
-	
 	{{ profile.infofield(i18n.getMessage("entity_trainer_name"), training_unit.trainer.name) }}
-	{{ profile.infofield(i18n.getMessage("entity_trainer_p_technique"), bar_tech|raw, true) }}
-	{{ profile.infofield(i18n.getMessage("entity_trainer_p_stamina"), bar_stamina|raw, true) }}
+	{{ profile.infofield(i18n.getMessage("entity_trainer_p_frische"), training_unit.trainer.p_frische, true) }}
+	{{ profile.infofield(i18n.getMessage("entity_trainer_p_kondition"), training_unit.trainer.p_kondition, true) }}
+	{{ profile.infofield(i18n.getMessage("entity_trainer_p_zufriedenheit"), training_unit.trainer.p_zufriedenheit, true) }}
 	
 	<form class="form-horizontal" method="post">
-		<fieldset>
-	    	<legend>{{ i18n.getMessage('training_execute_training_title') }}</legend>
-		
-			<div class="control-group">
-				<label class="control-label" for="focus">
-					<strong>{{ i18n.getMessage('training_execute_focus') }}</strong>
-				</label>
-				<div class="controls">
-					<select id="focus" name="focus">
-  						<option value="TE"{% if env.getRequestParameter("focus") == "TE" %} selected{% endif %}>{{ i18n.getMessage('training_execute_focus_technique') }}</option>
-  						<option value="STA"{% if env.getRequestParameter("focus") == "STA" %} selected{% endif %}>{{ i18n.getMessage('training_execute_focus_stamina') }}</option>
-  						<option value="MOT"{% if env.getRequestParameter("focus") == "MOT" %} selected{% endif %}>{{ i18n.getMessage('training_execute_focus_motivation') }}</option>
-  						<option value="FR"{% if env.getRequestParameter("focus") == "FR" %} selected{% endif %}>{{ i18n.getMessage('training_execute_focus_regeneration') }}</option>
-  					</select>
-				</div>
-			</div>
-			
-			<div class="control-group">
-				<label class="control-label" for="intensity">
-					<strong>{{ i18n.getMessage('training_execute_intensity') }}</strong>
-				</label>
-				<div class="controls">
-					{{ formelements.slider("intensity", (env.getRequestParameter("intensity") > 0) ? env.getRequestParameter("intensity") : 90 ) }}
-				</div>
-			</div>
-			
-		</fieldset>
 		<div class="form-actions">
 			<button type="submit" class="btn btn-primary">{{ i18n.getMessage('training_execute_button') }}</button>
 			<a href="{{ env.getInternalUrl("office") }}" class="btn">{{ i18n.getMessage('button_cancel') }}</a>

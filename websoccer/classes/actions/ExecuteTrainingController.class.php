@@ -82,11 +82,6 @@ class ExecuteTrainingController implements IActionController {
 		// trainer info
 		$trainer = TrainingDataService::getTrainerById($this->_websoccer, $this->_db, $unit["trainer_id"]);
 		
-		$columns["focus"] = $parameters["focus"];
-		$unit["focus"] = $parameters["focus"];
-		$columns["intensity"] = $parameters["intensity"];
-		$unit["intensity"] = $parameters["intensity"];
-		
 		// train players
 		$this->trainPlayers($teamId, $trainer, $unit);
 		
@@ -109,87 +104,31 @@ class ExecuteTrainingController implements IActionController {
 		// compute effect on every player
 		$players = PlayersDataService::getPlayersOfTeamById($this->_websoccer, $this->_db, $teamId);
 		
-		// freshness decrease for stamina and technique training
-		$freshnessDecrease = round(1 + $unit["intensity"] / 100 * 5);
-		
 		$fromTable = $this->_websoccer->getConfig("db_prefix") . "_spieler";
 		$whereCondition = "id = %d";
 		
 		$trainingEffects = array();
 		foreach ($players as $player) {
 			
-			// injured player only refreshes and looses stamina
 			$effectFreshness = 0;
 			$effectStamina = 0;
-			$effectTechnique = 0;
 			$effectSatisfaction = 0;
-			if ($player["matches_injured"]) {
-				$effectFreshness = 1;
-				$effectStamina = -1;
-			} else {
-				
-				// regeneration training
-				if ($unit["focus"] == "FR") {
-					$effectFreshness = 5;
-					$effectStamina = -2;
-					$effectSatisfaction = 1;
-					
-					// motivation training
-				} else if ($unit["focus"] == "MOT") {
-					$effectFreshness = 1;
-					$effectStamina = -1;
-					$effectSatisfaction = 5;
-					
-					// stamina training
-				} else if ($unit["focus"] == "STA") {
-					$effectSatisfaction = -1;
-					
-					// freshness depends on intensity
-					$effectFreshness = -$freshnessDecrease;
-					
-					// success depends on trainer skills and intensity
-					$staminaIncrease = 1;
-					if ($unit["intensity"] > 50) {
-						$successFactor = $unit["intensity"] * $trainer["p_stamina"] / 100;
-						$pStamina[5] = $successFactor;
-						$pStamina[1] = 100 - $successFactor;
-						
-						$staminaIncrease += SimulationHelper::selectItemFromProbabilities($pStamina);
-					}
-					
-					$effectStamina = $staminaIncrease;
-					
-					// technique
-				} else {
-					$effectFreshness = -$freshnessDecrease;
-					
-					if ($unit["intensity"] > 20) {
-						$effectStamina = 1;
-					}
-					
-					$techIncrease = 0;
-					if ($unit["intensity"] > 75) {
-						$successFactor = $unit["intensity"] * $trainer["p_technique"] / 100;
-						$pTech[2] = $successFactor;
-						$pTech[0] = 100 - $successFactor;
-					
-						$techIncrease += SimulationHelper::selectItemFromProbabilities($pTech);
-					}
-					
-					$effectTechnique = $techIncrease;
-				}
-			}
+
+			if (!$player["matches_injured"]) {
+				$effectFreshness = $trainer["p_frische"];
+				$effectStamina = $trainer["p_kondition"];
+				$effectSatisfaction = $trainer["p_zufriedenheit"];
+			} 
 			
 			// call plugins
 			$event = new PlayerTrainedEvent($this->_websoccer, $this->_db, $this->_i18n,
 					$player["id"], $teamId, $trainer["id"], 
-					$effectFreshness, $effectTechnique, $effectStamina, $effectSatisfaction);
+					$effectFreshness, $effectStamina, $effectSatisfaction);
 			PluginMediator::dispatchEvent($event);
 			
 			// update player
 			$columns = array(
 					"w_frische" => min(100, max(1, $player["strength_freshness"] + $effectFreshness)),
-					"w_technik" => min(100, max(1, $player["strength_technic"] + $effectTechnique)),
 					"w_kondition" => min(100, max(1, $player["strength_stamina"] + $effectStamina)),
 					"w_zufriedenheit" => min(100, max(1, $player["strength_satisfaction"] + $effectSatisfaction))
 					);
@@ -199,7 +138,6 @@ class ExecuteTrainingController implements IActionController {
 			$trainingEffects[$player["id"]] = array(
 					"name" => ($player["pseudonym"]) ? $player["pseudonym"] : $player["firstname"] . " " . $player["lastname"],
 					"freshness" => $effectFreshness,
-					"technique" => $effectTechnique,
 					"stamina" => $effectStamina,
 					"satisfaction" => $effectSatisfaction
 					);

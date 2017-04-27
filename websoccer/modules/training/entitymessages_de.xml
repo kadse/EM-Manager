@@ -4,7 +4,8 @@
     <message id="entity_trainer">Trainer</message>
 	<message id="entity_trainer_name">Name</message>
 	<message id="entity_trainer_salary">Gehalt pro Einheit</message>
-	<message id="entity_trainer_p_technique">Effektivität Techniktraining</message>
-	<message id="entity_trainer_p_stamina">Effektivität Konditionstraining</message>
+	<message id="entity_trainer_p_frische">Änderung Frische</message>
+	<message id="entity_trainer_p_kondition">Änderung Kondition</message>
+	<message id="entity_trainer_p_zufriedenheit">Änderung Zufriedenheit</message>
 	<message id="entity_trainer_premiumfee">Premiumgebühr</message>
 </messages>
