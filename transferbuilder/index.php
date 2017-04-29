@@ -55,6 +55,9 @@
                         <a href="index.php">Neue Liste</a>
                     </li>
                     <li>
+                        <a href="http://www.exklusiv-manager.de/spieltagsgenerator/">Spieltagsgenerator</a>
+                    </li>                    
+                    <li>
                         <a href="http://www.exklusiv-manager.de/forum/board/">Zum Forum</a>
                     </li>
                     <li>

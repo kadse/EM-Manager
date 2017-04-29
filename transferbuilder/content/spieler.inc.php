@@ -85,7 +85,7 @@ mysqli_close($dbconn);
 
                                 echo '<tr>';
                                     echo '<td style="text-align: center"><div class="checkbox"><label><input type="checkbox" value="'.$spieler_id[0].'" name="'.$key.'" checked=""/><span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span></label></div</td>';
-                                    echo '<td style="text-align: center">'.utf8_encode($spieler_id[1]).'<br /><i>'.utf8_encode($positionen).'</i></td>';
+                                    echo '<td style="text-align: center"><i>'.utf8_encode($positionen).'</i></td>';
                                     echo '<td>'.utf8_encode($name).'</td>';
                                     echo '<td>'.$alter->format('%y Jahre').'</td>';
                                     echo '<td style="text-align: center"><img src="http://www.exklusiv-manager.de/img/flags/players/'.$nation.'.png" /></td>';
@@ -97,6 +97,7 @@ mysqli_close($dbconn);
                 </table>
             </div>
         </div>
+<!-- Temporaer entfernt         
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
@@ -130,7 +131,15 @@ mysqli_close($dbconn);
                 </div>
                 <div class="col-lg-4"></div>
             </div>
-        </div>        
+        </div>
+Ende -->
+        <input type="hidden" id="sa_spiele" name="sa_spiele" value="1">
+        <input type="hidden" id="st_spiele" name="st_spiele" value="1">
+        <input type="hidden" id="sa_tore" name="sa_tore" value="1">
+        <input type="hidden" id="st_tore" name="st_tore" value="1">
+        <input type="hidden" id="sa_assists" name="sa_assists" value="1">
+        <input type="hidden" id="st_assists" name="st_assists" value="1">
+
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">

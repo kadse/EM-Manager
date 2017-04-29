@@ -71,7 +71,7 @@ if ($spieltag > 1) {
         <tbody>';    
 
     if (is_numeric($spieltag) && is_numeric($saison)) {
-        $query = "SELECT datum,home_verein,gast_verein,liga_id,id FROM _spiel WHERE spieltag = '".($spieltag-1)."' AND saison_id = '".$saison."'";
+        $query = "SELECT datum,home_verein,gast_verein,id,home_tore,gast_tore FROM _spiel WHERE spieltag = '".($spieltag-1)."' AND saison_id = '".$saison."'";
         $result = mysqli_query($dbconn, $query);
         $matches_old = mysqli_fetch_all($result);
         mysqli_free_result($result);        
@@ -91,15 +91,22 @@ if ($spieltag > 1) {
 
         $date_old = date("d.m.Y - H:i",$match_old[0]);
 
+        if (empty($match_old[4]) || empty($match_old[5])) {
+        	$match_res = "Zum Spiel";
+        }
+        else {
+        	$match_res = $match_old[4].":".$match_old[5];
+        }
+
         $output .= '
             <tr>
                 <td style="text-align: center">'.$date_old.' Uhr</td>
                 <td style="text-align: right"><a href="http://www.exklusiv-manager.de/?page=team&id='.$home_old['id'].'">'.utf8_encode($home_old['name']).'</a></td>
-                <td style="text-align: center"><img src="http://exklusiv-manager.de/uploads/club/'.$home_old['bild'].'" /></td>
+                <td style="text-align: center"><img src="http://exklusiv-manager.de/uploads/club_small/'.$home_old['bild'].'" /></td>
                 <td style="text-align: center">vs.</td>
-                <td style="text-align: center"><img src="http://exklusiv-manager.de/uploads/club/'.$guest_old['bild'].'" /></td>
+                <td style="text-align: center"><img src="http://exklusiv-manager.de/uploads/club_small/'.$guest_old['bild'].'" /></td>
                 <td style="text-align: left"><a href="http://www.exklusiv-manager.de/?page=team&id='.$guest_old['id'].'">'.utf8_encode($guest_old['name']).'</a></td>
-                <td style="text-align: center"><a href="http://www.exklusiv-manager.de/?page=match&id='.$match_old[3].'">Zum Spiel</a></td>
+                <td style="text-align: center"><a href="http://www.exklusiv-manager.de/?page=match&id='.$match_old[3].'">'.$match_res.'</a></td>
             </tr>
         ';
     }
@@ -154,9 +161,9 @@ foreach ($matches as $match) {
         <tr>
             <td style="text-align: center">'.$date.' Uhr</td>
             <td style="text-align: right"><a href="http://www.exklusiv-manager.de/?page=team&id='.$home['id'].'">'.utf8_encode($home['name']).'</a></td>
-            <td style="text-align: center"><img src="http://exklusiv-manager.de/uploads/club/'.$home['bild'].'" /></td>
+            <td style="text-align: center"><img src="http://exklusiv-manager.de/uploads/club_small/'.$home['bild'].'" /></td>
             <td style="text-align: center">vs.</td>
-            <td style="text-align: center"><img src="http://exklusiv-manager.de/uploads/club/'.$guest['bild'].'" /></td>
+            <td style="text-align: center"><img src="http://exklusiv-manager.de/uploads/club_small/'.$guest['bild'].'" /></td>
             <td style="text-align: left"><a href="http://www.exklusiv-manager.de/?page=team&id='.$guest['id'].'">'.utf8_encode($guest['name']).'</a></td>
             <td style="text-align: center"><a href="http://www.exklusiv-manager.de/?page=match&id='.$match[4].'">Zum Spiel</a></td>
         </tr>
@@ -196,7 +203,7 @@ foreach ($teams as $pos => $team) {
     $output .= '
         <tr>
             <td style="text-align: center">'.($pos+1).'</td>
-            <td style="text-align: center"><img src="http://exklusiv-manager.de/uploads/club/'.$team[1].'" /></td>
+            <td style="text-align: center"><img src="http://exklusiv-manager.de/uploads/club_small/'.$team[1].'" /></td>
             <td style="text-align: left"><a href="http://www.exklusiv-manager.de/?page=team&id='.$team[0].'">'.utf8_encode($team[2]).'</a></td>
             <td style="text-align: center">'.$team[3].'</td>
             <td style="text-align: center">'.$team[4].'</td>
