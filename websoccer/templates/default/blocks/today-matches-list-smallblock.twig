@@ -9,8 +9,8 @@
 {% if matches|length > 0 %}
 <table class="table table-borderless table-striped">
 	{% for match in matches %}
-	{% set homeTeamPicture = "<img src=\""~ env.getConfig("context_root") ~ "/uploads/club/" ~ match.home_team_picture ~ "\" style=\"height: 25px;\" />" %}
-	{% set guestTeamPicture = "<img src=\""~ env.getConfig("context_root") ~ "/uploads/club/" ~ match.guest_team_picture ~ "\" style=\"height: 25px;\" />" %}
+	{% set homeTeamPicture = "<img src=\""~ env.getConfig("context_root") ~ "/uploads/club/" ~ match.home_team_picture ~ "\" style=\"width: 25px;\" />" %}
+	{% set guestTeamPicture = "<img src=\""~ env.getConfig("context_root") ~ "/uploads/club/" ~ match.guest_team_picture ~ "\" style=\"width: 25px;\" />" %}
 
 	  <tr>
 	  	<td>{{ env.getFormattedDatetime(match.date) }}</td>
@@ -29,7 +29,7 @@
 	    <td style="text-align: center">{{ guestTeamPicture|raw }}</td>
 	    <td style="text-align: left"><a href="{{ env.getInternalUrl("team", "id=" ~ match.guest_id) }}">{{ match.guest_team }}</a></td>
 	    {% if match.simulated %}
-	    	<td style="text-align: center"><a href="{{ env.getInternalUrl("match", "id=" ~ match.id) }}" title="{{ i18n.getMessage("match_navlabel") }}"><img src="https://app-raisal.de/websoccer/uploads/numbers/{{ match.home_goals }}.png" style="height: 20px" /> : <img src="https://app-raisal.de/websoccer/uploads/numbers/{{ match.guest_goals }}.png" style="height: 20px" /></a></td>
+	    	<td style="text-align: center"><a href="{{ env.getInternalUrl("match", "id=" ~ match.id) }}" title="{{ i18n.getMessage("match_navlabel") }}"><img src="https://app-raisal.de/websoccer/uploads/numbers/{{ match.home_goals }}.png" style="width: 20px" /> : <img src="https://app-raisal.de/websoccer/uploads/numbers/{{ match.guest_goals }}.png" style="width: 20px" /></a></td>
 	    {% else %}
 	    	<td style="text-align: center"><a href="{{ env.getInternalUrl("match", "id=" ~ match.id) }}" title="{{ i18n.getMessage("match_navlabel") }}"><i class="fa fa-info-circle" aria-hidden="true"></i>
 </a></td>
