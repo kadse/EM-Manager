@@ -71,7 +71,7 @@ if ($spieltag > 1) {
         <tbody>';    
 
     if (is_numeric($spieltag) && is_numeric($saison)) {
-        $query = "SELECT datum,home_verein,gast_verein,id,home_tore,gast_tore FROM _spiel WHERE spieltag = '".($spieltag-1)."' AND saison_id = '".$saison."'";
+        $query = "SELECT datum,home_verein,gast_verein,id,home_tore,gast_tore,berechnet FROM _spiel WHERE spieltag = '".($spieltag-1)."' AND saison_id = '".$saison."'";
         $result = mysqli_query($dbconn, $query);
         $matches_old = mysqli_fetch_all($result);
         mysqli_free_result($result);        
@@ -91,11 +91,11 @@ if ($spieltag > 1) {
 
         $date_old = date("d.m.Y - H:i",$match_old[0]);
 
-        if (empty($match_old[4]) || empty($match_old[5])) {
-        	$match_res = "Zum Spiel";
+        if ($match_old[6] == "1") {
+        	$match_res_old = $match_old[4].":".$match_old[5];
         }
         else {
-        	$match_res = $match_old[4].":".$match_old[5];
+        	$match_res_old = "Zum Spiel";
         }
 
         $output .= '
@@ -106,7 +106,7 @@ if ($spieltag > 1) {
                 <td style="text-align: center">vs.</td>
                 <td style="text-align: center"><img src="http://exklusiv-manager.de/uploads/club_small/'.$guest_old['bild'].'" /></td>
                 <td style="text-align: left"><a href="http://www.exklusiv-manager.de/?page=team&id='.$guest_old['id'].'">'.utf8_encode($guest_old['name']).'</a></td>
-                <td style="text-align: center"><a href="http://www.exklusiv-manager.de/?page=match&id='.$match_old[3].'">'.$match_res.'</a></td>
+                <td style="text-align: center"><a href="http://www.exklusiv-manager.de/?page=match&id='.$match_old[3].'">'.$match_res_old.'</a></td>
             </tr>
         ';
     }
@@ -135,7 +135,7 @@ $output .= '
     <tbody>';
 
 if (is_numeric($spieltag) && is_numeric($saison)) {
-    $query = "SELECT datum,home_verein,gast_verein,liga_id,id FROM _spiel WHERE spieltag = '".$spieltag."' AND saison_id = '".$saison."'";
+    $query = "SELECT datum,home_verein,gast_verein,liga_id,id,home_tore,gast_tore,berechnet FROM _spiel WHERE spieltag = '".$spieltag."' AND saison_id = '".$saison."'";
     $result = mysqli_query($dbconn, $query);
     $matches = mysqli_fetch_all($result);
     mysqli_free_result($result);        
@@ -157,6 +157,13 @@ foreach ($matches as $match) {
 
     $date = date("d.m.Y - H:i",$match[0]);
 
+    if ($match[7] == "1") {
+    	$match_res = $match[5].":".$match[6];
+    }
+    else {
+    	$match_res = "Zum Spiel";
+    }    
+
     $output .= '
         <tr>
             <td style="text-align: center">'.$date.' Uhr</td>
@@ -165,7 +172,7 @@ foreach ($matches as $match) {
             <td style="text-align: center">vs.</td>
             <td style="text-align: center"><img src="http://exklusiv-manager.de/uploads/club_small/'.$guest['bild'].'" /></td>
             <td style="text-align: left"><a href="http://www.exklusiv-manager.de/?page=team&id='.$guest['id'].'">'.utf8_encode($guest['name']).'</a></td>
-            <td style="text-align: center"><a href="http://www.exklusiv-manager.de/?page=match&id='.$match[4].'">Zum Spiel</a></td>
+            <td style="text-align: center"><a href="http://www.exklusiv-manager.de/?page=match&id='.$match[4].'">'.$match_res.'</a></td>
         </tr>
     ';
 }
@@ -193,8 +200,7 @@ $output .= '
         </tr>
     </thead>';
 
-
-$query = "SELECT id,bild,name,sa_spiele,sa_siege,sa_unentschieden,sa_niederlagen,sa_tore,sa_gegentore,sa_punkte FROM _verein WHERE liga_id = '".$liga_id."' ORDER BY sa_punkte DESC";
+$query = "SELECT id,bild,name,sa_spiele,sa_siege,sa_unentschieden,sa_niederlagen,sa_tore,sa_gegentore,(sa_tore-sa_gegentore) as sa_differenz,sa_punkte FROM _verein WHERE liga_id = '".$liga_id."' ORDER BY sa_punkte DESC, sa_differenz DESC, sa_siege DESC, sa_unentschieden DESC, sa_tore DESC, name ASC";
 $result = mysqli_query($dbconn, $query);
 $teams = mysqli_fetch_all($result);
 mysqli_free_result($result);
@@ -210,8 +216,8 @@ foreach ($teams as $pos => $team) {
             <td style="text-align: center">'.$team[5].'</td>
             <td style="text-align: center">'.$team[6].'</td>
             <td style="text-align: center">'.$team[7].':'.$team[8].'</td>
-            <td style="text-align: center">'.($team[7] - $team[8]).'</td>
             <td style="text-align: center">'.$team[9].'</td>
+            <td style="text-align: center">'.$team[10].'</td>
         </tr>';
 }
 
