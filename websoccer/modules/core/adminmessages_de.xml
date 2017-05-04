@@ -178,6 +178,7 @@
 	<message id="manage_add_players">Mehrere neue Einträge erstellen</message>
 	<message id="manage_edit">Bearbeiten</message>
 	<message id="manage_delete">Löschen</message>
+	<message id="manage_move_match">Spieltage verschieben</message>
 	<message id="manage_no_records_found">Es wurden keine Datensätze gefunden.</message>
 	<message id="manage_number_of_records"><b>%d</b> Datensätze gefunden. Zeige %d bis %d:</message>
 	<message id="manage_select_all_label">Alle Einträge auswählen.</message>

@@ -192,7 +192,7 @@ if ($show == "add" || $show == "edit" || $show == "add_players") {
 				}
 			}
 			else {
-				foreach ($formFields as $fieldId => $fieldInfo) {					
+				foreach ($formFields as $fieldId => $fieldInfo) {
 					if ($fieldInfo["readonly"]) {
 						continue;
 					}
@@ -265,11 +265,64 @@ if ($show == "add" || $show == "edit" || $show == "add_players") {
 		}
 	}
 }
+elseif ($show == "move_match") {
+	$showOverview = FALSE;
+	$labelPrefix = "entity_". $entity ."_";
+
+	// save
+	if ($action == "save") {
+		try {
+			if ($admin['r_demo']) {
+				throw new Exception($i18n->getMessage("validationerror_no_changes_as_demo"));
+			}
+
+			$dateObj = DateTime::createFromFormat($website->getConfig("date_format") .", H:i", 
+						$_POST['days'] .", ". $_POST['hours']);
+			$timestamp = ($dateObj) ? $dateObj->getTimestamp() : 0;			
+
+			$now = $website->getNowAsTimestamp();
+
+			//### Spieltage Zeiten
+			$fromTable = $website->getConfig("db_prefix") . "_spiel";
+			$whereCondition = "saison_id = " . $_POST['liga_saison'] . " AND spieltag = " . $_POST['spieltag'];
+
+			$columns = [
+				"datum" => "timestamp"
+			];
+
+			$spieltag_times = $db->querySelect($columns, $fromTable, $whereCondition, null, 1)->fetch_array();
+			//-Spieltage
+
+			if ($timestamp < $spieltag_times['timestamp']) {
+				throw new Exception("Spieltage können nur in die Zukunft verschoben werden.");
+			}
+			if ($now >= $spieltag_times['timestamp']) {
+				throw new Exception("Es können nur Spieltage verschoben werden, die noch nicht ausgetragen wurden.");
+			}			
+
+			$timestamp_diff = $timestamp - $spieltag_times['timestamp'];
+			
+
+			//Update
+			$queryStr = "UPDATE " . $website->getConfig("db_prefix") . "_spiel SET datum = datum + " . $timestamp_diff . " WHERE saison_id = " . $_POST['liga_saison'] . " AND spieltag >= " . $_POST['spieltag'];
+
+			$db->executeQuery($queryStr);
+	
+			echo createSuccessMessage($i18n->getMessage("alert_save_success"), "");
+	
+			$showOverview = TRUE;
+		} catch (Exception $e) {
+			echo createErrorMessage($i18n->getMessage("subpage_error_alertbox_title"), $e->getMessage());
+		}
+	}	
+}
 
 if ($show == "add") {
 	include(__DIR__ . "/manage-add.inc.php");
 } elseif ($show == "add_players") {
 	include(__DIR__ . "/manage-add_players.inc.php");
+} elseif ($show == "move_match") {
+	include(__DIR__ . "/manage-move_match.inc.php");
 } elseif($show == "edit") {
 	include(__DIR__ . "/manage-edit.inc.php");
 } 

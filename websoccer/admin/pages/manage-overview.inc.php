@@ -66,6 +66,9 @@ if ($addEnabled) {
 	if ($entity == "player") {
 	echo "<p><a class=\"btn btn-small\" href=\"?site=". $site ."&entity=". $entity . "&show=add_players\"><i class=\"icon-file\"></i> ". $i18n->getMessage("manage_add_players") . "</a></p>";
 	}
+	if ($entity == "match") {
+		echo "<p><a class=\"btn btn-small\" href=\"?site=". $site ."&entity=". $entity . "&show=move_match\"><i class=\"icon-file\"></i> ". $i18n->getMessage("manage_move_match") . "</a></p>";	
+	}
 }
 
 // build meta data
@@ -188,7 +191,8 @@ if (!$rows['hits']) {
 	// query
 	$limit = $start .",". $eps;
 	$result = $db->querySelect($fields, $fromTable, $wherePart, $parameters, $limit);
-	
+
+
 	//output
 	echo "<form name=\"frmMain\" action=\"". $_SERVER['PHP_SELF'] ."\" method=\"post\">";
 	echo "<input type=\"hidden\" name=\"site\" value=\"". $site ."\">";
