@@ -177,7 +177,7 @@
 	<actions>
 		<action id="directtransfer-offer" controller="DirectTransferOfferController" role="user" log="true">
 			<param id="id" type="number" required="true" />
-			<param id="amount" type="number" required="true" min="1" max="1000000000" />
+			<param id="amount" type="number" required="true" min="0" max="1000000000" />
 			<param id="exchangeplayer1" type="number" />
 			<param id="exchangeplayer2" type="number" />
 			<param id="comment" type="text" max="255" />
